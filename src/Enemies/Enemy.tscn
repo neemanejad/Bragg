@@ -1,12 +1,21 @@
-[gd_scene load_steps=3 format=3 uid="uid://crxeuyluv2n2"]
+[gd_scene load_steps=6 format=3 uid="uid://crxeuyluv2n2"]
 
 [ext_resource type="Script" path="res://src/Enemies/Enemy.cs" id="1_j0635"]
+[ext_resource type="PackedScene" uid="uid://b730r6uoiexq6" path="res://src/HealthBar/HealthBar.tscn" id="2_lgjvy"]
+[ext_resource type="PackedScene" uid="uid://cjqqq7puvx83j" path="res://src/Components/HitboxComponent.tscn" id="2_ndqoa"]
+[ext_resource type="PackedScene" uid="uid://dx7rw14cjb4ie" path="res://src/Components/HealthComponent.tscn" id="3_l7cu6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w0kjd"]
 size = Vector2(48, 48)
 
-[node name="Enemy" type="Area2D"]
+[node name="Enemy" type="Node2D"]
 script = ExtResource("1_j0635")
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("HealthComponent") instance=ExtResource("2_ndqoa")]
+HealthComponent = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("RectangleShape2D_w0kjd")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = -24.0
@@ -15,5 +24,14 @@ offset_right = 24.0
 offset_bottom = 24.0
 color = Color(1, 0, 0, 1)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_w0kjd")
+[node name="HealthComponent" parent="." instance=ExtResource("3_l7cu6")]
+CurrentHealth = 30.0
+MaxHealth = 30.0
+
+[node name="HealthBar" parent="." node_paths=PackedStringArray("HealthComponent") instance=ExtResource("2_lgjvy")]
+position = Vector2(0, -56)
+scale = Vector2(0.735, 0.405)
+HealthComponent = NodePath("../HealthComponent")
+
+[connection signal="LostAllHealth" from="HealthComponent" to="." method="LostAllHealth"]
+[connection signal="LostAllHealth" from="HealthBar" to="." method="LostAllHealth"]
