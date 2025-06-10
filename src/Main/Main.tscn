@@ -1,14 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://d256twot7lnbw"]
+[gd_scene load_steps=3 format=3 uid="uid://d256twot7lnbw"]
 
 [ext_resource type="PackedScene" uid="uid://20wj24co13mm" path="res://src/Player/Player.tscn" id="1_j1vrh"]
+[ext_resource type="PackedScene" uid="uid://crxeuyluv2n2" path="res://src/Enemies/Enemy.tscn" id="2_yufv5"]
 
 [node name="Main" type="Node"]
 
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_left = 167.0
-offset_top = -91.0
-offset_right = 207.0
-offset_bottom = -51.0
-color = Color(0.0941176, 1, 1, 1)
-
 [node name="Player" parent="." instance=ExtResource("1_j1vrh")]
+
+[node name="Enemy" parent="." instance=ExtResource("2_yufv5")]
+position = Vector2(144, 0)
