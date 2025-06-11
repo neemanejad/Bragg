@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://cm3085ghkb12j"]
+
+[node name="Hub" type="Node2D"]
+metadata/_edit_group_ = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(0, 0, 192, 0, 192, 192, 0, 192, 0, 64, 8, 64, 8, 184, 184, 184, 184, 8, 0, 8)

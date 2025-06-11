@@ -24,8 +24,9 @@ public partial class HitboxComponent : Node
 
 	}
 
-	public void OnAreaEntered(Area2D area)
+	public void OnBodyEnteredHitBox(Node2D area)
 	{
+		GD.Print("enter");
 		HealthComponent.RemoveHealth(10);
 	}
 

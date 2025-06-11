@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class ExtractionPoint : Node2D
+public partial class ExtractionPoint : Area2D
 {
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -13,9 +13,15 @@ public partial class ExtractionPoint : Node2D
 	{
 	}
 
-	public void OnEnteredExtractionPoint(Area2D area)
+	public void OnBodyEnteredExtractionPoint(Node2D body)
 	{
 		// TODO: Change this to something useful
 		GD.Print("Entered extraction");
+	}
+
+	public void OnBodyExitedExtractionPoint(Node2D body)
+	{
+		// TODO: Change this to something useful
+		GD.Print("Exited extraction");
 	}
 }
