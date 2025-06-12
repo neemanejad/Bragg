@@ -16,7 +16,5 @@ position = Vector2(144, 0)
 position = Vector2(-144, -152)
 
 [node name="Hub" parent="." instance=ExtResource("3_jdlrk")]
-position = Vector2(128, 192)
-
-[node name="ExtractionPoint2" parent="." instance=ExtResource("3_o21rk")]
-position = Vector2(-312, 134)
+z_index = 1
+position = Vector2(0, 64)

@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://cy3fdt8nxx3wr"]
+
+[ext_resource type="Script" path="res://src/Hub/StartGame/StartGameArea.cs" id="1_3pmu0"]
+[ext_resource type="PackedScene" uid="uid://y5uvihjgny2r" path="res://src/Hub/StartGame/StartGame.tscn" id="2_exbeg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cdi45"]
+size = Vector2(192, 192)
+
+[node name="StartGameArea" type="Area2D"]
+script = ExtResource("1_3pmu0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(96, 96)
+shape = SubResource("RectangleShape2D_cdi45")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 192.0
+offset_bottom = 192.0
+color = Color(0.629288, 0.50548, 0.489932, 1)
+
+[node name="Label" type="Label" parent="."]
+offset_right = 192.0
+offset_bottom = 192.0
+theme_override_font_sizes/font_size = 10
+text = "Start Game"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="StartGame" parent="." instance=ExtResource("2_exbeg")]
+
+[connection signal="body_entered" from="." to="." method="OnBodyEnteredStartGameArea"]
+[connection signal="body_exited" from="." to="." method="OnBodyExitedStartGameArea"]
