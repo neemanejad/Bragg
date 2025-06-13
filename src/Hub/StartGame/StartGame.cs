@@ -3,10 +3,11 @@ using System;
 
 public partial class StartGame : CanvasLayer
 {
+	SceneSwitcher sceneSwitcher;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		GD.Print("StartGame menu");
+		sceneSwitcher = GetNode<SceneSwitcher>("SceneSwitcher");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -16,6 +17,6 @@ public partial class StartGame : CanvasLayer
 
 	public void OnBeginPressed()
 	{
-		GD.Print("Start game!");
+		sceneSwitcher.SwitchScene();
 	}
 }

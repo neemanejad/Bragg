@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c6l0ppc2vue46"]
+
+[ext_resource type="Script" path="res://src/Components/SceneSwitcher.cs" id="1_v3xn7"]
+
+[node name="SceneSwitcher" type="Node2D"]
+script = ExtResource("1_v3xn7")

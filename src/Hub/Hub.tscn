@@ -1,8 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://cm3085ghkb12j"]
+[gd_scene load_steps=3 format=3 uid="uid://dyq3odk2ogbfk"]
 
 [ext_resource type="PackedScene" uid="uid://cy3fdt8nxx3wr" path="res://src/Hub/StartGame/StartGameArea.tscn" id="1_e7paj"]
+[ext_resource type="PackedScene" uid="uid://20wj24co13mm" path="res://src/Player/Player.tscn" id="2_mijbm"]
 
 [node name="Hub" type="Node2D"]
 metadata/_edit_group_ = true
 
 [node name="StartGameArea" parent="." instance=ExtResource("1_e7paj")]
+
+[node name="Player" parent="." instance=ExtResource("2_mijbm")]
