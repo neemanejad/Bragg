@@ -1,16 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://bym04ysd5dpgy"]
+[gd_scene load_steps=4 format=3 uid="uid://bym04ysd5dpgy"]
 
 [ext_resource type="Script" path="res://src/Extraction/ExtractionPoint.cs" id="1_eqftt"]
 [ext_resource type="PackedScene" uid="uid://c6l0ppc2vue46" path="res://src/Components/SceneSwitcher.tscn" id="2_vawun"]
-[ext_resource type="PackedScene" uid="uid://dyq3odk2ogbfk" path="res://src/Hub/Hub.tscn" id="3_cb6qw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6yxla"]
 size = Vector2(192, 128)
 
 [node name="ExtractionPoint" type="Node2D"]
+script = ExtResource("1_eqftt")
 
 [node name="Area2D" type="Area2D" parent="."]
-script = ExtResource("1_eqftt")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_6yxla")
@@ -34,7 +33,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="SceneSwitcher" parent="." instance=ExtResource("2_vawun")]
-packedScene = ExtResource("3_cb6qw")
+packedScenePath = "res://src/Hub/Hub.tscn"
 
-[connection signal="body_entered" from="Area2D" to="Area2D" method="OnBodyEnteredExtractionPoint"]
-[connection signal="body_exited" from="Area2D" to="Area2D" method="OnBodyExitedExtractionPoint"]
+[connection signal="body_entered" from="Area2D" to="." method="OnBodyEnteredExtractionPoint"]

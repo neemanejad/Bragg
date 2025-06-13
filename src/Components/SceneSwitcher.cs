@@ -4,12 +4,12 @@ using System;
 public partial class SceneSwitcher : Node2D
 {
 	[Export]
-	public PackedScene packedScene;
+	public string packedScenePath;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		if (packedScene == null)
+		if (packedScenePath == null)
 		{
 			throw new NullReferenceException("Missing packed scene.");
 		}
@@ -22,7 +22,7 @@ public partial class SceneSwitcher : Node2D
 
 	public void SwitchScene()
 	{
-		var instantiatedScene = packedScene.Instantiate();
+		var instantiatedScene = ResourceLoader.Load<PackedScene>(packedScenePath).Instantiate();
 
 		var root = GetTree().Root;
 
@@ -31,6 +31,6 @@ public partial class SceneSwitcher : Node2D
 			child.QueueFree();
 		}
 
-		root.AddChild(instantiatedScene);
+		root.CallDeferred(Node.MethodName.AddChild, instantiatedScene);
 	}
 }
