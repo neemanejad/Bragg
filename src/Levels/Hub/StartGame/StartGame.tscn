@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://y5uvihjgny2r"]
 
-[ext_resource type="Script" path="res://src/Hub/StartGame/StartGame.cs" id="1_c63n8"]
+[ext_resource type="Script" path="res://src/Levels/Hub/StartGame/StartGame.cs" id="1_c63n8"]
 [ext_resource type="PackedScene" uid="uid://c6l0ppc2vue46" path="res://src/Components/SceneSwitcher.tscn" id="2_viey4"]
 
 [node name="StartGame" type="CanvasLayer"]

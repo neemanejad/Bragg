@@ -15,6 +15,7 @@ public partial class Enemy : Node2D
 
 	public void LostAllHealth()
 	{
+		PlayerManager.Instance.OnKillHandler();
 		QueueFree();
 	}
 }

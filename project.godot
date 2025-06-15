@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="Project"
-run/main_scene="res://src/Hub/Hub.tscn"
+run/main_scene="res://src/Levels/Hub/Hub.tscn"
 config/features=PackedStringArray("4.3", "C#", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+PlayerManager="*res://src/Singletons/PlayerManager/PlayerManager.cs"
 
 [display]
 

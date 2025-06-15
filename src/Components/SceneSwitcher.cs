@@ -22,15 +22,6 @@ public partial class SceneSwitcher : Node2D
 
 	public void SwitchScene()
 	{
-		var instantiatedScene = ResourceLoader.Load<PackedScene>(packedScenePath).Instantiate();
-
-		var root = GetTree().Root;
-
-		foreach (Node child in root.GetChildren())
-		{
-			child.QueueFree();
-		}
-
-		root.CallDeferred(Node.MethodName.AddChild, instantiatedScene);
+		GetTree().CallDeferred(SceneTree.MethodName.ChangeSceneToPacked, ResourceLoader.Load<PackedScene>(packedScenePath));
 	}
 }

@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cy3fdt8nxx3wr"]
 
-[ext_resource type="Script" path="res://src/Hub/StartGame/StartGameArea.cs" id="1_3pmu0"]
-[ext_resource type="PackedScene" uid="uid://y5uvihjgny2r" path="res://src/Hub/StartGame/StartGame.tscn" id="2_exbeg"]
+[ext_resource type="Script" path="res://src/Levels/Hub/StartGame/StartGameArea.cs" id="1_3pmu0"]
+[ext_resource type="PackedScene" uid="uid://y5uvihjgny2r" path="res://src/Levels/Hub/StartGame/StartGame.tscn" id="2_exbeg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cdi45"]
 size = Vector2(192, 192)
