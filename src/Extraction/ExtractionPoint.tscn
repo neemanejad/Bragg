@@ -1,7 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://bym04ysd5dpgy"]
+[gd_scene load_steps=3 format=3 uid="uid://bym04ysd5dpgy"]
 
 [ext_resource type="Script" path="res://src/Extraction/ExtractionPoint.cs" id="1_eqftt"]
-[ext_resource type="PackedScene" uid="uid://c6l0ppc2vue46" path="res://src/Components/SceneSwitcher.tscn" id="2_vawun"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6yxla"]
 size = Vector2(192, 128)
@@ -31,8 +30,5 @@ text = "Extraction
 Point"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="SceneSwitcher" parent="." instance=ExtResource("2_vawun")]
-packedScenePath = "res://src/Hub/Hub.tscn"
 
 [connection signal="body_entered" from="Area2D" to="." method="OnBodyEnteredExtractionPoint"]

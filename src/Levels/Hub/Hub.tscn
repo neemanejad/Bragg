@@ -1,15 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://dyq3odk2ogbfk"]
+[gd_scene load_steps=3 format=3 uid="uid://dyq3odk2ogbfk"]
 
 [ext_resource type="PackedScene" uid="uid://cy3fdt8nxx3wr" path="res://src/Levels/Hub/StartGame/StartGameArea.tscn" id="1_hwc5y"]
-[ext_resource type="PackedScene" uid="uid://c6l0ppc2vue46" path="res://src/Components/SceneSwitcher.tscn" id="2_5pnj2"]
 [ext_resource type="PackedScene" uid="uid://20wj24co13mm" path="res://src/Player/Player.tscn" id="2_mijbm"]
 
 [node name="Hub" type="Node2D"]
 metadata/_edit_group_ = true
 
 [node name="StartGameArea" parent="." instance=ExtResource("1_hwc5y")]
-
-[node name="SceneSwitcher" parent="." instance=ExtResource("2_5pnj2")]
-packedScenePath = "res://src/Extraction/ExtractionPoint.tscn"
 
 [node name="Player" parent="." instance=ExtResource("2_mijbm")]

@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://y5uvihjgny2r"]
+[gd_scene load_steps=2 format=3 uid="uid://y5uvihjgny2r"]
 
 [ext_resource type="Script" path="res://src/Levels/Hub/StartGame/StartGame.cs" id="1_c63n8"]
-[ext_resource type="PackedScene" uid="uid://c6l0ppc2vue46" path="res://src/Components/SceneSwitcher.tscn" id="2_viey4"]
 
 [node name="StartGame" type="CanvasLayer"]
 layer = 100
@@ -26,8 +25,5 @@ offset_top = 128.0
 offset_right = 256.0
 offset_bottom = 192.0
 text = "Begin"
-
-[node name="SceneSwitcher" parent="." instance=ExtResource("2_viey4")]
-packedScenePath = "res://src/Main/Main.tscn"
 
 [connection signal="pressed" from="Button" to="." method="OnBeginPressed"]
