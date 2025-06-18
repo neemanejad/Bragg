@@ -1,11 +1,43 @@
-[gd_scene load_steps=3 format=3 uid="uid://dyq3odk2ogbfk"]
+[gd_scene load_steps=6 format=3 uid="uid://dyq3odk2ogbfk"]
 
-[ext_resource type="PackedScene" uid="uid://cy3fdt8nxx3wr" path="res://src/Levels/Hub/StartGame/StartGameArea.tscn" id="1_hwc5y"]
+[ext_resource type="Script" path="res://src/Levels/Hub/StartGame.cs" id="2_ix0sj"]
 [ext_resource type="PackedScene" uid="uid://20wj24co13mm" path="res://src/Player/Player.tscn" id="2_mijbm"]
+[ext_resource type="FontFile" uid="uid://bqvowpn52m0pp" path="res://fonts/SpaceNova-6Rpd1.otf" id="3_i15nx"]
+[ext_resource type="Script" path="res://src/Levels/Hub/ActionLabel.cs" id="3_knfo8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sq0g4"]
+size = Vector2(104, 208)
 
 [node name="Hub" type="Node2D"]
-metadata/_edit_group_ = true
-
-[node name="StartGameArea" parent="." instance=ExtResource("1_hwc5y")]
 
 [node name="Player" parent="." instance=ExtResource("2_mijbm")]
+
+[node name="StartGame" type="Area2D" parent="."]
+script = ExtResource("2_ix0sj")
+
+[node name="ColorRect" type="ColorRect" parent="StartGame"]
+offset_left = 256.0
+offset_top = 128.0
+offset_right = 280.0
+offset_bottom = 256.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StartGame"]
+position = Vector2(268, 192)
+shape = SubResource("RectangleShape2D_sq0g4")
+
+[node name="ActionLabel" type="CanvasLayer" parent="StartGame"]
+follow_viewport_enabled = true
+script = ExtResource("3_knfo8")
+
+[node name="Label" type="Label" parent="StartGame/ActionLabel"]
+offset_left = 224.0
+offset_top = 88.0
+offset_right = 314.0
+offset_bottom = 111.0
+theme_override_fonts/font = ExtResource("3_i15nx")
+text = "Press E"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="body_entered" from="StartGame" to="StartGame/ActionLabel" method="ShowLabel"]
+[connection signal="body_exited" from="StartGame" to="StartGame/ActionLabel" method="HideLabel"]

@@ -29,7 +29,7 @@ CurrentHealth = 30.0
 MaxHealth = 30.0
 
 [node name="HealthBar" parent="." node_paths=PackedStringArray("HealthComponent") instance=ExtResource("2_lgjvy")]
-position = Vector2(0, -56)
+position = Vector2(0, -61)
 scale = Vector2(0.735, 0.405)
 HealthComponent = NodePath("../HealthComponent")
 

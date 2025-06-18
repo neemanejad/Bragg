@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://8pn6igmaecrr"]
-
-[ext_resource type="Script" path="res://src/Singletons/PlayerManager/PlayerManager.cs" id="1_cpdf8"]
-[ext_resource type="PackedScene" uid="uid://20wj24co13mm" path="res://src/Player/Player.tscn" id="2_o41ma"]
-
-[node name="PlayerManager" type="Node"]
-script = ExtResource("1_cpdf8")
-PlayerScene = ExtResource("2_o41ma")

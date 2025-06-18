@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://20wj24co13mm"]
+[gd_scene load_steps=5 format=3 uid="uid://20wj24co13mm"]
 
 [ext_resource type="Script" path="res://src/Player/Player.cs" id="1_r0lme"]
+[ext_resource type="PackedScene" uid="uid://xihwfy5g6dem" path="res://src/Player/Vitals.tscn" id="2_jtnkn"]
 [ext_resource type="Texture2D" uid="uid://ddb7q8y77vkbk" path="res://icon.svg" id="2_tvobu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c472h"]
@@ -9,6 +10,8 @@ size = Vector2(16, 16)
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_r0lme")
 metadata/_edit_group_ = true
+
+[node name="Vitals" parent="." instance=ExtResource("2_jtnkn")]
 
 [node name="PlayerCamera" type="Camera2D" parent="."]
 
