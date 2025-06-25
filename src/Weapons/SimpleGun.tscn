@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://c8rduuyifi7bj"]
+
+[ext_resource type="Script" path="res://src/Weapons/BaseWeapon.cs" id="1_6n8lv"]
+[ext_resource type="PackedScene" uid="uid://dx4dhe4ky264e" path="res://src/Weapons/Bullet.tscn" id="2_kd840"]
+
+[node name="SimpleGun" type="Node2D"]
+script = ExtResource("1_6n8lv")
+Bullet = ExtResource("2_kd840")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 32.0
+offset_bottom = 16.0
+color = Color(0.745098, 0.435294, 1, 1)
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(40, 8)

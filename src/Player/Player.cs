@@ -6,9 +6,11 @@ public partial class Player : CharacterBody2D
 	[Export]
 	public int Speed { get; set; } = 400;
 
+	[Export]
+	public Inventory PlayerInventory;
+
 	public Vector2 ScreenSize;
 
-	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		ScreenSize = GetViewportRect().Size;
@@ -25,4 +27,14 @@ public partial class Player : CharacterBody2D
 		GetInput();
 		MoveAndSlide();
 	}
+
+    public override void _Process(double delta)
+    {
+		if (Input.IsActionJustPressed("interact"))
+		{
+			
+			var weapon = GetNode<BaseWeapon>("CyclicFollowerComponent/SimpleGun");
+			weapon.Shoot();
+		}
+    }
 }

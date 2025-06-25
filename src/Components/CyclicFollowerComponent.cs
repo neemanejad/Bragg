@@ -6,10 +6,10 @@ public partial class CyclicFollowerComponent : Node2D
 	[Export]
 	public PackedScene EntityScene { get; set; }
 	[Export]
-	public Vector2 Anchor {  get; set; }
+	public Vector2 Anchor { get; set; }
 	[Export]
 	public float Radius { get; set; }
-	private Node2D Entity {  get; set; }
+	private Node2D Entity { get; set; }
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -32,7 +32,9 @@ public partial class CyclicFollowerComponent : Node2D
 
 	private void ProcessMouseMovement()
 	{
-        var directionVector = GetLocalMousePosition().Normalized() * Radius;
-        Entity.Position = directionVector;
-    }
+		var directionVector = GetLocalMousePosition().Normalized() * Radius;
+		Entity.Position = directionVector;
+
+		Entity.LookAt(GetGlobalMousePosition());
+	}
 }

@@ -1,0 +1,7 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://cetusmaumlxmx"]
+
+[ext_resource type="Script" path="res://src/Inventory/Inventory.cs" id="1_at4q8"]
+
+[resource]
+script = ExtResource("1_at4q8")
+InventoryItems = Array[Object]([null, null])

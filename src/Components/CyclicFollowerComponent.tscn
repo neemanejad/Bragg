@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://bu2st17h6eh0v"]
+[gd_scene load_steps=2 format=3 uid="uid://c6jq6aaps3i3a"]
 
 [ext_resource type="Script" path="res://src/Components/CyclicFollowerComponent.cs" id="1_b4u0l"]
 

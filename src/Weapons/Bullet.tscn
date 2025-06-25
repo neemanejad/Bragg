@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://dx4dhe4ky264e"]
+
+[ext_resource type="Script" path="res://src/Weapons/Bullet.cs" id="1_8gjmm"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_18yvn"]
+
+[node name="Area2D" type="Area2D"]
+script = ExtResource("1_8gjmm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(1, 1.01334)
+shape = SubResource("CapsuleShape2D_18yvn")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -8.0
+offset_top = -16.0
+offset_right = 8.0
+offset_bottom = 16.0
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(0, 2.38419e-07)
+scale = Vector2(1, 1.6)
+
+[connection signal="body_entered" from="." to="." method="Hit"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="FreeBullet"]
