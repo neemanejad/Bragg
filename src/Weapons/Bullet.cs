@@ -2,13 +2,9 @@ using Godot;
 
 public partial class Bullet : Area2D
 {
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
-	{
-		GD.Print("bullet");
-	}
+	[Export]
+	float Damage { get; set; }
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
 	}
@@ -20,8 +16,12 @@ public partial class Bullet : Area2D
 
 	public void Hit(Node2D body)
 	{
-		GD.Print("Hit");
-		GD.Print(body);
+
+		if (body is Enemy enemy)
+		{
+			enemy.HealthComponent.RemoveHealth(Damage);
+			QueueFree();
+		}
 	}
 
 	public void FreeBullet()

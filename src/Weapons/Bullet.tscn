@@ -6,6 +6,7 @@
 
 [node name="Area2D" type="Area2D"]
 script = ExtResource("1_8gjmm")
+Damage = 10.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(1, 1.01334)

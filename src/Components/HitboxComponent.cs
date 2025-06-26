@@ -5,8 +5,10 @@ public partial class HitboxComponent : Node
 {
 	[Export]
 	public HealthComponent HealthComponent { get; set; }
+
 	[Export]
 	public Timer HitTimer { get; set; }
+
 	private bool canAttack = true;
 
 	// Called when the node enters the scene tree for the first time.
