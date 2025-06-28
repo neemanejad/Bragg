@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://dyq3odk2ogbfk"]
 
-[ext_resource type="Script" path="res://src/Levels/Hub/StartGame.cs" id="2_ix0sj"]
-[ext_resource type="PackedScene" uid="uid://20wj24co13mm" path="res://src/Player/Player.tscn" id="2_mijbm"]
+[ext_resource type="PackedScene" uid="uid://20wj24co13mm" path="res://Player/Player.tscn" id="2_mijbm"]
+[ext_resource type="Script" path="res://Levels/Hub/StartGame.cs" id="2_vx5c7"]
+[ext_resource type="Script" path="res://Levels/Hub/ActionLabel.cs" id="3_6u5if"]
 [ext_resource type="FontFile" uid="uid://bqvowpn52m0pp" path="res://fonts/SpaceNova-6Rpd1.otf" id="3_i15nx"]
-[ext_resource type="Script" path="res://src/Levels/Hub/ActionLabel.cs" id="3_knfo8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sq0g4"]
 size = Vector2(104, 208)
@@ -13,7 +13,7 @@ size = Vector2(104, 208)
 [node name="Player" parent="." instance=ExtResource("2_mijbm")]
 
 [node name="StartGame" type="Area2D" parent="."]
-script = ExtResource("2_ix0sj")
+script = ExtResource("2_vx5c7")
 
 [node name="ColorRect" type="ColorRect" parent="StartGame"]
 offset_left = 256.0
@@ -27,7 +27,7 @@ shape = SubResource("RectangleShape2D_sq0g4")
 
 [node name="ActionLabel" type="CanvasLayer" parent="StartGame"]
 follow_viewport_enabled = true
-script = ExtResource("3_knfo8")
+script = ExtResource("3_6u5if")
 
 [node name="Label" type="Label" parent="StartGame/ActionLabel"]
 offset_left = 224.0

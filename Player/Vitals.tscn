@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://xihwfy5g6dem"]
 
-[ext_resource type="PackedScene" uid="uid://dx7rw14cjb4ie" path="res://src/Components/HealthComponent.tscn" id="1_ppne3"]
-[ext_resource type="PackedScene" uid="uid://b730r6uoiexq6" path="res://src/HealthBar/HealthBar.tscn" id="2_37h1q"]
+[ext_resource type="PackedScene" uid="uid://dx7rw14cjb4ie" path="res://Components/HealthComponent.tscn" id="1_ppne3"]
+[ext_resource type="PackedScene" uid="uid://b730r6uoiexq6" path="res://HealthBar/HealthBar.tscn" id="2_37h1q"]
 [ext_resource type="FontFile" uid="uid://bqvowpn52m0pp" path="res://fonts/SpaceNova-6Rpd1.otf" id="3_4d55s"]
 
 [node name="Vitals" type="Node2D"]

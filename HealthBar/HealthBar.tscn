@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://b730r6uoiexq6"]
 
-[ext_resource type="Script" path="res://src/HealthBar/HealthBar.cs" id="1_jxtvd"]
+[ext_resource type="Script" path="res://HealthBar/HealthBar.cs" id="1_qrjax"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rjnpr"]
 bg_color = Color(0, 0, 0, 1)
@@ -9,7 +9,7 @@ bg_color = Color(0, 0, 0, 1)
 bg_color = Color(0.486275, 0, 0, 1)
 
 [node name="HealthBar" type="Node2D"]
-script = ExtResource("1_jxtvd")
+script = ExtResource("1_qrjax")
 metadata/_edit_group_ = true
 
 [node name="ColorRect" type="ColorRect" parent="."]

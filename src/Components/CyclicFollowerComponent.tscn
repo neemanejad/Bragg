@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://c6jq6aaps3i3a"]
-
-[ext_resource type="Script" path="res://src/Components/CyclicFollowerComponent.cs" id="1_b4u0l"]
-
-[node name="CyclicFollowerComponent" type="Node2D"]
-script = ExtResource("1_b4u0l")

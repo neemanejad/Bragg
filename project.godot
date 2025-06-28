@@ -11,14 +11,14 @@ config_version=5
 [application]
 
 config/name="game"
-run/main_scene="res://src/Levels/Hub/Hub.tscn"
+run/main_scene="res://Levels/Hub/Hub.tscn"
 config/features=PackedStringArray("4.3", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
-PlayerManager="*res://src/Singletons/PlayerManager/PlayerManager.cs"
-SceneSwitcher="*res://src/Singletons/SceneSwitcher/SceneSwitcher.cs"
+PlayerManager="*res://Singletons/PlayerManager/PlayerManager.cs"
+SceneSwitcher="*res://Singletons/SceneSwitcher/SceneSwitcher.cs"
 
 [display]
 
