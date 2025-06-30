@@ -1,15 +1,25 @@
-[gd_scene load_steps=4 format=3 uid="uid://d256twot7lnbw"]
+[gd_scene load_steps=5 format=3 uid="uid://d256twot7lnbw"]
 
-[ext_resource type="PackedScene" uid="uid://crxeuyluv2n2" path="res://src/Enemies/Enemy.tscn" id="2_yufv5"]
-[ext_resource type="PackedScene" uid="uid://bym04ysd5dpgy" path="res://src/Extraction/ExtractionPoint.tscn" id="3_o21rk"]
-[ext_resource type="PackedScene" uid="uid://20wj24co13mm" path="res://src/Player/Player.tscn" id="4_la53p"]
+[ext_resource type="PackedScene" uid="uid://crxeuyluv2n2" path="res://Enemies/Enemy.tscn" id="2_yufv5"]
+[ext_resource type="PackedScene" uid="uid://bym04ysd5dpgy" path="res://Extraction/ExtractionPoint.tscn" id="3_o21rk"]
+[ext_resource type="PackedScene" uid="uid://dmhkmyvvhm1db" path="res://Items/SpeedBoostItem.tscn" id="4_jghw2"]
+[ext_resource type="PackedScene" uid="uid://20wj24co13mm" path="res://Player/Player.tscn" id="4_la53p"]
 
 [node name="Main" type="Node"]
 
 [node name="Enemy" parent="." instance=ExtResource("2_yufv5")]
-position = Vector2(144, 0)
+position = Vector2(400, -32)
 
 [node name="ExtractionPoint" parent="." instance=ExtResource("3_o21rk")]
 position = Vector2(-144, -152)
 
 [node name="Player" parent="." instance=ExtResource("4_la53p")]
+
+[node name="SpeedBoostItem" parent="." instance=ExtResource("4_jghw2")]
+position = Vector2(-144, 120)
+
+[node name="SpeedBoostItem2" parent="." instance=ExtResource("4_jghw2")]
+position = Vector2(-144, 304)
+
+[node name="SpeedBoostItem3" parent="." instance=ExtResource("4_jghw2")]
+position = Vector2(-144, 216)

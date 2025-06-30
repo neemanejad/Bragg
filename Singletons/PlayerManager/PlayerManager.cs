@@ -1,9 +1,13 @@
 using Godot;
-
-
+using Project.Items;
+using System.Collections.Generic;
 
 public partial class PlayerManager : Node
 {
+	[Signal]
+	public delegate void ItemAddedEventHandler(int itemId);
+
+	public Dictionary<ItemId, int> ItemCountMap  = new Dictionary<ItemId, int>();
 	public static PlayerManager Instance { get; private set; }
 
 	private float _health = 100f;
@@ -37,5 +41,16 @@ public partial class PlayerManager : Node
 		}
 
 		_health = healthSum;
+	}
+
+	public void AddItem(int itemId)
+	{
+		if (!ItemCountMap.TryGetValue((ItemId) itemId, out _))
+		{
+			ItemCountMap[(ItemId)itemId] = 0;
+		}
+
+        ItemCountMap[(ItemId)itemId] += 1;
+        EmitSignal(SignalName.ItemAdded, itemId);
 	}
 }

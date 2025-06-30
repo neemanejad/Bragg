@@ -1,13 +1,10 @@
 using Godot;
 using System;
 
-public partial class Player : CharacterBody2D
+public partial class Player : Area2D
 {
 	[Export]
 	public int Speed { get; set; } = 400;
-
-	[Export]
-	public Inventory PlayerInventory;
 
 	public Vector2 ScreenSize;
 
@@ -16,23 +13,22 @@ public partial class Player : CharacterBody2D
 		ScreenSize = GetViewportRect().Size;
 	}
 
-	public void GetInput()
+	public void HandleMovementInput(double deltaTime)
 	{
 		Vector2 inputDirection = Input.GetVector("left", "right", "up", "down");
-		Velocity = inputDirection * Speed;
+		GlobalPosition += (inputDirection * (float)(Speed * deltaTime));
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
-		GetInput();
-		MoveAndSlide();
 	}
 
     public override void _Process(double delta)
     {
+		HandleMovementInput(delta);
+
 		if (Input.IsActionJustPressed("interact"))
 		{
-			
 			var weapon = GetNode<BaseWeapon>("CyclicFollowerComponent/SimpleGun");
 			weapon.Shoot();
 		}
