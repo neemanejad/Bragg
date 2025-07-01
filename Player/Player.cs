@@ -1,16 +1,18 @@
 using Godot;
+using Project.Items;
 using System;
 
 public partial class Player : Area2D
 {
 	[Export]
-	public int Speed { get; set; } = 400;
+	public double Speed { get; set; } = 400;
 
-	public Vector2 ScreenSize;
 
 	public override void _Ready()
 	{
-		ScreenSize = GetViewportRect().Size;
+        PlayerManager.Instance.SetPlayerNode(this);
+
+        ApplyExistingItemEffectsToPlayer();
 	}
 
 	public void HandleMovementInput(double deltaTime)
@@ -33,4 +35,19 @@ public partial class Player : Area2D
 			weapon.Shoot();
 		}
     }
+
+	/// <summary>
+	/// Apply all of the existing item effects on player. This should only
+	/// be called once in <see cref="_Ready"/>.
+	/// </summary>
+    private void ApplyExistingItemEffectsToPlayer()
+	{
+		foreach ( var entry in PlayerManager.Instance.ItemCountMap)
+		{
+			for ( var i = 0; i < entry.Value; i++ )
+			{
+				Item.GetItem(entry.Key).Effect(this);
+			}
+		}
+	}
 }

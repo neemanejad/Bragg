@@ -31,4 +31,4 @@ Point"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[connection signal="body_entered" from="Area2D" to="." method="OnBodyEnteredExtractionPoint"]
+[connection signal="area_entered" from="Area2D" to="." method="OnBodyEnteredExtractionPoint"]

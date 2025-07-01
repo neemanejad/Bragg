@@ -9,6 +9,7 @@ public partial class PlayerManager : Node
 
 	public Dictionary<ItemId, int> ItemCountMap  = new Dictionary<ItemId, int>();
 	public static PlayerManager Instance { get; private set; }
+	public static Player PlayerNode { get; private set; }
 
 	private float _health = 100f;
 
@@ -51,6 +52,12 @@ public partial class PlayerManager : Node
 		}
 
         ItemCountMap[(ItemId)itemId] += 1;
+		Item.GetItem((ItemId)itemId).Effect(PlayerNode);
         EmitSignal(SignalName.ItemAdded, itemId);
+	}
+
+	public void SetPlayerNode(Player player)
+	{
+		PlayerNode = player;
 	}
 }
