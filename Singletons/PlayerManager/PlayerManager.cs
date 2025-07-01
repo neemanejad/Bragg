@@ -1,5 +1,5 @@
 using Godot;
-using Project.Items;
+using Redwood.Items;
 using System.Collections.Generic;
 
 public partial class PlayerManager : Node

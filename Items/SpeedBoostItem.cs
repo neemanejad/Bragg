@@ -1,6 +1,6 @@
 using Godot;
 using System;
-using Project.Items;
+using Redwood.Items;
 
 public partial class SpeedBoostItem : Node2D, IItemNode
 {

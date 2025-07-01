@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Project.Items
+namespace Redwood.Items
 {
     public delegate void ItemEffect(Player player);
 
