@@ -22,9 +22,9 @@ public partial class SpeedBoostItem : Node2D, IItemNode
 	{
 	}
 
-	public void OnAreaEntered(Area2D area)
+	public void OnPickup(Node2D body)
 	{
-		if (area.IsInGroup("Player"))
+		if (body.IsInGroup("Player"))
 		{
 			PlayerManager.Instance.AddItem((int)ItemId);
 			QueueFree();

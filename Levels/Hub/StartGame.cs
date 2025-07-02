@@ -4,7 +4,7 @@ public partial class StartGame : Area2D
 {
 	public override void _Process(double delta)
 	{
-		var playerInArea = GetOverlappingAreas().Contains(Owner.GetNode<Player>("Player"));
+		var playerInArea = GetOverlappingBodies().Contains(PlayerManager.PlayerNode);
 
 		var isInteracting = Input.IsActionJustPressed("interact");
 

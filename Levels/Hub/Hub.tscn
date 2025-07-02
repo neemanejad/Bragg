@@ -39,5 +39,5 @@ text = "Press E"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[connection signal="area_entered" from="StartGame" to="StartGame/ActionLabel" method="ShowLabel"]
-[connection signal="area_exited" from="StartGame" to="StartGame/ActionLabel" method="HideLabel"]
+[connection signal="body_entered" from="StartGame" to="StartGame/ActionLabel" method="ShowLabel"]
+[connection signal="body_exited" from="StartGame" to="StartGame/ActionLabel" method="HideLabel"]
