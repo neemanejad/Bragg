@@ -30,6 +30,7 @@ public partial class Enemy : CharacterBody2D
 	public void LostAllHealth()
 	{
 		PlayerManager.Instance.OnKillHandler();
+		MaybeDropItem();
 		QueueFree();
 	}
 
@@ -43,4 +44,16 @@ public partial class Enemy : CharacterBody2D
 		var playerDirection =  (PlayerManager.PlayerNode.GlobalPosition - GlobalPosition).Normalized();
 		GlobalPosition += playerDirection * (float)(Speed * delta);
 	}
+
+	private void MaybeDropItem()
+	{
+		var random = new Random();
+		var randomNumber = random.Next(0, 100);
+		if (randomNumber >= 1)
+		{
+			var item = ResourceLoader.Load<PackedScene>("res://Items/SpeedBoostItem.tscn").Instantiate<SpeedBoostItem>();
+            item.GlobalPosition = GlobalPosition;
+            GetParent().CallDeferred(MethodName.AddChild, item);
+        }
+    }
 }
