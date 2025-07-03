@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://cath56h12gwyc"]
+[gd_scene load_steps=2 format=3 uid="uid://cp7na7lpka4bf"]
 
 [ext_resource type="Script" path="res://Enemies/EnemySpawner.cs" id="1_mkct2"]
 
