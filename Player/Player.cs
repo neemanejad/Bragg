@@ -1,6 +1,5 @@
 using Godot;
 using Redwood.Items;
-using System;
 
 public partial class Player : CharacterBody2D
 {
@@ -12,22 +11,22 @@ public partial class Player : CharacterBody2D
 	{
 		PlayerManager.Instance.SetPlayerNode(this);
 
+		GetNode<HealthComponent>("Vitals/UI/HealthComponent").SetHealth(PlayerManager.Instance.Health);
+
 		ApplyExistingItemEffectsToPlayer();
 	}
 
-	public void HandleMovementInput(double deltaTime)
+	public void HandleMovementInput()
 	{
 		Vector2 inputDirection = Input.GetVector("left", "right", "up", "down");
-		GlobalPosition += (inputDirection * (float)(Speed * deltaTime));
+		Velocity = inputDirection * (float)Speed;
+
+		MoveAndSlide();
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
-	}
-
-	public override void _Process(double delta)
-	{
-		HandleMovementInput(delta);
+		HandleMovementInput();
 
 		if (Input.IsActionJustPressed("interact"))
 		{
@@ -42,9 +41,9 @@ public partial class Player : CharacterBody2D
 	/// </summary>
 	private void ApplyExistingItemEffectsToPlayer()
 	{
-		foreach ( var entry in PlayerManager.Instance.ItemCountMap)
+		foreach (var entry in PlayerManager.Instance.ItemCountMap)
 		{
-			for ( var i = 0; i < entry.Value; i++ )
+			for (var i = 0; i < entry.Value; i++)
 			{
 				Item.GetItem(entry.Key).Effect(this);
 			}

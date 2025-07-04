@@ -8,8 +8,12 @@ public partial class Enemy : CharacterBody2D
 
 	[Export]
 	public Timer HitTimer { get; set; }
+
 	[Export]
 	public double Speed = 200;
+
+	[Export]
+	public float Damage { get; set; }
 
 	private bool canAttack = true;
 
@@ -21,10 +25,29 @@ public partial class Enemy : CharacterBody2D
 		}
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
+	public override void _PhysicsProcess(double delta)
 	{
-		FollowPlayer(delta);
+		FollowPlayer();
+		DealDamage();
+	}
+
+	public void DealDamage()
+	{
+		var lastSlideCollision = GetLastSlideCollision();
+
+		if (lastSlideCollision == null)
+		{
+			return;
+		}
+
+		var collider = lastSlideCollision.GetCollider();
+
+		if (collider != PlayerManager.PlayerNode)
+		{
+			return;
+		}
+
+		PlayerManager.Instance.SubtractHealth(Damage);
 	}
 
 	public void LostAllHealth()
@@ -34,15 +57,16 @@ public partial class Enemy : CharacterBody2D
 		QueueFree();
 	}
 
-	private void FollowPlayer(double delta)
+	private void FollowPlayer()
 	{
 		if (PlayerManager.PlayerNode == null)
 		{
 			return;
 		}
 
-		var playerDirection =  (PlayerManager.PlayerNode.GlobalPosition - GlobalPosition).Normalized();
-		GlobalPosition += playerDirection * (float)(Speed * delta);
+		var playerDirection = (PlayerManager.PlayerNode.GlobalPosition - GlobalPosition).Normalized();
+		Velocity = playerDirection * (float)Speed;
+		MoveAndSlide();
 	}
 
 	private void MaybeDropItem()
@@ -52,8 +76,8 @@ public partial class Enemy : CharacterBody2D
 		if (randomNumber >= 1)
 		{
 			var item = ResourceLoader.Load<PackedScene>("res://Items/SpeedBoostItem.tscn").Instantiate<SpeedBoostItem>();
-            item.GlobalPosition = GlobalPosition;
-            GetParent().CallDeferred(MethodName.AddChild, item);
-        }
-    }
+			item.GlobalPosition = GlobalPosition;
+			GetParent().CallDeferred(MethodName.AddChild, item);
+		}
+	}
 }

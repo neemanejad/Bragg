@@ -1,5 +1,6 @@
 using Godot;
 using Redwood.Items;
+using System;
 using System.Collections.Generic;
 
 public partial class PlayerManager : Node
@@ -7,11 +8,16 @@ public partial class PlayerManager : Node
 	[Signal]
 	public delegate void ItemAddedEventHandler(int itemId);
 
-	public Dictionary<ItemId, int> ItemCountMap  = new Dictionary<ItemId, int>();
+	public Dictionary<ItemId, int> ItemCountMap = new Dictionary<ItemId, int>();
 	public static PlayerManager Instance { get; private set; }
 	public static Player PlayerNode { get; private set; }
 
 	private float _health = 100f;
+
+	public float Health
+	{
+		get { return _health; }
+	}
 
 	private int _killCount;
 
@@ -23,11 +29,15 @@ public partial class PlayerManager : Node
 	public void OnKillHandler()
 	{
 		_killCount += 1;
-		GD.Print(_killCount);
 	}
 
 	public void AddHealth(float health)
 	{
+		if (health < 0)
+		{
+			throw new Exception("health should be >= 0");
+		}
+
 		var healthSum = health + _health;
 
 		if (healthSum > 100f)
@@ -35,25 +45,49 @@ public partial class PlayerManager : Node
 			_health = 100f;
 			return;
 		}
-		else if (healthSum <= 0f)
+
+		_health = healthSum;
+
+		var healthComponent = PlayerNode.GetNode<HealthComponent>("Vitals/UI/HealthComponent");
+		healthComponent.RemoveHealth(health);
+	}
+
+	public void SubtractHealth(float health)
+	{
+		var healthComponent = PlayerNode.GetNode<HealthComponent>("Vitals/UI/HealthComponent");
+
+		if (health < 0)
 		{
-			_health = 0;
+			throw new Exception("health should be >= 0");
+		}
+
+		var healthDiff = _health - health;
+
+		if (healthDiff <= 0)
+		{
+
+			_health = 100;
+			SceneSwitcher.Instance.DeferredGotoScene("res://Levels/Hub/Hub.tscn");
+
 			return;
 		}
 
-		_health = healthSum;
+		_health = healthDiff;
+
+		healthComponent.RemoveHealth(health);
+
 	}
 
 	public void AddItem(int itemId)
 	{
-		if (!ItemCountMap.TryGetValue((ItemId) itemId, out _))
+		if (!ItemCountMap.TryGetValue((ItemId)itemId, out _))
 		{
 			ItemCountMap[(ItemId)itemId] = 0;
 		}
 
-        ItemCountMap[(ItemId)itemId] += 1;
+		ItemCountMap[(ItemId)itemId] += 1;
 		Item.GetItem((ItemId)itemId).Effect(PlayerNode);
-        EmitSignal(SignalName.ItemAdded, itemId);
+		EmitSignal(SignalName.ItemAdded, itemId);
 	}
 
 	public void SetPlayerNode(Player player)

@@ -14,9 +14,9 @@ public partial class HealthComponent : Node
     {
     }
 
-    // Called every frame. 'delta' is the elapsed time since the previous frame.
-    public override void _Process(double delta)
+    public void SetHealth(float healthPoints)
     {
+        CurrentHealth = healthPoints;
     }
 
     public void AddHealth(float healthPoints)

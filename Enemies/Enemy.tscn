@@ -11,6 +11,7 @@ size = Vector2(128, 128)
 [node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("HealthComponent")]
 script = ExtResource("1_xio3m")
 HealthComponent = NodePath("HealthComponent")
+Damage = 1.0
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
