@@ -1,0 +1,18 @@
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://bpgvfjexld3th"]
+
+[ext_resource type="FontFile" uid="uid://bqvowpn52m0pp" path="res://fonts/SpaceNova-6Rpd1.otf" id="1_c15ni"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kcdut"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_color = Color(0.8, 0.8, 0.8, 0)
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6c1vh"]
+bg_color = Color(0.597176, 0.597176, 0.597176, 1)
+
+[resource]
+Button/colors/font_color = Color(0.87451, 0.12549, 0.121569, 1)
+Button/colors/font_focus_color = Color(0.94902, 0, 0, 1)
+Button/fonts/font = ExtResource("1_c15ni")
+Button/styles/focus = SubResource("StyleBoxFlat_kcdut")
+Button/styles/normal = SubResource("StyleBoxFlat_6c1vh")

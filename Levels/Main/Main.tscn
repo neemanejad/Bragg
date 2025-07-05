@@ -9,7 +9,6 @@
 
 [node name="Main" type="Node"]
 script = ExtResource("1_eh1jh")
-EnemyScene = ExtResource("2_yufv5")
 
 [node name="ExtractionPoint" parent="." instance=ExtResource("3_o21rk")]
 position = Vector2(-144, -152)

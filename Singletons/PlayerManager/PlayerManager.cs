@@ -67,7 +67,7 @@ public partial class PlayerManager : Node
 		{
 
 			_health = 100;
-			SceneSwitcher.Instance.DeferredGotoScene("res://Levels/Hub/Hub.tscn");
+			SceneSwitcher.Instance.GotoScene("res://Levels/Hub/Hub.tscn");
 
 			return;
 		}

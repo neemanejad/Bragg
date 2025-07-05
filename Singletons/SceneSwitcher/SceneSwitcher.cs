@@ -31,7 +31,7 @@ public partial class SceneSwitcher : Node
 		CallDeferred(MethodName.DeferredGotoScene, path);
 	}
 
-	public void DeferredGotoScene(string path)
+	private void DeferredGotoScene(string path)
 	{
 		CurrentScene.Free();
 
