@@ -36,7 +36,6 @@ public partial class SceneSwitcher : Node
 		CurrentScene.Free();
 
 		var nextScene = ResourceLoader.Load<PackedScene>(path);
-		GD.Print(nextScene);
 
 		CurrentScene = nextScene.Instantiate();
 		GetTree().Root.AddChild(CurrentScene);

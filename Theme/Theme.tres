@@ -1,0 +1,6 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://deqeqesf3ve3l"]
+
+[ext_resource type="FontFile" uid="uid://bqvowpn52m0pp" path="res://fonts/SpaceNova-6Rpd1.otf" id="1_bkm32"]
+
+[resource]
+default_font = ExtResource("1_bkm32")

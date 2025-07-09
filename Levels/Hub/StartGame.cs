@@ -10,6 +10,7 @@ public partial class StartGame : Area2D
 
 		if (playerInArea && isInteracting)
 		{
+			GameManager.Instance.Start();
 			SceneSwitcher.Instance.GotoScene("res://Levels/Main/Main.tscn");
 		}
 	}

@@ -9,7 +9,9 @@ public partial class PlayerManager : Node
 	public delegate void ItemAddedEventHandler(int itemId);
 
 	public Dictionary<ItemId, int> ItemCountMap = new Dictionary<ItemId, int>();
+
 	public static PlayerManager Instance { get; private set; }
+
 	public static Player PlayerNode { get; private set; }
 
 	private float _health = 100f;
@@ -19,7 +21,9 @@ public partial class PlayerManager : Node
 		get { return _health; }
 	}
 
-	private int _killCount;
+	private int _killCount = 0;
+
+	public int KillCount { get { return _killCount; } }
 
 	public override void _Ready()
 	{
@@ -29,6 +33,11 @@ public partial class PlayerManager : Node
 	public void OnKillHandler()
 	{
 		_killCount += 1;
+	}
+
+	public void Reset()
+	{
+		_health = 100f;
 	}
 
 	public void AddHealth(float health)
@@ -65,9 +74,9 @@ public partial class PlayerManager : Node
 
 		if (healthDiff <= 0)
 		{
+			_health = 0;
 
-			_health = 100;
-			SceneSwitcher.Instance.GotoScene("res://Levels/Hub/Hub.tscn");
+			GameManager.Instance.End();
 
 			return;
 		}
@@ -93,5 +102,10 @@ public partial class PlayerManager : Node
 	public void SetPlayerNode(Player player)
 	{
 		PlayerNode = player;
+	}
+
+	public static void ClearPlayerNode()
+	{
+		PlayerNode = null;
 	}
 }

@@ -27,6 +27,11 @@ public partial class Enemy : CharacterBody2D
 
 	public override void _PhysicsProcess(double delta)
 	{
+		if (PlayerManager.PlayerNode == null)
+		{
+			return;
+		}
+
 		FollowPlayer();
 		DealDamage();
 	}
@@ -59,11 +64,6 @@ public partial class Enemy : CharacterBody2D
 
 	private void FollowPlayer()
 	{
-		if (PlayerManager.PlayerNode == null)
-		{
-			return;
-		}
-
 		var playerDirection = (PlayerManager.PlayerNode.GlobalPosition - GlobalPosition).Normalized();
 		Velocity = playerDirection * (float)Speed;
 		MoveAndSlide();

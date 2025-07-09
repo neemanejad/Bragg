@@ -26,7 +26,6 @@ public partial class Bullet : Area2D
 
 	public void FreeBullet()
 	{
-		GD.Print("Free bullet");
 		QueueFree();
 	}
 }

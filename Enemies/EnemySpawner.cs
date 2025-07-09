@@ -13,6 +13,11 @@ public partial class EnemySpawner : Node2D
 
 	private void SpawnEnemy()
 	{
+		if (PlayerManager.PlayerNode == null)
+		{
+			return;
+		}
+
 		var enemyNode = EnemyScene.Instantiate<Enemy>();
 
 		enemyNode.Position = CreateRandomPosition();

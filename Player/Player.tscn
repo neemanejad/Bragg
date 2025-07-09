@@ -12,6 +12,7 @@
 size = Vector2(32, 32)
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
+motion_mode = 1
 script = ExtResource("1_qas8a")
 metadata/_edit_group_ = true
 
