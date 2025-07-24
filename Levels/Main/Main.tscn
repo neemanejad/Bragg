@@ -1,11 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://d256twot7lnbw"]
+[gd_scene load_steps=8 format=3 uid="uid://d256twot7lnbw"]
 
 [ext_resource type="Script" path="res://Levels/Main/Main.cs" id="1_eh1jh"]
-[ext_resource type="PackedScene" uid="uid://crxeuyluv2n2" path="res://Enemies/Enemy.tscn" id="2_yufv5"]
 [ext_resource type="PackedScene" uid="uid://bym04ysd5dpgy" path="res://Extraction/ExtractionPoint.tscn" id="3_o21rk"]
 [ext_resource type="PackedScene" uid="uid://dmhkmyvvhm1db" path="res://Items/SpeedBoostItem.tscn" id="4_jghw2"]
 [ext_resource type="PackedScene" uid="uid://20wj24co13mm" path="res://Player/Player.tscn" id="4_la53p"]
-[ext_resource type="PackedScene" uid="uid://cp7na7lpka4bf" path="res://Enemies/EnemySpawner.tscn" id="6_75cyq"]
+[ext_resource type="PackedScene" uid="uid://offehl7fi1k0" path="res://Enemies/StrongEnemySpawner.tscn" id="5_cljq5"]
+[ext_resource type="PackedScene" uid="uid://cxuka6u0mkyoy" path="res://Enemies/ShootingEnemySpawner.tscn" id="6_01w0l"]
+[ext_resource type="PackedScene" uid="uid://c0h2vgfek4h1n" path="res://Enemies/FastEnemySpawner.tscn" id="7_4sjyf"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_eh1jh")
@@ -24,5 +25,8 @@ position = Vector2(-144, 304)
 [node name="SpeedBoostItem3" parent="." instance=ExtResource("4_jghw2")]
 position = Vector2(-144, 216)
 
-[node name="EnemySpawner" parent="." instance=ExtResource("6_75cyq")]
-EnemyScene = ExtResource("2_yufv5")
+[node name="ShootingEnemySpawner" parent="." instance=ExtResource("6_01w0l")]
+
+[node name="StrongEnemySpawner" parent="." instance=ExtResource("5_cljq5")]
+
+[node name="FastEnemySpawner" parent="." instance=ExtResource("7_4sjyf")]

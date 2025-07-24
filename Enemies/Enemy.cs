@@ -27,6 +27,7 @@ public partial class Enemy : CharacterBody2D
 
 	public override void _PhysicsProcess(double delta)
 	{
+		// TODO: remove need for this
 		if (PlayerManager.PlayerNode == null)
 		{
 			return;

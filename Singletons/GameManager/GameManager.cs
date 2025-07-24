@@ -34,6 +34,7 @@ public partial class GameManager : Node
 		ElapsedTime = (int)(Time.GetUnixTimeFromSystem() - StartTimeUnix);
 
 		var gameOverScene = GD.Load<PackedScene>("res://UI/GameOver/GameOver.tscn").Instantiate();
+		gameOverScene.ProcessMode = ProcessModeEnum.Always;
 
 		playerNode.GetParent().AddChild(gameOverScene);
 		playerNode.QueueFree();

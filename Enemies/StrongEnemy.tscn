@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://bnm71i6wv2411"]
+
+[ext_resource type="Script" path="res://Enemies/StrongEnemy.cs" id="1_ftrru"]
+[ext_resource type="Texture2D" uid="uid://ddb7q8y77vkbk" path="res://icon.svg" id="2_my2eh"]
+[ext_resource type="PackedScene" uid="uid://dx7rw14cjb4ie" path="res://Components/HealthComponent.tscn" id="3_7wkvk"]
+[ext_resource type="PackedScene" uid="uid://b730r6uoiexq6" path="res://HealthBar/HealthBar.tscn" id="4_k2i8b"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_evqp1"]
+size = Vector2(144, 144)
+
+[node name="StrongEnemy" type="CharacterBody2D" node_paths=PackedStringArray("HealthComponent")]
+position = Vector2(8, -8)
+script = ExtResource("1_ftrru")
+HealthComponent = NodePath("HealthComponent")
+Speed = 150.0
+Damage = 10.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-8, 8)
+shape = SubResource("RectangleShape2D_evqp1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-8.00002, 8)
+rotation = 3.14159
+scale = Vector2(1.12496, 1.12715)
+texture = ExtResource("2_my2eh")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -80.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 80.0
+color = Color(0.909804, 0.509804, 0, 0.713726)
+
+[node name="HealthComponent" parent="." instance=ExtResource("3_7wkvk")]
+
+[node name="HealthBar" parent="." node_paths=PackedStringArray("HealthComponent") instance=ExtResource("4_k2i8b")]
+position = Vector2(0, -104)
+HealthComponent = NodePath("../HealthComponent")
+
+[connection signal="LostAllHealth" from="HealthComponent" to="." method="LostAllHealth"]

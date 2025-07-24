@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://offehl7fi1k0"]
+
+[ext_resource type="PackedScene" uid="uid://cp7na7lpka4bf" path="res://Enemies/EnemySpawner.tscn" id="1_i0d5g"]
+[ext_resource type="PackedScene" uid="uid://bnm71i6wv2411" path="res://Enemies/StrongEnemy.tscn" id="2_42ot3"]
+
+[node name="StrongEnemySpawner" type="Node2D"]
+
+[node name="EnemySpawner" parent="." instance=ExtResource("1_i0d5g")]
+EnemyScene = ExtResource("2_42ot3")
+SpawnTimer = 10.0

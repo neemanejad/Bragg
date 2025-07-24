@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://bvdwgpet7jhfd"]
+
+[ext_resource type="Script" path="res://Enemies/Weapons/Bullets/EnemyBullet.cs" id="1_2xwcl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qdr3k"]
+size = Vector2(16, 15.7893)
+
+[node name="EnemyBullet" type="Area2D"]
+position = Vector2(0, -8)
+script = ExtResource("1_2xwcl")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -8.0
+offset_right = 8.0
+offset_bottom = 16.0
+color = Color(0.926299, 2.5028e-06, 1.54018e-06, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(4.17233e-07, 8)
+scale = Vector2(0.8, 0.8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 7.99999)
+scale = Vector2(1, 1.01334)
+shape = SubResource("RectangleShape2D_qdr3k")
+
+[connection signal="body_entered" from="." to="." method="OnBodyEntered"]
