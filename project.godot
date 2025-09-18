@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 PlayerManager="*res://Singletons/PlayerManager/PlayerManager.cs"
 SceneSwitcher="*res://Singletons/SceneSwitcher/SceneSwitcher.cs"
 GameManager="*res://Singletons/GameManager/GameManager.cs"
+LocationUtils="*res://Utils/LocationUtils.cs"
 
 [display]
 

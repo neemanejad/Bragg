@@ -27,9 +27,14 @@ public partial class SurvivalTimer : Node2D
 
 	public void UpdateTimerLabel()
 	{
+		timerLabel.Text = GetSurvivalTime();
+    }
+
+	public String GetSurvivalTime()
+	{
         int minutes = this.seconds / 60;
         int seconds = this.seconds % 60;
 
-        timerLabel.Text = $"{minutes:D2}:{seconds:D2}";
+		return $"{minutes:D2}:{seconds:D2}";
     }
 }
