@@ -74,7 +74,7 @@ public partial class Enemy : CharacterBody2D
 	{
 		var random = new Random();
 		var randomNumber = random.Next(0, 100);
-		if (randomNumber >= 1)
+		if (randomNumber >= 90)
 		{
 			var item = ResourceLoader.Load<PackedScene>("res://Items/SpeedBoostItem.tscn").Instantiate<SpeedBoostItem>();
 			item.GlobalPosition = GlobalPosition;
