@@ -1,4 +1,5 @@
 using Godot;
+
 using Redwood.Items;
 
 public partial class Player : CharacterBody2D

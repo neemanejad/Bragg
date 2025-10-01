@@ -1,5 +1,6 @@
-using Godot;
 using System;
+
+using Godot;
 
 public partial class HealthBar : Node2D
 {

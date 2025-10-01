@@ -6,7 +6,7 @@ public partial class EnemySpawner : Node2D
 	public PackedScene EnemyScene { get; set; }
 	[Export]
 	public double SpawnTimer { get; set; } = 5.0f;
-	private Timer timer {  get; set; }
+	private Timer timer { get; set; }
 
 	public override void _Ready()
 	{

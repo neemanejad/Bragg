@@ -1,5 +1,6 @@
-using Godot;
 using System;
+
+using Godot;
 
 public partial class Main : Node
 {
@@ -8,7 +9,7 @@ public partial class Main : Node
 
 	public override void _Ready()
 	{
-        GameManager.Instance.ResetSurvivalTimer();
+		GameManager.Instance.ResetSurvivalTimer();
 		GameManager.Instance.ResumeSurvivalTimer();
 		PlayerManager.Instance.ShowSurvivalTimer();
 	}

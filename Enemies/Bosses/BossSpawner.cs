@@ -1,5 +1,6 @@
-using Godot;
 using System;
+
+using Godot;
 
 public partial class BossSpawner : Node2D
 {
@@ -21,17 +22,17 @@ public partial class BossSpawner : Node2D
 
 	public void SpawnBoss()
 	{
-        if (PlayerManager.PlayerNode == null)
-        {
-            return;
-        }
+		if (PlayerManager.PlayerNode == null)
+		{
+			return;
+		}
 
-        var enemyNode = BossPackedScene.Instantiate<Node2D>();
+		var enemyNode = BossPackedScene.Instantiate<Node2D>();
 
-        enemyNode.Position = LocationUtils.Instance.CreateRandomPosition();
+		enemyNode.Position = LocationUtils.Instance.CreateRandomPosition();
 
-        AddChild(enemyNode);
+		AddChild(enemyNode);
 
-        EmitSignal(SignalName.BossSpawned);
+		EmitSignal(SignalName.BossSpawned);
 	}
 }
