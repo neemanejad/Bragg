@@ -1,10 +1,11 @@
 using Godot;
+using Project.Utils;
 using System;
 
 public partial class TimeAliveLabelValue : Label
 {
 	public override void _Ready()
 	{
-		Text = GameManager.Instance.ElapsedTime.ToString();
+        Text = TimeUtils.FormatSecondsToSurvivalTime(GameManager.Instance.SurvivalTime);
 	}
 }

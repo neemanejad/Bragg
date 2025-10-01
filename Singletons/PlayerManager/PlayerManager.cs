@@ -109,34 +109,15 @@ public partial class PlayerManager : Node
 		PlayerNode = null;
 	}
 
-	public void PauseSurvivalTimer()
-	{
-        var survivalTimer = PlayerNode.GetNode<SurvivalTimer>("SurvivalTimer");
-		survivalTimer.Timer.Stop();
-    }
-
-	public void UnPauseSurvivalTimer()
-	{
-        var survivalTimer = PlayerNode.GetNode<SurvivalTimer>("SurvivalTimer");
-		survivalTimer.Timer.Start();
-    }
-
-	public void ResetSurvivalTimer()
-	{
-		var survivalTimer = PlayerNode.GetNode<SurvivalTimer>("SurvivalTimer");
-		survivalTimer.seconds = 0;
-		survivalTimer.Timer.Start(1);
-	}
-
-	public void HideSurvivalTimer()
-	{
-        var canvasLayer = PlayerNode.GetNode<CanvasLayer>("SurvivalTimer/CanvasLayer");
-        canvasLayer.Visible = false;
-    }
-
     public void ShowSurvivalTimer()
     {
         var canvasLayer = PlayerNode.GetNode<CanvasLayer>("SurvivalTimer/CanvasLayer");
         canvasLayer.Visible = true;
+    }
+
+    public void HideSurvivalTimer()
+    {
+        var canvasLayer = PlayerNode.GetNode<CanvasLayer>("SurvivalTimer/CanvasLayer");
+        canvasLayer.Visible = false;
     }
 }
