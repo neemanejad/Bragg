@@ -11,7 +11,6 @@
 size = Vector2(32, 32)
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
-collision_layer = 0
 motion_mode = 1
 platform_on_leave = 2
 script = ExtResource("1_qas8a")
