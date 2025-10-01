@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dx7rw14cjb4ie" path="res://Components/HealthComponent.tscn" id="3_l7cu6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_na3nw"]
-size = Vector2(128, 128)
+size = Vector2(256, 256)
 
 [node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("HealthComponent")]
 motion_mode = 1
