@@ -1,6 +1,5 @@
-[gd_scene load_steps=6 format=3 uid="uid://dyq3odk2ogbfk"]
+[gd_scene load_steps=5 format=3 uid="uid://dyq3odk2ogbfk"]
 
-[ext_resource type="PackedScene" uid="uid://20wj24co13mm" path="res://Player/Player.tscn" id="2_mijbm"]
 [ext_resource type="Script" path="res://Levels/Hub/StartGame.cs" id="2_vx5c7"]
 [ext_resource type="Script" path="res://Levels/Hub/ActionLabel.cs" id="3_6u5if"]
 [ext_resource type="FontFile" uid="uid://bqvowpn52m0pp" path="res://fonts/SpaceNova-6Rpd1.otf" id="3_i15nx"]
@@ -9,8 +8,6 @@
 size = Vector2(104, 208)
 
 [node name="Hub" type="Node2D"]
-
-[node name="Player" parent="." instance=ExtResource("2_mijbm")]
 
 [node name="StartGame" type="Area2D" parent="."]
 script = ExtResource("2_vx5c7")

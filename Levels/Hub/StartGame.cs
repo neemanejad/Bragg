@@ -2,14 +2,14 @@ using Godot;
 
 public partial class StartGame : Area2D
 {
-    public override void _Ready()
-    {
-        GameManager.Instance.PauseSurvivalTimer();
-        GameManager.Instance.ResetSurvivalTimer();
-        PlayerManager.Instance.HideSurvivalTimer();
-    }
+	public override void _Ready()
+	{
+		GameManager.Instance.PauseSurvivalTimer();
+		GameManager.Instance.ResetSurvivalTimer();
+		PlayerManager.Instance.HideSurvivalTimer();
+	}
 
-    public override void _Process(double delta)
+	public override void _Process(double delta)
 	{
 		var playerInArea = GetOverlappingBodies().Contains(PlayerManager.PlayerNode);
 

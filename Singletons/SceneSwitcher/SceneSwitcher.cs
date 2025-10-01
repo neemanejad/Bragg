@@ -4,7 +4,7 @@ public partial class SceneSwitcher : Node
 {
 	public static SceneSwitcher Instance { get; private set; }
 
-	public Node CurrentScene { get; set; }
+	public Node2D WorldRoot { get; set; }
 
 	public override void _Ready()
 	{
@@ -12,9 +12,7 @@ public partial class SceneSwitcher : Node
 
 		Viewport root = GetTree().Root;
 		// last child node of `root`.
-		CurrentScene = root.GetChild(-1);
-
-		GD.Print(Instance);
+		WorldRoot = root.GetNode<Node2D>("Main/WorldRoot");
 	}
 
 	public void GotoScene(string path)
@@ -33,12 +31,14 @@ public partial class SceneSwitcher : Node
 
 	private void DeferredGotoScene(string path)
 	{
-		CurrentScene.Free();
+		foreach (Node child in WorldRoot.GetChildren()) {
+			child.Free();
+		}
 
 		var nextScene = ResourceLoader.Load<PackedScene>(path);
 
-		CurrentScene = nextScene.Instantiate();
-		GetTree().Root.AddChild(CurrentScene);
-		GetTree().CurrentScene = CurrentScene;
+		var scene = nextScene.Instantiate();
+		WorldRoot.AddChild(scene);
+		// GetTree().CurrentScene = CurrentScene;
 	}
 }

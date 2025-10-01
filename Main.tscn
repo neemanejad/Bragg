@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://dqmaocyudw442"]
+
+[ext_resource type="PackedScene" uid="uid://dyq3odk2ogbfk" path="res://Levels/Hub/Hub.tscn" id="1_fnuqi"]
+[ext_resource type="PackedScene" uid="uid://4kalpfq4lmh7" path="res://Menus/PauseMenu/PauseMenu.tscn" id="2_beb82"]
+[ext_resource type="PackedScene" uid="uid://bbux5rs511px1" path="res://Inventory/InventoryUI.tscn" id="3_n5n71"]
+[ext_resource type="PackedScene" uid="uid://20wj24co13mm" path="res://Player/Player.tscn" id="3_tcv06"]
+
+[node name="Main" type="Node"]
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PauseMenu" parent="UI" instance=ExtResource("2_beb82")]
+layout_mode = 1
+
+[node name="InventoryUI" parent="UI" instance=ExtResource("3_n5n71")]
+layout_mode = 1
+
+[node name="Player" parent="." instance=ExtResource("3_tcv06")]
+
+[node name="WorldRoot" type="Node2D" parent="."]
+
+[node name="Hub" parent="WorldRoot" instance=ExtResource("1_fnuqi")]
