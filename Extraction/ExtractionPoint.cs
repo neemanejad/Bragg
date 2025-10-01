@@ -6,7 +6,7 @@ public partial class ExtractionPoint : Node2D
 	{
 		if (body.IsInGroup("Player"))
 		{
-            SceneSwitcher.Instance.GotoScene("res://Levels/Hub/Hub.tscn");
-        }
-    }
+			SceneSwitcher.Instance.GotoScene("res://Levels/Hub/Hub.tscn");
+		}
+	}
 }

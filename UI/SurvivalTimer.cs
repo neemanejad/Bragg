@@ -1,6 +1,8 @@
-using Godot;
-using Project.Utils;
 using System;
+
+using Godot;
+
+using Project.Utils;
 
 public partial class SurvivalTimer : Node2D
 {
@@ -15,11 +17,11 @@ public partial class SurvivalTimer : Node2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-        UpdateTimerLabel();
-    }
+		UpdateTimerLabel();
+	}
 
 	public void UpdateTimerLabel()
 	{
 		timerLabel.Text = TimeUtils.FormatSecondsToSurvivalTime(GameManager.Instance.SurvivalTime);
-    }
+	}
 }

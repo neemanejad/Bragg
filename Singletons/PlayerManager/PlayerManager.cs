@@ -1,7 +1,9 @@
-using Godot;
-using Redwood.Items;
 using System;
 using System.Collections.Generic;
+
+using Godot;
+
+using Redwood.Items;
 
 public partial class PlayerManager : Node
 {
@@ -109,15 +111,15 @@ public partial class PlayerManager : Node
 		PlayerNode = null;
 	}
 
-    public void ShowSurvivalTimer()
-    {
-        var canvasLayer = PlayerNode.GetNode<CanvasLayer>("SurvivalTimer/CanvasLayer");
-        canvasLayer.Visible = true;
-    }
+	public void ShowSurvivalTimer()
+	{
+		var canvasLayer = PlayerNode.GetNode<CanvasLayer>("SurvivalTimer/CanvasLayer");
+		canvasLayer.Visible = true;
+	}
 
-    public void HideSurvivalTimer()
-    {
-        var canvasLayer = PlayerNode.GetNode<CanvasLayer>("SurvivalTimer/CanvasLayer");
-        canvasLayer.Visible = false;
-    }
+	public void HideSurvivalTimer()
+	{
+		var canvasLayer = PlayerNode.GetNode<CanvasLayer>("SurvivalTimer/CanvasLayer");
+		canvasLayer.Visible = false;
+	}
 }

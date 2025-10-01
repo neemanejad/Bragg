@@ -1,5 +1,7 @@
-using Godot;
 using System;
+
+using Godot;
+
 using Redwood.Items;
 
 public partial class SpeedBoostItem : Node2D, IItemNode
@@ -12,8 +14,8 @@ public partial class SpeedBoostItem : Node2D, IItemNode
 		}
 	}
 
-    // Called when the node enters the scene tree for the first time.
-    public override void _Ready()
+	// Called when the node enters the scene tree for the first time.
+	public override void _Ready()
 	{
 	}
 

@@ -1,4 +1,5 @@
 using System;
+
 using Godot;
 
 public partial class GameManager : Node
@@ -29,10 +30,10 @@ public partial class GameManager : Node
 		survivalTimer.Stop();
 	}
 
-    public void ResumeSurvivalTimer()
-    {
-        survivalTimer.Start();
-    }
+	public void ResumeSurvivalTimer()
+	{
+		survivalTimer.Start();
+	}
 
 	public void ResetSurvivalTimer()
 	{
@@ -40,7 +41,7 @@ public partial class GameManager : Node
 		SurvivalTime = 0;
 	}
 
-    private void AddSecond()
+	private void AddSecond()
 	{
 		SurvivalTime += 1;
 	}
