@@ -31,7 +31,8 @@ public partial class SceneSwitcher : Node
 
 	private void DeferredGotoScene(string path)
 	{
-		foreach (Node child in WorldRoot.GetChildren()) {
+		foreach (Node child in WorldRoot.GetChildren())
+		{
 			child.Free();
 		}
 
