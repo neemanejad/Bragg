@@ -8,8 +8,8 @@ public partial class Main : Node
 
 	public override void _Ready()
 	{
-        PlayerManager.Instance.ResetSurvivalTimer();
-		PlayerManager.Instance.UnPauseSurvivalTimer();
+        GameManager.Instance.ResetSurvivalTimer();
+		GameManager.Instance.ResumeSurvivalTimer();
 		PlayerManager.Instance.ShowSurvivalTimer();
 	}
 

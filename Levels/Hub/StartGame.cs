@@ -4,8 +4,8 @@ public partial class StartGame : Area2D
 {
     public override void _Ready()
     {
-        PlayerManager.Instance.PauseSurvivalTimer();
-        PlayerManager.Instance.ResetSurvivalTimer();
+        GameManager.Instance.PauseSurvivalTimer();
+        GameManager.Instance.ResetSurvivalTimer();
         PlayerManager.Instance.HideSurvivalTimer();
     }
 

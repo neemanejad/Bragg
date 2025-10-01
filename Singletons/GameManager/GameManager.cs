@@ -11,27 +11,48 @@ public partial class GameManager : Node
 	[Signal]
 	public delegate void EndGameEventHandler();
 
-	private double StartTimeUnix;
+	Timer survivalTimer = new Timer();
 
-	public int ElapsedTime { get; private set; }
+
+	public int SurvivalTime { get; private set; }
 
 	public override void _Ready()
 	{
 		Instance = this;
+		survivalTimer.WaitTime = 1;
+		survivalTimer.Connect(Timer.SignalName.Timeout, new Callable(this, MethodName.AddSecond));
+		AddChild(survivalTimer);
+	}
+
+	public void PauseSurvivalTimer()
+	{
+		survivalTimer.Stop();
+	}
+
+    public void ResumeSurvivalTimer()
+    {
+        survivalTimer.Start();
+    }
+
+	public void ResetSurvivalTimer()
+	{
+		survivalTimer.Stop();
+		SurvivalTime = 0;
+	}
+
+    private void AddSecond()
+	{
+		SurvivalTime += 1;
 	}
 
 	public void Start()
 	{
-		StartTimeUnix = Time.GetUnixTimeFromSystem();
-
 		EmitSignal(SignalName.StartGame);
 	}
 
 	public void End()
 	{
 		var playerNode = PlayerManager.PlayerNode;
-
-		ElapsedTime = (int)(Time.GetUnixTimeFromSystem() - StartTimeUnix);
 
 		var gameOverScene = GD.Load<PackedScene>("res://UI/GameOver/GameOver.tscn").Instantiate();
 		gameOverScene.ProcessMode = ProcessModeEnum.Always;
