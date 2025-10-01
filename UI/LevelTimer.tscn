@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://doixm3ykyaxch"]
+[gd_scene load_steps=3 format=3 uid="uid://efn1mva2p3vn"]
 
 [ext_resource type="Script" path="res://UI/SurvivalTimer.cs" id="1_djpen"]
 [ext_resource type="FontFile" uid="uid://bqvowpn52m0pp" path="res://fonts/SpaceNova-6Rpd1.otf" id="1_uwg2b"]

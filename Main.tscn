@@ -1,0 +1,62 @@
+[gd_scene load_steps=9 format=3 uid="uid://v0t5wcplgn67"]
+
+[ext_resource type="PackedScene" uid="uid://dyq3odk2ogbfk" path="res://Levels/Hub/Hub.tscn" id="1_fnuqi"]
+[ext_resource type="PackedScene" uid="uid://4kalpfq4lmh7" path="res://Menus/PauseMenu/PauseMenu.tscn" id="2_beb82"]
+[ext_resource type="PackedScene" uid="uid://bbux5rs511px1" path="res://Inventory/InventoryUI.tscn" id="3_n5n71"]
+[ext_resource type="PackedScene" uid="uid://20wj24co13mm" path="res://Player/Player.tscn" id="3_tcv06"]
+[ext_resource type="Script" path="res://Levels/Hub/StartGame.cs" id="4_jimxg"]
+[ext_resource type="Script" path="res://Levels/Hub/ActionLabel.cs" id="5_75ne5"]
+[ext_resource type="FontFile" uid="uid://bqvowpn52m0pp" path="res://fonts/SpaceNova-6Rpd1.otf" id="6_wbj8v"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sq0g4"]
+size = Vector2(104, 208)
+
+[node name="Main" type="Node"]
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PauseMenu" parent="UI" instance=ExtResource("2_beb82")]
+layout_mode = 1
+
+[node name="InventoryUI" parent="UI" instance=ExtResource("3_n5n71")]
+layout_mode = 1
+
+[node name="Player" parent="." instance=ExtResource("3_tcv06")]
+
+[node name="WorldRoot" type="Node2D" parent="."]
+
+[node name="Hub" parent="WorldRoot" instance=ExtResource("1_fnuqi")]
+
+[node name="StartGame2" type="Area2D" parent="WorldRoot/Hub"]
+script = ExtResource("4_jimxg")
+
+[node name="ColorRect" type="ColorRect" parent="WorldRoot/Hub/StartGame2"]
+offset_left = 256.0
+offset_top = 128.0
+offset_right = 280.0
+offset_bottom = 256.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldRoot/Hub/StartGame2"]
+position = Vector2(268, 192)
+shape = SubResource("RectangleShape2D_sq0g4")
+
+[node name="ActionLabel" type="CanvasLayer" parent="WorldRoot/Hub/StartGame2"]
+follow_viewport_enabled = true
+script = ExtResource("5_75ne5")
+
+[node name="Label" type="Label" parent="WorldRoot/Hub/StartGame2/ActionLabel"]
+offset_left = 224.0
+offset_top = 88.0
+offset_right = 314.0
+offset_bottom = 111.0
+theme_override_fonts/font = ExtResource("6_wbj8v")
+text = "Press E"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="body_entered" from="WorldRoot/Hub/StartGame2" to="WorldRoot/Hub/StartGame2/ActionLabel" method="ShowLabel"]
+[connection signal="body_exited" from="WorldRoot/Hub/StartGame2" to="WorldRoot/Hub/StartGame2/ActionLabel" method="HideLabel"]

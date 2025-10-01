@@ -1,13 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://20wj24co13mm"]
+[gd_scene load_steps=8 format=3 uid="uid://20wj24co13mm"]
 
 [ext_resource type="Script" path="res://Player/Player.cs" id="1_qas8a"]
 [ext_resource type="PackedScene" uid="uid://xihwfy5g6dem" path="res://Player/Vitals.tscn" id="2_jtnkn"]
 [ext_resource type="Texture2D" uid="uid://ddb7q8y77vkbk" path="res://icon.svg" id="2_tvobu"]
-[ext_resource type="PackedScene" path="res://UI/LevelTimer.tscn" id="3_31yhf"]
+[ext_resource type="PackedScene" uid="uid://efn1mva2p3vn" path="res://UI/LevelTimer.tscn" id="3_31yhf"]
 [ext_resource type="PackedScene" uid="uid://c6jq6aaps3i3a" path="res://Components/CyclicFollowerComponent.tscn" id="4_bnkv4"]
 [ext_resource type="PackedScene" uid="uid://c8rduuyifi7bj" path="res://Weapons/SimpleGun.tscn" id="5_qi6p3"]
-[ext_resource type="PackedScene" uid="uid://bbux5rs511px1" path="res://Inventory/InventoryUI.tscn" id="6_dqak2"]
-[ext_resource type="PackedScene" uid="uid://4kalpfq4lmh7" path="res://Menus/PauseMenu/PauseMenu.tscn" id="7_6qsq3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c472h"]
 size = Vector2(32, 32)
@@ -37,12 +35,3 @@ shape = SubResource("RectangleShape2D_c472h")
 [node name="CyclicFollowerComponent" parent="." instance=ExtResource("4_bnkv4")]
 EntityScene = ExtResource("5_qi6p3")
 Radius = 50.0
-
-[node name="InventoryUI" parent="." instance=ExtResource("6_dqak2")]
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-grow_horizontal = 1
-grow_vertical = 1
-
-[node name="PauseMenu" parent="." instance=ExtResource("7_6qsq3")]
