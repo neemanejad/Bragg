@@ -12,6 +12,9 @@ public partial class GameManager : Node
 	[Signal]
 	public delegate void EndGameEventHandler();
 
+	[Signal]
+	public delegate void LevelClearedEventHandler();
+
 	Timer survivalTimer = new Timer();
 
 
@@ -65,5 +68,10 @@ public partial class GameManager : Node
 		PlayerManager.Instance.Reset();
 
 		EmitSignal(SignalName.EndGame);
+	}
+
+	public void LevelClearedSignal()
+	{
+		EmitSignal(SignalName.LevelCleared);
 	}
 }

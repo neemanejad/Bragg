@@ -1,10 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://by3erxvtlilmd"]
+[gd_scene load_steps=3 format=3 uid="uid://by3erxvtlilmd"]
 
 [ext_resource type="PackedScene" uid="uid://crxeuyluv2n2" path="res://Enemies/Enemy.tscn" id="1_573lr"]
+[ext_resource type="Script" path="res://Enemies/ImportantEnemy.cs" id="2_yofl3"]
 
 [node name="HeavyBoss" instance=ExtResource("1_573lr")]
-Speed = 50.0
-Damage = 15.0
+script = ExtResource("2_yofl3")
+Damage = 0.0
 
 [node name="Sprite2D" parent="." index="1"]
 scale = Vector2(2, 2)

@@ -16,6 +16,9 @@ public partial class Enemy : CharacterBody2D
 	[Export]
 	public float Damage { get; set; }
 
+	[Signal]
+	public delegate void EnemyDefeatedEventHandler();
+
 	private bool canAttack = true;
 
 	public override void _Ready()
@@ -62,6 +65,8 @@ public partial class Enemy : CharacterBody2D
 		PlayerManager.Instance.OnKillHandler();
 		MaybeDropItem();
 		QueueFree();
+
+		EmitSignal(SignalName.EnemyDefeated);
 	}
 
 	private void FollowPlayer()
