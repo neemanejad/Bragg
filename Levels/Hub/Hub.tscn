@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Levels/Hub/StartGame.cs" id="2_vx5c7"]
 [ext_resource type="Script" path="res://Levels/Hub/ActionLabel.cs" id="3_6u5if"]
-[ext_resource type="FontFile" uid="uid://bqvowpn52m0pp" path="res://fonts/SpaceNova-6Rpd1.otf" id="3_i15nx"]
+[ext_resource type="Theme" uid="uid://deqeqesf3ve3l" path="res://Theme/Theme.tres" id="3_xhfos"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sq0g4"]
 size = Vector2(104, 208)
@@ -31,7 +31,7 @@ offset_left = 224.0
 offset_top = 88.0
 offset_right = 314.0
 offset_bottom = 111.0
-theme_override_fonts/font = ExtResource("3_i15nx")
+theme = ExtResource("3_xhfos")
 text = "Press E"
 horizontal_alignment = 1
 vertical_alignment = 1

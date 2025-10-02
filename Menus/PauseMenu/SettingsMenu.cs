@@ -4,17 +4,21 @@ using Godot;
 
 public partial class SettingsMenu : CanvasLayer
 {
-	CheckBox fullscreenCheckbox;
+	CheckBox _fullscreenCheckbox;
+	Button _backButton;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		fullscreenCheckbox = GetNode<CheckBox>("CheckBox");
+		_fullscreenCheckbox = GetNode<CheckBox>("MarginContainer/VBoxContainer/SettingsContainer/MarginContainer/CheckBox");
+		_backButton = GetNode<Button>("MarginContainer/VBoxContainer/ButtonContainer/MarginContainer/Button");
 
 		Hide();
 
-		fullscreenCheckbox.Pressed += OnFullscreenCheckboxPressed;
-		fullscreenCheckbox.ButtonPressed = DisplayServer.WindowGetMode() == DisplayServer.WindowMode.Fullscreen;
+		_fullscreenCheckbox.Pressed += OnFullscreenCheckboxPressed;
+		_fullscreenCheckbox.ButtonPressed = DisplayServer.WindowGetMode() == DisplayServer.WindowMode.Fullscreen;
+
+		_backButton.Pressed += () => Visible = !Visible;
 
 		ProcessMode = ProcessModeEnum.Always;
 	}
@@ -40,7 +44,7 @@ public partial class SettingsMenu : CanvasLayer
 
 	public void OnFullscreenCheckboxPressed()
 	{
-		if (fullscreenCheckbox.ButtonPressed)
+		if (_fullscreenCheckbox.ButtonPressed)
 		{
 			DisplayServer.WindowSetMode(DisplayServer.WindowMode.Fullscreen);
 		}
@@ -52,7 +56,7 @@ public partial class SettingsMenu : CanvasLayer
 
 	public override void _ExitTree()
 	{
-		fullscreenCheckbox.Pressed -= OnFullscreenCheckboxPressed;
+		_fullscreenCheckbox.Pressed -= OnFullscreenCheckboxPressed;
 		base._ExitTree();
 	}
 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://efn1mva2p3vn"]
 
 [ext_resource type="Script" path="res://UI/SurvivalTimer.cs" id="1_djpen"]
-[ext_resource type="FontFile" uid="uid://bqvowpn52m0pp" path="res://fonts/SpaceNova-6Rpd1.otf" id="1_uwg2b"]
+[ext_resource type="Theme" uid="uid://deqeqesf3ve3l" path="res://Theme/Theme.tres" id="2_q8a8c"]
 
 [node name="SurvivalTimer" type="Node2D"]
 script = ExtResource("1_djpen")
@@ -18,7 +18,7 @@ offset_right = -9.0
 offset_bottom = 40.0
 grow_horizontal = 0
 size_flags_horizontal = 8
-theme_override_fonts/font = ExtResource("1_uwg2b")
+theme = ExtResource("2_q8a8c")
 theme_override_font_sizes/font_size = 20
 text = "00:00"
 horizontal_alignment = 1

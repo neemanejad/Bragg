@@ -17,10 +17,10 @@ public partial class StartingMenu : CanvasLayer
 
 		ProcessMode = ProcessModeEnum.Always;
 
-		ResumeButton = GetNode<Button>("ResumeButton");
-		SettingsButton = GetNode<Button>("SettingsButton");
-		QuitToHubButton = GetNode<Button>("QuitToHubButton");
-		QuitToDesktopButton = GetNode<Button>("QuitToDesktopButton");
+		ResumeButton = GetNode<Button>("MarginContainer/VBoxContainer/ResumeButton");
+		SettingsButton = GetNode<Button>("MarginContainer/VBoxContainer/SettingsButton");
+		QuitToHubButton = GetNode<Button>("MarginContainer/VBoxContainer/QuitToHubButton");
+		QuitToDesktopButton = GetNode<Button>("MarginContainer/VBoxContainer/QuitToDesktopButton");
 
 		ResumeButton.Pressed += OnResumeButtonClicked;
 		SettingsButton.Pressed += OnSettingsButtonClicked;

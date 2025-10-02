@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://b730r6uoiexq6"]
+[gd_scene load_steps=5 format=3 uid="uid://b730r6uoiexq6"]
 
 [ext_resource type="Script" path="res://HealthBar/HealthBar.cs" id="1_qrjax"]
+[ext_resource type="Theme" uid="uid://deqeqesf3ve3l" path="res://Theme/Theme.tres" id="2_x2357"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rjnpr"]
 bg_color = Color(0, 0, 0, 1)
@@ -9,23 +10,8 @@ bg_color = Color(0, 0, 0, 1)
 bg_color = Color(0.486275, 0, 0, 1)
 
 [node name="HealthBar" type="Node2D"]
+position = Vector2(224, 16)
 script = ExtResource("1_qrjax")
-metadata/_edit_group_ = true
-
-[node name="ColorRect" type="ColorRect" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -236.0
-offset_top = -24.0
-offset_right = 236.0
-offset_bottom = 24.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_vertical = 4
-color = Color(0, 0, 0, 1)
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 anchors_preset = 8
@@ -33,13 +19,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -228.0
+offset_left = -224.0
 offset_top = -16.0
-offset_right = 228.0
-offset_bottom = 16.0
+offset_right = 224.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 4
+theme = ExtResource("2_x2357")
 theme_override_styles/background = SubResource("StyleBoxFlat_rjnpr")
 theme_override_styles/fill = SubResource("StyleBoxFlat_nf555")
 show_percentage = false

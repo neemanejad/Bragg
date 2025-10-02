@@ -1,36 +1,44 @@
 [gd_scene load_steps=3 format=3 uid="uid://bwugmn83a2u4f"]
 
 [ext_resource type="Script" path="res://Menus/PauseMenu/SettingsMenu.cs" id="1_oe3i4"]
-[ext_resource type="Theme" uid="uid://bpgvfjexld3th" path="res://Menus/PauseMenu/PauseMenu.tres" id="2_6mhgh"]
+[ext_resource type="Theme" uid="uid://deqeqesf3ve3l" path="res://Theme/Theme.tres" id="2_ebue4"]
 
 [node name="SettingsMenu" type="CanvasLayer"]
 script = ExtResource("1_oe3i4")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 64.0
-offset_top = 64.0
-offset_right = -56.0
-offset_bottom = -64.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-color = Color(0.159125, 1.35819e-06, 7.46027e-07, 1)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("2_ebue4")
 
-[node name="CheckBox" type="CheckBox" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -284.0
-offset_top = -168.0
-offset_right = 292.0
-offset_bottom = -104.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("2_6mhgh")
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="ButtonContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/ButtonContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/ButtonContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Back"
+
+[node name="SettingsContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/SettingsContainer"]
+layout_mode = 2
+
+[node name="CheckBox" type="CheckBox" parent="MarginContainer/VBoxContainer/SettingsContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
 text = "Fullscreen"

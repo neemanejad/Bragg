@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://xihwfy5g6dem"]
+[gd_scene load_steps=3 format=3 uid="uid://xihwfy5g6dem"]
 
 [ext_resource type="PackedScene" uid="uid://dx7rw14cjb4ie" path="res://Components/HealthComponent.tscn" id="1_ppne3"]
 [ext_resource type="PackedScene" uid="uid://b730r6uoiexq6" path="res://HealthBar/HealthBar.tscn" id="2_37h1q"]
-[ext_resource type="FontFile" uid="uid://bqvowpn52m0pp" path="res://fonts/SpaceNova-6Rpd1.otf" id="3_4d55s"]
 
 [node name="Vitals" type="Node2D"]
 
@@ -13,14 +12,3 @@ position = Vector2(245, 64)
 HealthComponent = NodePath("../HealthComponent")
 
 [node name="HealthComponent" parent="UI" instance=ExtResource("1_ppne3")]
-
-[node name="HPLabel" type="Label" parent="UI"]
-offset_left = 8.0
-offset_top = 8.0
-offset_right = 60.0
-offset_bottom = 41.0
-theme_override_fonts/font = ExtResource("3_4d55s")
-theme_override_font_sizes/font_size = 30
-text = "HP"
-metadata/_edit_use_anchors_ = true
-metadata/_edit_group_ = true

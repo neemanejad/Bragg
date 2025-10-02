@@ -1,6 +1,11 @@
 [gd_resource type="Theme" load_steps=2 format=3 uid="uid://deqeqesf3ve3l"]
 
-[ext_resource type="FontFile" uid="uid://bqvowpn52m0pp" path="res://fonts/SpaceNova-6Rpd1.otf" id="1_bkm32"]
+[ext_resource type="FontFile" uid="uid://b36bfdyusqcyn" path="res://fonts/toxigenesis bd.otf" id="1_ek8rg"]
 
 [resource]
-default_font = ExtResource("1_bkm32")
+default_font = ExtResource("1_ek8rg")
+Label/fonts/font = ExtResource("1_ek8rg")
+MarginContainer/constants/margin_bottom = 10
+MarginContainer/constants/margin_left = 10
+MarginContainer/constants/margin_right = 10
+MarginContainer/constants/margin_top = 10

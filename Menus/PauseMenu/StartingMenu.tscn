@@ -1,81 +1,37 @@
 [gd_scene load_steps=3 format=3 uid="uid://i7t0sm66mfmu"]
 
 [ext_resource type="Script" path="res://Menus/PauseMenu/StartingMenu.cs" id="1_7sf1l"]
-[ext_resource type="Theme" uid="uid://bpgvfjexld3th" path="res://Menus/PauseMenu/PauseMenu.tres" id="1_hhyel"]
+[ext_resource type="Theme" uid="uid://deqeqesf3ve3l" path="res://Theme/Theme.tres" id="2_2jqdw"]
 
 [node name="StartingMenu" type="CanvasLayer"]
 script = ExtResource("1_7sf1l")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 64.0
-offset_top = 64.0
-offset_right = -56.0
-offset_bottom = -64.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-color = Color(0.159125, 1.35819e-06, 7.46027e-07, 1)
+theme = ExtResource("2_2jqdw")
 
-[node name="ResumeButton" type="Button" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -220.0
-offset_top = -176.0
-offset_right = 228.0
-offset_bottom = -112.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("1_hhyel")
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="ResumeButton" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
 text = "Resume"
 
-[node name="SettingsButton" type="Button" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -220.0
-offset_top = -88.0
-offset_right = 228.0
-offset_bottom = -24.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("1_hhyel")
+[node name="SettingsButton" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
 text = "Settings"
 
-[node name="QuitToHubButton" type="Button" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -220.0
-offset_right = 228.0
-offset_bottom = 64.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("1_hhyel")
+[node name="QuitToHubButton" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
 text = "Quit to Hub"
 
-[node name="QuitToDesktopButton" type="Button" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -220.0
-offset_top = 88.0
-offset_right = 228.0
-offset_bottom = 152.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("1_hhyel")
+[node name="QuitToDesktopButton" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
 text = "Quit to Desktop
 "
