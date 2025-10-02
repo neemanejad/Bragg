@@ -28,12 +28,6 @@ public partial class Player : CharacterBody2D
 	public override void _PhysicsProcess(double delta)
 	{
 		HandleMovementInput();
-
-		if (Input.IsActionJustPressed("interact"))
-		{
-			var weapon = GetNode<BaseWeapon>("CyclicFollowerComponent/SimpleGun");
-			weapon.Shoot();
-		}
 	}
 
 	/// <summary>

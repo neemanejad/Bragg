@@ -14,3 +14,6 @@ color = Color(0.745098, 0.435294, 1, 1)
 
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(40, 8)
+
+[node name="ShootTimer" type="Timer" parent="."]
+wait_time = 0.15

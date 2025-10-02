@@ -13,9 +13,24 @@ public partial class BaseWeapon : Node2D
 	public int MagazineCapacity;
 
 	private int _currentMagazine;
+	Timer shootTimer;
 
 	public override void _Ready()
 	{
+		shootTimer = GetNode<Timer>("ShootTimer");
+		shootTimer.Connect(Timer.SignalName.Timeout, new Callable(this, MethodName.Shoot));
+
+		PlayerManager.Instance.SetWeapon(this);
+	}
+
+	public void StopShooting()
+	{
+		shootTimer.Stop();
+	}
+
+	public void StartShooting()
+	{
+		shootTimer.Start();
 	}
 
 	public void Shoot()

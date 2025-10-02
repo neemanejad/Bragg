@@ -12,6 +12,7 @@ public partial class Main : Node
 		GameManager.Instance.ResetSurvivalTimer();
 		GameManager.Instance.ResumeSurvivalTimer();
 		PlayerManager.Instance.ShowSurvivalTimer();
+		PlayerManager.Instance.StartShooting();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

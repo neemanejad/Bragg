@@ -7,6 +7,7 @@ public partial class StartGame : Area2D
 		GameManager.Instance.PauseSurvivalTimer();
 		GameManager.Instance.ResetSurvivalTimer();
 		PlayerManager.Instance.HideSurvivalTimer();
+		PlayerManager.Instance.StopShooting();
 	}
 
 	public override void _Process(double delta)

@@ -15,6 +15,7 @@ public partial class PlayerManager : Node
 	public static PlayerManager Instance { get; private set; }
 
 	public static Player PlayerNode { get; private set; }
+	public static BaseWeapon WeaponNode { get; private set; }
 
 	private float _health = 100f;
 
@@ -121,5 +122,20 @@ public partial class PlayerManager : Node
 	{
 		var canvasLayer = PlayerNode.GetNode<CanvasLayer>("SurvivalTimer/CanvasLayer");
 		canvasLayer.Visible = false;
+	}
+
+	internal void SetWeapon(BaseWeapon baseWeapon)
+	{
+		WeaponNode = baseWeapon;
+	}
+
+	internal void StartShooting()
+	{
+		WeaponNode.StartShooting();
+	}
+
+	internal void StopShooting()
+	{
+		WeaponNode.StopShooting();
 	}
 }
