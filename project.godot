@@ -32,7 +32,7 @@ window/vsync/vsync_mode=0
 
 [dotnet]
 
-project/assembly_name="Project"
+project/assembly_name="Redwood"
 
 [global_group]
 
