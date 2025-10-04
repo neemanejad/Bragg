@@ -1,5 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://dyq3odk2ogbfk"]
+[gd_scene load_steps=7 format=3 uid="uid://dyq3odk2ogbfk"]
 
+[ext_resource type="PackedScene" uid="uid://cta5bqe3ycrgs" path="res://Scripts/Core/WorldManager.tscn" id="1_1xe4m"]
+[ext_resource type="Script" path="res://Levels/Hub/Hub.cs" id="1_3cofr"]
 [ext_resource type="Script" path="res://Levels/Hub/StartGame.cs" id="2_vx5c7"]
 [ext_resource type="Script" path="res://Levels/Hub/ActionLabel.cs" id="3_6u5if"]
 [ext_resource type="Theme" uid="uid://deqeqesf3ve3l" path="res://Theme/Theme.tres" id="3_xhfos"]
@@ -8,6 +10,9 @@
 size = Vector2(104, 208)
 
 [node name="Hub" type="Node2D"]
+script = ExtResource("1_3cofr")
+
+[node name="WorldManager" parent="." instance=ExtResource("1_1xe4m")]
 
 [node name="StartGame" type="Area2D" parent="."]
 script = ExtResource("2_vx5c7")
