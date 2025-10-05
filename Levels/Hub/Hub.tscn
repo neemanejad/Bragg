@@ -1,45 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://dyq3odk2ogbfk"]
+[gd_scene load_steps=3 format=3 uid="uid://dyq3odk2ogbfk"]
 
-[ext_resource type="PackedScene" uid="uid://cta5bqe3ycrgs" path="res://Scripts/Core/WorldManager.tscn" id="1_1xe4m"]
 [ext_resource type="Script" path="res://Levels/Hub/Hub.cs" id="1_3cofr"]
-[ext_resource type="Script" path="res://Levels/Hub/StartGame.cs" id="2_vx5c7"]
-[ext_resource type="Script" path="res://Levels/Hub/ActionLabel.cs" id="3_6u5if"]
-[ext_resource type="Theme" uid="uid://deqeqesf3ve3l" path="res://Theme/Theme.tres" id="3_xhfos"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_sq0g4"]
-size = Vector2(104, 208)
+[ext_resource type="PackedScene" uid="uid://baqjugpoi57hx" path="res://Deployment/Deployment.tscn" id="3_lhmwt"]
 
 [node name="Hub" type="Node2D"]
 script = ExtResource("1_3cofr")
 
-[node name="WorldManager" parent="." instance=ExtResource("1_1xe4m")]
-
-[node name="StartGame" type="Area2D" parent="."]
-script = ExtResource("2_vx5c7")
-
-[node name="ColorRect" type="ColorRect" parent="StartGame"]
-offset_left = 256.0
-offset_top = 128.0
-offset_right = 280.0
-offset_bottom = 256.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StartGame"]
-position = Vector2(268, 192)
-shape = SubResource("RectangleShape2D_sq0g4")
-
-[node name="ActionLabel" type="CanvasLayer" parent="StartGame"]
-follow_viewport_enabled = true
-script = ExtResource("3_6u5if")
-
-[node name="Label" type="Label" parent="StartGame/ActionLabel"]
-offset_left = 224.0
-offset_top = 88.0
-offset_right = 314.0
-offset_bottom = 111.0
-theme = ExtResource("3_xhfos")
-text = "Press E"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[connection signal="body_entered" from="StartGame" to="StartGame/ActionLabel" method="ShowLabel"]
-[connection signal="body_exited" from="StartGame" to="StartGame/ActionLabel" method="HideLabel"]
+[node name="Deployment" parent="." instance=ExtResource("3_lhmwt")]

@@ -1,0 +1,78 @@
+[gd_scene load_steps=3 format=3 uid="uid://bbcjk2bl5rgle"]
+
+[ext_resource type="Theme" uid="uid://cuwh8gxfjejhg" path="res://Theme/Terminal/Terminal.tres" id="1_8sko1"]
+[ext_resource type="Script" path="res://UI/Deployment/DeploymentSelection.cs" id="1_petd7"]
+
+[node name="DeploymentSelection" type="CanvasLayer"]
+script = ExtResource("1_petd7")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_8sko1")
+
+[node name="MarginContainer" type="MarginContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"LargeMargin"
+
+[node name="PanelContainer" type="PanelContainer" parent="Control/MarginContainer"]
+layout_mode = 2
+theme_type_variation = &"MainPanelContainer"
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/MarginContainer/PanelContainer"]
+layout_mode = 2
+theme_type_variation = &"LargeMargin"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="HeaderContainer" type="VBoxContainer" parent="Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HeaderContainer"]
+layout_mode = 2
+
+[node name="Header" type="Label" parent="Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HeaderContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"XLGreenLabel"
+text = "WORLD DEPLOYMENT SYSTEM"
+
+[node name="Button" type="Button" parent="Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HeaderContainer/HBoxContainer"]
+layout_mode = 2
+text = "Cancel"
+
+[node name="HeaderInfoContainer" type="HBoxContainer" parent="Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HeaderContainer"]
+layout_mode = 2
+
+[node name="ShipStatusContainer" type="HBoxContainer" parent="Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HeaderContainer/HeaderInfoContainer"]
+layout_mode = 2
+
+[node name="ShipStatus" type="Label" parent="Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HeaderContainer/HeaderInfoContainer/ShipStatusContainer"]
+layout_mode = 2
+theme_type_variation = &"SmallBlueLabel"
+text = "SHIP STATUS:"
+
+[node name="StatusPill" type="PanelContainer" parent="Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HeaderContainer/HeaderInfoContainer/ShipStatusContainer"]
+layout_mode = 2
+theme_type_variation = &"Pill"
+
+[node name="Status" type="Label" parent="Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HeaderContainer/HeaderInfoContainer/ShipStatusContainer/StatusPill"]
+layout_mode = 2
+theme_type_variation = &"SmallPurpleText"
+text = "OPERATIONAL"
+
+[node name="DeploymentCardGrid" type="GridContainer" parent="Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_type_variation = &"DeploymentGrid"
+columns = 3

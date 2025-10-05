@@ -2,6 +2,7 @@ namespace Redwood.Scripts.World;
 
 public sealed class World
 {
+	public string Name { get; }
 	public Biome Biome { get; }
 	public Weather Weather { get; }
 	public TimeOfDay TimeOfDay { get; }
@@ -10,8 +11,9 @@ public sealed class World
 	public float TemperatureC { get; }
 	public bool AtmosphereBreathable { get; }
 	public float VisibilityKm { get; }
-	public World(Biome biome, Weather weather, TimeOfDay timeOfDay, float gravityScale, float temperatureC, bool atmosphereBreathable, float visibilityKm)
+	public World(string name, Biome biome, Weather weather, TimeOfDay timeOfDay, float gravityScale, float temperatureC, bool atmosphereBreathable, float visibilityKm)
 	{
+		Name = name;
 		Biome = biome;
 		Weather = weather;
 		TimeOfDay = timeOfDay;

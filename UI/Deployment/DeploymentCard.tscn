@@ -1,0 +1,119 @@
+[gd_scene load_steps=4 format=3 uid="uid://54rhx3xraty3"]
+
+[ext_resource type="Theme" uid="uid://cuwh8gxfjejhg" path="res://Theme/Terminal/Terminal.tres" id="1_ak26n"]
+[ext_resource type="Script" path="res://UI/Deployment/DeploymentCard.cs" id="2_0l11t"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1hx12"]
+
+[node name="PanelContainer" type="PanelContainer"]
+offset_right = 40.0
+theme = ExtResource("1_ak26n")
+theme_type_variation = &"DeploymentCard"
+script = ExtResource("2_0l11t")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_type_variation = &"LargeMargin"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"LargeBlueLabel"
+text = "Name"
+
+[node name="PillContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TempPill" type="PanelContainer" parent="MarginContainer/VBoxContainer/PillContainer"]
+layout_mode = 2
+theme_type_variation = &"Pill"
+
+[node name="TempPillValue" type="Label" parent="MarginContainer/VBoxContainer/PillContainer/TempPill"]
+layout_mode = 2
+theme_type_variation = &"SmallPurpleText"
+text = "Temperature"
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_1hx12")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/MarginContainer/PanelContainer"]
+layout_mode = 2
+text = "......................................
+......................................
+......................................
+......................................
+......................................
+......................................
+......................................"
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+columns = 2
+
+[node name="TimeLabel" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Time:"
+
+[node name="TimeValue" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "..."
+horizontal_alignment = 2
+
+[node name="WeatherLabel" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "Weather:"
+
+[node name="WeatherValue" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "..."
+horizontal_alignment = 2
+
+[node name="GravityLabel" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "Gravity:"
+
+[node name="GravityValue" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "..."
+horizontal_alignment = 2
+
+[node name="TempLabel" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "Temp:"
+
+[node name="TempValue" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "..."
+horizontal_alignment = 2
+
+[node name="AtmoLabel" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "Atmosphere:"
+
+[node name="AtmoValue" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "..."
+horizontal_alignment = 2
+
+[node name="ThreatLabel" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "Threat:"
+
+[node name="ThreatValue" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "..."
+horizontal_alignment = 2
+
+[node name="DeployButton" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Deploy to ..."

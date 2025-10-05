@@ -21,6 +21,7 @@ PlayerManager="*res://Singletons/PlayerManager/PlayerManager.cs"
 SceneSwitcher="*res://Singletons/SceneSwitcher/SceneSwitcher.cs"
 GameManager="*res://Singletons/GameManager/GameManager.cs"
 LocationUtils="*res://Utils/LocationUtils.cs"
+WorldManager="*res://Singletons/WorldManager/WorldManager.cs"
 
 [display]
 

@@ -7,11 +7,11 @@ using Godot;
 
 using Redwood.Scripts.World;
 
-public partial class WorldManager : Node
+public partial class WorldGenerator
 {
-	private RandomNumberGenerator _rng = new();
+	private readonly RandomNumberGenerator _rng = new();
 
-	public override void _Ready()
+	public WorldGenerator()
 	{
 		_rng.Randomize();
 	}
@@ -23,6 +23,7 @@ public partial class WorldManager : Node
 			_rng.Seed = (ulong)seed.Value;
 		}
 
+		var name = GenerateName();
 		var biome = PickBiome();
 		var weather = PickWeatherFor(biome);
 		var timeOfDay = PickEnum<TimeOfDay>();
@@ -30,12 +31,21 @@ public partial class WorldManager : Node
 		var temperatureC = SampleTemperatureFor(biome, timeOfDay, weather);
 
 		// Randomize generation for breathable atmposphere and visibility
-		var world = new World(biome, weather, timeOfDay, gravityScale, temperatureC, true, 100f);
+		var world = new World(name, biome, weather, timeOfDay, gravityScale, temperatureC, true, 100f);
 
 		// Debugging
-		GD.Print(world);
+		// GD.Print(world);
 
 		return world;
+	}
+
+	private string GenerateName()
+	{
+		var rand = new Random((int)_rng.Randi());
+		var guid = new byte[16];
+		rand.NextBytes(guid);
+
+		return new Guid(guid).ToString().Substr(0, 5);
 	}
 
 	private float SampleTemperatureFor(Biome biome, TimeOfDay timeOfDay, Weather weather)

@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://cta5bqe3ycrgs"]
-
-[ext_resource type="Script" path="res://Scripts/Core/WorldManager.cs" id="1_nilj7"]
-
-[node name="WorldManager" type="Node"]
-script = ExtResource("1_nilj7")
