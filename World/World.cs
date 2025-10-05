@@ -1,11 +1,17 @@
-using System;
-
 using Godot;
 
-public partial class Main : Node
+using Redwood.Scripts.World;
+
+using Redwood.Singletons.WorldManager;
+
+namespace Redwood.World;
+
+public partial class World : Node
 {
 	[Export]
 	public PackedScene EnemyScene { get; set; }
+
+	private WorldData _worldData;
 
 	public override void _Ready()
 	{
@@ -13,6 +19,8 @@ public partial class Main : Node
 		GameManager.Instance.ResumeSurvivalTimer();
 		PlayerManager.Instance.ShowSurvivalTimer();
 		PlayerManager.Instance.StartShooting();
+
+		_worldData = WorldManager.Instance.SelectedWorld;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

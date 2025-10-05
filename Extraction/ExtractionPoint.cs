@@ -1,5 +1,9 @@
 using Godot;
 
+using Redwood.Singletons.SceneSwitcher;
+
+namespace Redwood.Extraction;
+
 public partial class ExtractionPoint : Node2D
 {
 
@@ -15,14 +19,14 @@ public partial class ExtractionPoint : Node2D
 
 		GameManager.Instance.LevelCleared += IsExtractable;
 
-		setExtractableColor();
+		SetExtractableColor();
 	}
 
 	public override void _Process(double delta)
 	{
 		base._Process(delta);
 
-		setExtractableColor();
+		SetExtractableColor();
 	}
 
 	public override void _ExitTree()
@@ -36,7 +40,7 @@ public partial class ExtractionPoint : Node2D
 	{
 		if (_isExtractable && body.IsInGroup("Player"))
 		{
-			SceneSwitcher.Instance.GotoScene("res://Levels/Hub/Hub.tscn");
+			SceneSwitcher.Instance.GotoScene("res://Hub/Hub.tscn");
 		}
 	}
 
@@ -45,7 +49,7 @@ public partial class ExtractionPoint : Node2D
 		_isExtractable = true;
 	}
 
-	private void setExtractableColor()
+	private void SetExtractableColor()
 	{
 		var extractionColorRect = GetNode<ColorRect>("ColorRect");
 

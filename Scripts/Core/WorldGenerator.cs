@@ -16,7 +16,7 @@ public partial class WorldGenerator
 		_rng.Randomize();
 	}
 
-	public World GenerateWorld(int? seed = null)
+	public WorldData GenerateWorld(int? seed = null)
 	{
 		if (seed.HasValue)
 		{
@@ -31,7 +31,7 @@ public partial class WorldGenerator
 		var temperatureC = SampleTemperatureFor(biome, timeOfDay, weather);
 
 		// Randomize generation for breathable atmposphere and visibility
-		var world = new World(name, biome, weather, timeOfDay, gravityScale, temperatureC, true, 100f);
+		var world = new WorldData(name, biome, weather, timeOfDay, gravityScale, temperatureC, true, 100f);
 
 		// Debugging
 		// GD.Print(world);

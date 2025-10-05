@@ -1,6 +1,6 @@
-using System;
-
 using Godot;
+
+namespace Redwood.Hub;
 
 public partial class ActionLabel : CanvasLayer
 {

@@ -1,5 +1,9 @@
 using Godot;
 
+using Redwood.Singletons.SceneSwitcher;
+
+namespace Redwood.Hub;
+
 public partial class StartGame : Area2D
 {
 	public override void _Ready()
@@ -19,7 +23,7 @@ public partial class StartGame : Area2D
 		if (playerInArea && isInteracting)
 		{
 			GameManager.Instance.Start();
-			SceneSwitcher.Instance.GotoScene("res://Levels/Main/Main.tscn");
+			SceneSwitcher.Instance.GotoScene("res://World/World.tscn");
 		}
 	}
 }

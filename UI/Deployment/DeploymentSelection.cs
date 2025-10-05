@@ -1,8 +1,8 @@
-namespace Redwood.UI.Deployment;
-
 using Godot;
 
-using Singletons.WorldManager;
+using Redwood.Singletons.WorldManager;
+
+namespace Redwood.UI.Deployment;
 
 public partial class DeploymentSelection : CanvasLayer
 {
@@ -30,30 +30,10 @@ public partial class DeploymentSelection : CanvasLayer
 
 		foreach (var world in worlds)
 		{
-			var name = world.Name;
-			var biome = world.Biome;
-			var weather = world.Weather;
-			var timeOfDay = world.TimeOfDay;
-			var gravityScale = world.GravityScale;
-			var temperatureC = world.TemperatureC;
-			var atmosphereBreathable = world.AtmosphereBreathable;
-			var visibilityKm = world.VisibilityKm;
+			var deploymentCard = ResourceLoader.Load<PackedScene>("res://UI/Deployment/DeploymentCard.tscn").Instantiate<DeploymentCard>();
+			deploymentCard.World = world;
 
-			var builder = new DeploymentCardBuilder();
-
-			var card = builder
-				.SetName(name)
-				.SetBiome(biome)
-				.SetWeather(weather)
-				.SetTimeOfDay(timeOfDay)
-				.SetGravityScale(gravityScale)
-				.SetTemperature(temperatureC)
-				.SetAtmosphereBreathable(atmosphereBreathable)
-				.SetWeather(weather)
-				.SetVisibilityKm(visibilityKm)
-				.GetDeploymentCard();
-
-			_deploymentCardGrid.AddChild(card);
+			_deploymentCardGrid.AddChild(deploymentCard);
 		}
 	}
 

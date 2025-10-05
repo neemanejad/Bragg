@@ -1,42 +1,37 @@
-namespace Redwood.UI.Deployment;
-
 using Godot;
 
 using Redwood.Scripts.World;
+using Redwood.Singletons.SceneSwitcher;
+using Redwood.Singletons.WorldManager;
+
+namespace Redwood.UI.Deployment;
 
 public partial class DeploymentCard : PanelContainer
 {
-	public string WorldName { get; set; }
-	public Biome Biome { get; set; }
-	public TimeOfDay TimeOfDay { get; set; }
-	public Weather Weather { get; set; }
-	public float GravityScale { get; set; }
-	public float Temperature { get; set; }
-	public float VisibilityKm { get; set; }
-	public bool AtmosphereBreathable { get; set; }
+	public WorldData World { get; set; }
 
 	public override void _Ready()
 	{
 		var nameValue = GetNode<Label>("MarginContainer/VBoxContainer/NameLabel");
-		nameValue.Text = WorldName;
+		nameValue.Text = World.Name;
 
 		var biomeValue = GetNode<Label>("MarginContainer/VBoxContainer/PillContainer/TempPill/TempPillValue");
-		biomeValue.Text = Biome.ToString();
+		biomeValue.Text = World.Biome.ToString();
 
 		var timeValue = GetNode<Label>("MarginContainer/VBoxContainer/GridContainer/TimeValue");
-		timeValue.Text = TimeOfDay.ToString();
+		timeValue.Text = World.TimeOfDay.ToString();
 
 		var weatherValue = GetNode<Label>("MarginContainer/VBoxContainer/GridContainer/WeatherValue");
-		weatherValue.Text = Weather.ToString();
+		weatherValue.Text = World.Weather.ToString();
 
 		var gravityValue = GetNode<Label>("MarginContainer/VBoxContainer/GridContainer/GravityValue");
-		gravityValue.Text = GravityScale.ToString();
+		gravityValue.Text = World.GravityScale.ToString();
 
 		var tempValue = GetNode<Label>("MarginContainer/VBoxContainer/GridContainer/TempValue");
-		tempValue.Text = Temperature.ToString();
+		tempValue.Text = World.TemperatureC.ToString();
 
 		var atmoValue = GetNode<Label>("MarginContainer/VBoxContainer/GridContainer/AtmoValue");
-		atmoValue.Text = AtmosphereBreathable.ToString();
+		atmoValue.Text = World.AtmosphereBreathable.ToString();
 
 		var deployButton = GetNode<Button>("MarginContainer/VBoxContainer/DeployButton");
 		deployButton.Pressed += Deploy;
@@ -45,6 +40,7 @@ public partial class DeploymentCard : PanelContainer
 	private void Deploy()
 	{
 		GameManager.Instance.Start();
-		SceneSwitcher.Instance.GotoScene("res://Levels/Main/Main.tscn");
+		WorldManager.Instance.Select(World);
+		SceneSwitcher.Instance.GotoScene("res://World/World.tscn");
 	}
 }

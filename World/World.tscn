@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://d256twot7lnbw"]
 
-[ext_resource type="Script" path="res://Levels/Main/Main.cs" id="1_eh1jh"]
+[ext_resource type="Script" path="res://World/World.cs" id="1_eh1jh"]
 [ext_resource type="PackedScene" uid="uid://bym04ysd5dpgy" path="res://Extraction/ExtractionPoint.tscn" id="3_o21rk"]
 [ext_resource type="PackedScene" uid="uid://dmhkmyvvhm1db" path="res://Items/SpeedBoostItem.tscn" id="4_jghw2"]
 [ext_resource type="PackedScene" uid="uid://offehl7fi1k0" path="res://Enemies/StrongEnemySpawner.tscn" id="5_cljq5"]

@@ -1,8 +1,8 @@
-namespace Redwood.Levels.Hub;
-
 using Godot;
 
-using Singletons.WorldManager;
+using Redwood.Singletons.WorldManager;
+
+namespace Redwood.Hub;
 
 public partial class Hub : Node2D
 {

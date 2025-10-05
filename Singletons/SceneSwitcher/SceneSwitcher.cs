@@ -1,5 +1,7 @@
 using Godot;
 
+namespace Redwood.Singletons.SceneSwitcher;
+
 public partial class SceneSwitcher : Node
 {
 	public static SceneSwitcher Instance { get; private set; }

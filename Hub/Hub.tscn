@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dyq3odk2ogbfk"]
 
-[ext_resource type="Script" path="res://Levels/Hub/Hub.cs" id="1_3cofr"]
+[ext_resource type="Script" path="res://Hub/Hub.cs" id="1_3cofr"]
 [ext_resource type="PackedScene" uid="uid://baqjugpoi57hx" path="res://Deployment/Deployment.tscn" id="3_lhmwt"]
 
 [node name="Hub" type="Node2D"]
