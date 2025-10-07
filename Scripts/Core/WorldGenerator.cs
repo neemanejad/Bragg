@@ -1,4 +1,3 @@
-namespace Redwood.Scripts.Core;
 
 using System;
 using System.Collections.Generic;
@@ -6,6 +5,8 @@ using System.Collections.Generic;
 using Godot;
 
 using Redwood.Scripts.World;
+
+namespace Redwood.Scripts.Core;
 
 public partial class WorldGenerator
 {

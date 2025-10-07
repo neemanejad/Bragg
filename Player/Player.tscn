@@ -21,7 +21,6 @@ metadata/_edit_group_ = true
 [node name="SurvivalTimer" parent="." instance=ExtResource("3_31yhf")]
 
 [node name="PlayerCamera" type="Camera2D" parent="."]
-zoom = Vector2(0.61, 0.61)
 
 [node name="Sprite" type="Sprite2D" parent="."]
 position = Vector2(-4.76837e-07, 4.76837e-07)

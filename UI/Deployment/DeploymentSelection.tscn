@@ -75,4 +75,4 @@ text = "OPERATIONAL"
 layout_mode = 2
 size_flags_vertical = 3
 theme_type_variation = &"DeploymentGrid"
-columns = 3
+columns = 4
