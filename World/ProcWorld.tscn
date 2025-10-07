@@ -1,0 +1,16 @@
+[gd_scene load_steps=5 format=3 uid="uid://bl7bfufu62jm1"]
+
+[ext_resource type="TileSet" uid="uid://df4uinf8jiogj" path="res://TileSets/WorldTileSet3.tres" id="1_cd10m"]
+[ext_resource type="Script" path="res://World/ProcWorld.cs" id="1_u8h71"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_61c3w"]
+noise_type = 3
+frequency = 0.0025
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_sa4bd"]
+noise = SubResource("FastNoiseLite_61c3w")
+
+[node name="ProcWorld" type="TileMapLayer"]
+tile_set = ExtResource("1_cd10m")
+script = ExtResource("1_u8h71")
+NoiseTexture2D = SubResource("NoiseTexture2D_sa4bd")
