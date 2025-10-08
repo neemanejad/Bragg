@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://offehl7fi1k0" path="res://Enemies/StrongEnemySpawner.tscn" id="5_cljq5"]
 [ext_resource type="PackedScene" uid="uid://cxuka6u0mkyoy" path="res://Enemies/ShootingEnemySpawner.tscn" id="6_01w0l"]
 [ext_resource type="PackedScene" uid="uid://ft4u0d4owk8k" path="res://Enemies/FastEnemySpawner.tscn" id="7_4sjyf"]
-[ext_resource type="PackedScene" uid="uid://bl7bfufu62jm1" path="res://World/ProcWorld.tscn" id="8_kb1jm"]
+[ext_resource type="PackedScene" path="res://World/ProcWorld.tscn" id="8_kb1jm"]
 [ext_resource type="PackedScene" uid="uid://cv18dv24ggpk3" path="res://Enemies/Bosses/BossSpawner.tscn" id="8_s8w8r"]
 
 [node name="World" type="Node2D"]

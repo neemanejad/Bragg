@@ -5,16 +5,16 @@
 [ext_resource type="PackedScene" uid="uid://4kalpfq4lmh7" path="res://Menus/PauseMenu/PauseMenu.tscn" id="2_beb82"]
 [ext_resource type="PackedScene" uid="uid://bbux5rs511px1" path="res://Inventory/InventoryUI.tscn" id="3_n5n71"]
 [ext_resource type="PackedScene" uid="uid://20wj24co13mm" path="res://Player/Player.tscn" id="3_tcv06"]
-[ext_resource type="PackedScene" uid="uid://ct00w70xnn0vw" path="res://UI/Bounties/PlayerBounties.tscn" id="4_d0ken"]
-[ext_resource type="PackedScene" uid="uid://cvtdesilp60wl" path="res://UI/Notifications/NotificationUI.tscn" id="5_noq44"]
+[ext_resource type="PackedScene" uid="uid://cvtdesilp60wl" path="res://UI/Notifications/NotificationUI.tscn" id="6_wapn0"]
+[ext_resource type="PackedScene" uid="uid://ct00w70xnn0vw" path="res://UI/Bounties/PlayerBounties.tscn" id="7_fo1wt"]
 
 [node name="Main" type="Node"]
+
+[node name="Player" parent="." instance=ExtResource("3_tcv06")]
 
 [node name="WorldRoot" type="Node2D" parent="."]
 
 [node name="Hub" parent="WorldRoot" instance=ExtResource("1_fnuqi")]
-
-[node name="Player" parent="." instance=ExtResource("3_tcv06")]
 
 [node name="UI" type="Control" parent="."]
 z_index = 4096
@@ -28,4 +28,10 @@ theme = ExtResource("1_f80gw")
 layout_mode = 1
 
 [node name="InventoryUI" parent="UI" instance=ExtResource("3_n5n71")]
+layout_mode = 1
+
+[node name="NotificationUI" parent="UI" instance=ExtResource("6_wapn0")]
+layout_mode = 1
+
+[node name="CurrentBounties" parent="UI" instance=ExtResource("7_fo1wt")]
 layout_mode = 1
