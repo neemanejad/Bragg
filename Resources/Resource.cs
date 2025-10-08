@@ -21,12 +21,11 @@ public class Resource
 {
 	public string Name { get; private set; }
 	public string Description { get; private set; }
-	public int Quanity { get; private set; }
 	public ResourceId Id { get; private set; }
 }
 
 public class ResourceBundle
 {
-	public Resource Resource { get; private set; }
-	public int Quantity { get; private set; }
+	public Resource Resource { get; set; }
+	public int Quantity { get; set; }
 }

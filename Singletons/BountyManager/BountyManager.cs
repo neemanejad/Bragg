@@ -8,6 +8,7 @@ using Godot.Collections;
 using Redwood.Bounties;
 using Redwood.Enemies;
 using Redwood.Notifications;
+using Redwood.Resources;
 using Redwood.Singletons.NotificationsManager;
 
 public partial class BountyManager : Node
@@ -76,7 +77,7 @@ public partial class BountyManager : Node
 		var enemyResourceFileNames = new Array<string>(enemyResourceDir.GetFiles()).ToList().Select((file) => file = $"{enemyResourceDir.GetCurrentDir()}/{file}");
 		var randomEnemyResourceFileName = new Array<string>(enemyResourceFileNames).PickRandom();
 		var randomEnemyResource = ResourceLoader.Load<EnemyData>(randomEnemyResourceFileName);
-		var randomEliminationCount = 1; // _rng.RandiRange(3, 10);
+		var randomEliminationCount = _rng.RandiRange(3, 10);
 
 		Bounty bounty = new EliminationBounty($"Eliminate {randomEliminationCount}x {randomEnemyResource.Name}", "This is a test elimination bounty, expect things to not work", randomEnemyResource.Id, 5, 100, false, null, null, null, randomEliminationCount);
 
@@ -118,23 +119,32 @@ public partial class BountyManager : Node
 			}
 		}
 
-		// Remove finished bounties from player
 		if (finishedBounties.Count > 0)
 		{
 			foreach (var bounty in finishedBounties)
 			{
+				// Remove finished bounties from player
 				PlayerBounties.Remove(bounty);
 				EmitSignal(SignalName.OnPlayerBountyRemoved, bounty.Id);
+
+				// Display finished bounty notifications
+				var notificationData = new NotificationData(bounty.Name, "Completed!");
+				NotificationsManager.Instance.EnqueueNotification(notificationData);
+
+				// Apply rewards to player
+				if (bounty.ReputationReward != null)
+				{
+					PlayerManager.Instance.AddReputation((int)bounty.ReputationReward);
+				}
+				if (bounty.CurrencyReward != null)
+				{
+					PlayerManager.Instance.AddCurrency((int)bounty.CurrencyReward);
+				}
+				if (bounty.ResourceReward != null)
+				{
+					PlayerManager.Instance.AddResource((ResourceBundle)bounty.ResourceReward);
+				}
 			}
 		}
-
-		// Display finished bounty notifications
-		foreach (var bounty in finishedBounties)
-		{
-			var notificationData = new NotificationData(bounty.Name, "Completed!");
-			NotificationsManager.Instance.EnqueueNotification(notificationData);
-		}
-
-		// TODO: Apply rewards to player
 	}
 }

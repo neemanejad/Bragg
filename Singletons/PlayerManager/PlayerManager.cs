@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Godot;
 
 using Redwood.Items;
+using Redwood.Resources;
 
 public partial class PlayerManager : Node
 {
@@ -27,6 +28,56 @@ public partial class PlayerManager : Node
 	private int _killCount = 0;
 
 	public int KillCount { get { return _killCount; } }
+	public int ReputationCount { get; private set; }
+	public int CurrencyCount { get; private set; }
+	public Dictionary<ResourceId, ResourceBundle> ResourceCount { get; private set; }
+
+	public void AddReputation(int reputation)
+	{
+		ReputationCount += reputation;
+	}
+
+	public void RemoveReputation(int reputation)
+	{
+		ReputationCount -= reputation;
+	}
+
+	public void AddCurrency(int currency)
+	{
+		CurrencyCount += currency;
+	}
+
+	public void RemoveCurrency(int currency)
+	{
+		CurrencyCount -= currency;
+	}
+
+	public void AddResource(ResourceBundle resource)
+	{
+		if (!ResourceCount.ContainsKey(resource.Resource.Id))
+		{
+			ResourceCount[resource.Resource.Id] = resource;
+		}
+		else
+		{
+			ResourceCount[resource.Resource.Id].Quantity += resource.Quantity;
+		}
+	}
+
+	public void RemoveResource(ResourceBundle resource)
+	{
+		if (!ResourceCount.ContainsKey(resource.Resource.Id))
+		{
+			return;
+		}
+
+		var resourceBundle = ResourceCount[resource.Resource.Id];
+		resourceBundle.Quantity -= resource.Quantity;
+		if (resourceBundle.Quantity < 0)
+		{
+			resourceBundle.Quantity = 0;
+		}
+	}
 
 	public override void _Ready()
 	{
