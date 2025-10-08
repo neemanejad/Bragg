@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using static System.Net.Mime.MediaTypeNames;
 
-namespace Project.Utils
+namespace Redwood.Utils
 {
 	internal class TimeUtils
 	{

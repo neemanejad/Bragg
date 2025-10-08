@@ -103,6 +103,7 @@ public partial class BountyManager : Node
 	{
 		List<Bounty> finishedBounties = new List<Bounty>();
 		List<Bounty> eliminationBounties = PlayerBounties.Where((bounty) => bounty is EliminationBounty).ToList();
+
 		foreach (var bounty in PlayerBounties)
 		{
 			if (bounty.TargetId != enemyId)
@@ -144,6 +145,18 @@ public partial class BountyManager : Node
 				{
 					PlayerManager.Instance.AddResource((ResourceBundle)bounty.ResourceReward);
 				}
+			}
+		}
+	}
+
+	public void DecrementBountyLifetimes()
+	{
+		foreach (var bounty in PlayerBounties)
+		{
+			bounty.DecrementLifetime();
+			if (bounty.LifeTime <= 0)
+			{
+				RemovePlayerBounty(bounty);
 			}
 		}
 	}

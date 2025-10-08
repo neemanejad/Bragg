@@ -62,7 +62,7 @@ public partial class GameManager : Node
 		gameOverScene.ProcessMode = ProcessModeEnum.Always;
 
 		playerNode.GetParent().AddChild(gameOverScene);
-		playerNode.QueueFree();
+		//playerNode.QueueFree();
 
 		PlayerManager.Instance.Reset();
 

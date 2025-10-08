@@ -29,6 +29,7 @@ public interface Bounty
 	public int CurrentProgress { get; }
 	public int MaxProgress { get; }
 	public void AddProgress(int progress);
+	public void DecrementLifetime();
 }
 
 internal class EliminationBounty : Bounty
@@ -76,6 +77,12 @@ internal class EliminationBounty : Bounty
 	{
 		CurrentProgress += progress;
 	}
+	public void DecrementLifetime()
+	{
+		if (LifeTime <= 0) return;
+
+		LifeTime -= 0;
+	}
 }
 
 internal class CollectionBounty : Bounty
@@ -122,5 +129,11 @@ internal class CollectionBounty : Bounty
 	public void AddProgress(int progress)
 	{
 		CurrentProgress += progress;
+	}
+	public void DecrementLifetime()
+	{
+		if (LifeTime <= 0) return;
+
+		LifeTime -= 0;
 	}
 }

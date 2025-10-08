@@ -92,6 +92,8 @@ public partial class PlayerManager : Node
 	public void Reset()
 	{
 		_health = 100f;
+		var healthComponent = PlayerNode.GetNode<HealthComponent>("Vitals/HealthComponent");
+		healthComponent.SetHealth(_health);
 	}
 
 	public void AddHealth(float health)

@@ -1,11 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://bffthneg1lqvx"]
+[gd_scene load_steps=3 format=3 uid="uid://bffthneg1lqvx"]
 
+[ext_resource type="Script" path="res://UI/GameOver/GameOver.cs" id="1_2lmwy"]
 [ext_resource type="Theme" uid="uid://deqeqesf3ve3l" path="res://Theme/Theme.tres" id="1_ykcu0"]
-[ext_resource type="Script" path="res://UI/GameOver/TimeAliveLabelValue.cs" id="2_er3r1"]
-[ext_resource type="Script" path="res://UI/GameOver/KillsLabelValue.cs" id="3_425hf"]
-[ext_resource type="Script" path="res://UI/GameOver/ContinueButton.cs" id="4_1i0yi"]
 
 [node name="GameOver" type="CanvasLayer"]
+script = ExtResource("1_2lmwy")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchors_preset = 15
@@ -101,7 +100,6 @@ text = "Time alive"
 layout_mode = 2
 size_flags_horizontal = 10
 text = "0"
-script = ExtResource("2_er3r1")
 
 [node name="PanelContainer2" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer"]
 layout_mode = 2
@@ -125,7 +123,6 @@ text = "Kills"
 layout_mode = 2
 size_flags_horizontal = 10
 text = "0"
-script = ExtResource("3_425hf")
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -137,6 +134,5 @@ layout_mode = 2
 [node name="ContinueButton" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Continue"
-script = ExtResource("4_1i0yi")
 
-[connection signal="button_down" from="MarginContainer/VBoxContainer/ContinueButton" to="MarginContainer/VBoxContainer/ContinueButton" method="Continue"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ContinueButton" to="." method="OnContinueButtonPressed"]
