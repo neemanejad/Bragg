@@ -3,7 +3,9 @@
 [ext_resource type="Script" path="res://UI/SurvivalTimer.cs" id="1_djpen"]
 [ext_resource type="Theme" uid="uid://deqeqesf3ve3l" path="res://Theme/Theme.tres" id="2_q8a8c"]
 
-[node name="SurvivalTimer" type="Node2D"]
+[node name="SurvivalTimer" type="Control"]
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("1_djpen")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -12,19 +14,17 @@ script = ExtResource("1_djpen")
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -83.0
+offset_left = -64.0
 offset_top = 8.0
-offset_right = -9.0
-offset_bottom = 40.0
+offset_right = -8.0
+offset_bottom = 33.0
 grow_horizontal = 0
 size_flags_horizontal = 8
 theme = ExtResource("2_q8a8c")
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 14
 text = "00:00"
 horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_group_ = true
 
 [node name="Timer" type="Timer" parent="."]
-
-[connection signal="timeout" from="Timer" to="." method="OnSecondTimeout"]

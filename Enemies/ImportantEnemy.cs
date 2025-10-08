@@ -19,7 +19,7 @@ public partial class ImportantEnemy : Enemy
 		EnemyDefeated -= ImportantEnemyDefeatedSignal;
 	}
 
-	public void ImportantEnemyDefeatedSignal()
+	public void ImportantEnemyDefeatedSignal(string enemyId)
 	{
 		GameManager.Instance.LevelClearedSignal();
 	}

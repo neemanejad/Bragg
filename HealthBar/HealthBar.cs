@@ -2,7 +2,7 @@ using System;
 
 using Godot;
 
-public partial class HealthBar : Node2D
+public partial class HealthBar : Control
 {
 	[Signal]
 	public delegate void LostAllHealthEventHandler();

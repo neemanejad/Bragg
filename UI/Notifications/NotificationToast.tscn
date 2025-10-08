@@ -1,0 +1,38 @@
+[gd_scene load_steps=3 format=3 uid="uid://djixj40ch8d3y"]
+
+[ext_resource type="Script" path="res://UI/Notifications/NotificationToast.cs" id="1_2h2b6"]
+[ext_resource type="Theme" uid="uid://cuwh8gxfjejhg" path="res://Theme/Terminal/Terminal.tres" id="1_ucejp"]
+
+[node name="NotificationToast" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_2h2b6")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = -288.0
+offset_top = -64.0
+offset_right = 288.0
+offset_bottom = 64.0
+theme = ExtResource("1_ucejp")
+theme_type_variation = &"BlackPanelContainer"
+
+[node name="Title" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 96.0
+offset_top = 8.0
+offset_right = 480.0
+offset_bottom = 56.0
+text = "PLACEHOLDER_TITLE_NAME"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Description" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 96.0
+offset_top = 64.0
+offset_right = 480.0
+offset_bottom = 120.0
+text = "PLACEHOLDER_NOTIFICATION_DESCRIPTION"
+horizontal_alignment = 1
+vertical_alignment = 1

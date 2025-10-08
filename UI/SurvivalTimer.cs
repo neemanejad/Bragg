@@ -4,7 +4,7 @@ using Godot;
 
 using Project.Utils;
 
-public partial class SurvivalTimer : Node2D
+public partial class SurvivalTimer : Control
 {
 	private Label timerLabel;
 

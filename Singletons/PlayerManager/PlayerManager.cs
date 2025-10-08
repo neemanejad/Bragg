@@ -60,13 +60,13 @@ public partial class PlayerManager : Node
 
 		_health = healthSum;
 
-		var healthComponent = PlayerNode.GetNode<HealthComponent>("Vitals/UI/HealthComponent");
+		var healthComponent = PlayerNode.GetNode<HealthComponent>("Vitals/HealthComponent");
 		healthComponent.RemoveHealth(health);
 	}
 
 	public void SubtractHealth(float health)
 	{
-		var healthComponent = PlayerNode.GetNode<HealthComponent>("Vitals/UI/HealthComponent");
+		var healthComponent = PlayerNode.GetNode<HealthComponent>("Vitals/HealthComponent");
 
 		if (health < 0)
 		{
@@ -105,11 +105,6 @@ public partial class PlayerManager : Node
 	public void SetPlayerNode(Player player)
 	{
 		PlayerNode = player;
-	}
-
-	public static void ClearPlayerNode()
-	{
-		PlayerNode = null;
 	}
 
 	public void ShowSurvivalTimer()

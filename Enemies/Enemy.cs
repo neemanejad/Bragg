@@ -1,23 +1,23 @@
 using System;
+using System.Collections.Generic;
 
 using Godot;
 
+using Redwood.Enemies;
+
 public partial class Enemy : CharacterBody2D
 {
+	[Export]
+	public EnemyData EnemyData { get; set; }
+
 	[Export]
 	public HealthComponent HealthComponent { get; set; }
 
 	[Export]
 	public Timer HitTimer { get; set; }
 
-	[Export]
-	public double Speed = 200;
-
-	[Export]
-	public float Damage { get; set; }
-
 	[Signal]
-	public delegate void EnemyDefeatedEventHandler();
+	public delegate void EnemyDefeatedEventHandler(string? enemyId);
 
 	private bool canAttack = true;
 
@@ -27,6 +27,8 @@ public partial class Enemy : CharacterBody2D
 		{
 			throw new NullReferenceException("HealthComponent is null in HitboxComponent");
 		}
+
+		Connect(SignalName.EnemyDefeated, new Callable(WorldEventListener.Instance, WorldEventListener.MethodName.OnEnemyKilled));
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -57,7 +59,7 @@ public partial class Enemy : CharacterBody2D
 			return;
 		}
 
-		PlayerManager.Instance.SubtractHealth(Damage);
+		PlayerManager.Instance.SubtractHealth(EnemyData.Damage);
 	}
 
 	public void LostAllHealth()
@@ -66,13 +68,13 @@ public partial class Enemy : CharacterBody2D
 		MaybeDropItem();
 		QueueFree();
 
-		EmitSignal(SignalName.EnemyDefeated);
+		EmitSignal(SignalName.EnemyDefeated, EnemyData.Id);
 	}
 
 	private void FollowPlayer()
 	{
 		var playerDirection = (PlayerManager.PlayerNode.GlobalPosition - GlobalPosition).Normalized();
-		Velocity = playerDirection * (float)Speed;
+		Velocity = playerDirection * (float)EnemyData.Speed;
 		MoveAndSlide();
 	}
 

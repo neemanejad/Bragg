@@ -3,12 +3,17 @@
 [ext_resource type="PackedScene" uid="uid://dx7rw14cjb4ie" path="res://Components/HealthComponent.tscn" id="1_ppne3"]
 [ext_resource type="PackedScene" uid="uid://b730r6uoiexq6" path="res://HealthBar/HealthBar.tscn" id="2_37h1q"]
 
-[node name="Vitals" type="Node2D"]
+[node name="Vitals" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="HealthComponent" parent="." instance=ExtResource("1_ppne3")]
 
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="HealthBar" parent="UI" node_paths=PackedStringArray("HealthComponent") instance=ExtResource("2_37h1q")]
-position = Vector2(245, 64)
-HealthComponent = NodePath("../HealthComponent")
-
-[node name="HealthComponent" parent="UI" instance=ExtResource("1_ppne3")]
+offset_left = 240.0
+offset_top = 32.0
+offset_right = 240.0
+offset_bottom = 32.0
+HealthComponent = NodePath("../../HealthComponent")

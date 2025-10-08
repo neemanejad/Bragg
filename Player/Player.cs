@@ -12,7 +12,7 @@ public partial class Player : CharacterBody2D
 	{
 		PlayerManager.Instance.SetPlayerNode(this);
 
-		GetNode<HealthComponent>("Vitals/UI/HealthComponent").SetHealth(PlayerManager.Instance.Health);
+		GetNode<HealthComponent>("Vitals/HealthComponent").SetHealth(PlayerManager.Instance.Health);
 
 		ApplyExistingItemEffectsToPlayer();
 	}

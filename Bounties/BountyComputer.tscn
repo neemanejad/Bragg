@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://c86r35uksfxx7"]
+
+[ext_resource type="Texture2D" uid="uid://bnx10qyuxk3bv" path="res://Art/Bounties/Sprite-0001.png" id="1_qx4oe"]
+[ext_resource type="Script" path="res://Bounties/BountyComputer.cs" id="1_yoc2o"]
+[ext_resource type="Theme" uid="uid://deqeqesf3ve3l" path="res://Theme/Theme.tres" id="2_hbslf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0wka5"]
+size = Vector2(208, 216)
+
+[node name="BountyComputer" type="Node2D"]
+script = ExtResource("1_yoc2o")
+
+[node name="InteractionLabel" type="Label" parent="."]
+offset_left = -128.0
+offset_top = -104.0
+offset_right = 128.0
+offset_bottom = -72.0
+theme = ExtResource("2_hbslf")
+theme_override_font_sizes/font_size = 26
+text = "PRESS E"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_qx4oe")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_0wka5")
+
+[connection signal="body_entered" from="Area2D" to="." method="OnPlayerEnterInteractionArea"]
+[connection signal="body_exited" from="Area2D" to="." method="OnPlayerLeaveInteractionArea"]

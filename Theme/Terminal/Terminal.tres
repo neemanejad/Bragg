@@ -63,13 +63,6 @@ corner_radius_top_right = 6
 corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j08xt"]
-bg_color = Color(0, 0, 0, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3arg2"]
 content_margin_left = 6.0
 content_margin_top = 6.0
@@ -85,6 +78,18 @@ corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_33jmr"]
+bg_color = Color(0.0509804, 0.329412, 0.168627, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.0196078, 0.87451, 0.447059, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
 
 [sub_resource type="SystemFont" id="SystemFont_4vu1s"]
 font_names = PackedStringArray("Monospace")
@@ -113,9 +118,10 @@ LargeMargin/constants/margin_left = 24
 LargeMargin/constants/margin_right = 24
 LargeMargin/constants/margin_top = 24
 MainPanelContainer/base_type = &"PanelContainer"
-MainPanelContainer/styles/panel = SubResource("StyleBoxFlat_j08xt")
 Pill/base_type = &"PanelContainer"
 Pill/styles/panel = SubResource("StyleBoxFlat_3arg2")
+PlayerBountyPanel/base_type = &"Panel"
+PlayerBountyPanel/styles/panel = SubResource("StyleBoxFlat_33jmr")
 SmallBlueLabel/base_type = &"Label"
 SmallBlueLabel/colors/font_color = Color(0, 0.827451, 0.952941, 1)
 SmallBlueLabel/font_sizes/font_size = 14

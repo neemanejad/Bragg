@@ -64,7 +64,6 @@ public partial class GameManager : Node
 		playerNode.GetParent().AddChild(gameOverScene);
 		playerNode.QueueFree();
 
-		PlayerManager.ClearPlayerNode();
 		PlayerManager.Instance.Reset();
 
 		EmitSignal(SignalName.EndGame);

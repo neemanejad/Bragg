@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://cavcc3ptyyuhp"]
+[gd_scene load_steps=7 format=3 uid="uid://cavcc3ptyyuhp"]
 
 [ext_resource type="Script" path="res://Enemies/FastEnemy.cs" id="1_ka8ga"]
 [ext_resource type="Texture2D" uid="uid://ddb7q8y77vkbk" path="res://icon.svg" id="2_u5nwc"]
+[ext_resource type="Resource" uid="uid://cvtue4x0bw3ur" path="res://Resources/Enemies/FastEnemy.tres" id="2_uq11i"]
 [ext_resource type="PackedScene" uid="uid://dx7rw14cjb4ie" path="res://Components/HealthComponent.tscn" id="3_kxoke"]
 [ext_resource type="PackedScene" uid="uid://b730r6uoiexq6" path="res://HealthBar/HealthBar.tscn" id="4_qgf56"]
 
@@ -10,9 +11,8 @@ size = Vector2(64, 64)
 
 [node name="FastEnemy" type="CharacterBody2D" node_paths=PackedStringArray("HealthComponent")]
 script = ExtResource("1_ka8ga")
+EnemyData = ExtResource("2_uq11i")
 HealthComponent = NodePath("HealthComponent")
-Speed = 400.0
-Damage = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_eey5v")
@@ -33,7 +33,10 @@ color = Color(0.266667, 1, 0.388235, 0.345098)
 [node name="HealthComponent" parent="." instance=ExtResource("3_kxoke")]
 
 [node name="HealthBar" parent="." node_paths=PackedStringArray("HealthComponent") instance=ExtResource("4_qgf56")]
-position = Vector2(0, -72)
+offset_left = 0.0
+offset_top = -72.0
+offset_right = 0.0
+offset_bottom = -72.0
 HealthComponent = NodePath("../HealthComponent")
 
 [connection signal="LostAllHealth" from="HealthComponent" to="." method="LostAllHealth"]

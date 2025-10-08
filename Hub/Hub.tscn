@@ -1,9 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://dyq3odk2ogbfk"]
+[gd_scene load_steps=4 format=3 uid="uid://dyq3odk2ogbfk"]
 
 [ext_resource type="Script" path="res://Hub/Hub.cs" id="1_3cofr"]
+[ext_resource type="PackedScene" uid="uid://c86r35uksfxx7" path="res://Bounties/BountyComputer.tscn" id="2_mmun4"]
 [ext_resource type="PackedScene" uid="uid://baqjugpoi57hx" path="res://Deployment/Deployment.tscn" id="3_lhmwt"]
 
 [node name="Hub" type="Node2D"]
 script = ExtResource("1_3cofr")
+
+[node name="BountyComputer" parent="." instance=ExtResource("2_mmun4")]
+position = Vector2(48, -440)
 
 [node name="Deployment" parent="." instance=ExtResource("3_lhmwt")]

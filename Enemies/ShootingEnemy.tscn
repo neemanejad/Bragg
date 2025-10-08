@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://das0vbqna72es"]
+[gd_scene load_steps=8 format=3 uid="uid://das0vbqna72es"]
 
 [ext_resource type="Script" path="res://Enemies/ShootingEnemy.cs" id="1_2en1h"]
 [ext_resource type="PackedScene" uid="uid://bvdwgpet7jhfd" path="res://Enemies/Weapons/Bullets/EnemyBullet.tscn" id="2_2bqju"]
 [ext_resource type="Texture2D" uid="uid://ddb7q8y77vkbk" path="res://icon.svg" id="2_ax7kk"]
 [ext_resource type="PackedScene" uid="uid://dx7rw14cjb4ie" path="res://Components/HealthComponent.tscn" id="3_t4cmk"]
+[ext_resource type="Resource" uid="uid://p023y7ydepgg" path="res://Resources/Enemies/ShootingEnemy.tres" id="3_yvjig"]
 [ext_resource type="PackedScene" uid="uid://b730r6uoiexq6" path="res://HealthBar/HealthBar.tscn" id="4_lmn4a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2w76t"]
@@ -14,10 +15,9 @@ script = ExtResource("1_2en1h")
 Projectile = ExtResource("2_2bqju")
 ProjectileSpeed = 500.0
 ProjectileDamage = 10.0
+EnemyData = ExtResource("3_yvjig")
 HealthComponent = NodePath("HealthComponent")
 HitTimer = NodePath("ShootTimer")
-Speed = 250.0
-Damage = 2.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 4)
@@ -39,7 +39,10 @@ color = Color(0.0352941, 0.0352941, 0.0352941, 0.741176)
 [node name="HealthComponent" parent="." instance=ExtResource("3_t4cmk")]
 
 [node name="HealthBar" parent="." node_paths=PackedStringArray("HealthComponent") instance=ExtResource("4_lmn4a")]
-position = Vector2(0, -104)
+offset_left = 0.0
+offset_top = -104.0
+offset_right = 0.0
+offset_bottom = -104.0
 HealthComponent = NodePath("../HealthComponent")
 
 [node name="ShootTimer" type="Timer" parent="."]
