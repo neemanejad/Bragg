@@ -1,26 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://d256twot7lnbw"]
+[gd_scene load_steps=3 format=3 uid="uid://d256twot7lnbw"]
 
 [ext_resource type="Script" path="res://World/World.cs" id="1_eh1jh"]
-[ext_resource type="PackedScene" uid="uid://bym04ysd5dpgy" path="res://Extraction/ExtractionPoint.tscn" id="3_o21rk"]
-[ext_resource type="PackedScene" uid="uid://offehl7fi1k0" path="res://Enemies/StrongEnemySpawner.tscn" id="5_cljq5"]
-[ext_resource type="PackedScene" uid="uid://cxuka6u0mkyoy" path="res://Enemies/ShootingEnemySpawner.tscn" id="6_01w0l"]
-[ext_resource type="PackedScene" uid="uid://ft4u0d4owk8k" path="res://Enemies/FastEnemySpawner.tscn" id="7_4sjyf"]
-[ext_resource type="PackedScene" uid="uid://bl7bfufu62jm1" path="res://World/ProcWorld.tscn" id="8_kb1jm"]
-[ext_resource type="PackedScene" uid="uid://cv18dv24ggpk3" path="res://Enemies/Bosses/BossSpawner.tscn" id="8_s8w8r"]
+[ext_resource type="PackedScene" uid="uid://bbs8urh6wwvxm" path="res://World/ProcWorld.tscn" id="8_kb1jm"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_eh1jh")
 metadata/_edit_lock_ = true
 
 [node name="ProcWorld" parent="." instance=ExtResource("8_kb1jm")]
-
-[node name="ExtractionPoint" parent="." instance=ExtResource("3_o21rk")]
-position = Vector2(-144, -152)
-
-[node name="ShootingEnemySpawner" parent="." instance=ExtResource("6_01w0l")]
-
-[node name="StrongEnemySpawner" parent="." instance=ExtResource("5_cljq5")]
-
-[node name="FastEnemySpawner" parent="." instance=ExtResource("7_4sjyf")]
-
-[node name="BossSpawner" parent="." instance=ExtResource("8_s8w8r")]

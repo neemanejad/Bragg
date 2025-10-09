@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://bl7bfufu62jm1"]
+[gd_scene load_steps=5 format=3 uid="uid://bbs8urh6wwvxm"]
 
 [ext_resource type="TileSet" uid="uid://df4uinf8jiogj" path="res://TileSets/WorldTileSet3.tres" id="1_cd10m"]
 [ext_resource type="Script" path="res://World/ProcWorld.cs" id="1_u8h71"]

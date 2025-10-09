@@ -10,11 +10,11 @@
 
 [node name="Main" type="Node"]
 
-[node name="Player" parent="." instance=ExtResource("3_tcv06")]
-
 [node name="WorldRoot" type="Node2D" parent="."]
 
 [node name="Hub" parent="WorldRoot" instance=ExtResource("1_fnuqi")]
+
+[node name="Player" parent="." instance=ExtResource("3_tcv06")]
 
 [node name="UI" type="Control" parent="."]
 z_index = 4096

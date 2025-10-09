@@ -7,12 +7,14 @@ public partial class Player : CharacterBody2D
 	[Export]
 	public double Speed { get; set; } = 400;
 
+	public Camera2D PlayerCamera { get; private set; }
 
 	public override void _Ready()
 	{
 		PlayerManager.Instance.SetPlayerNode(this);
 
 		GetNode<HealthComponent>("Vitals/HealthComponent").SetHealth(PlayerManager.Instance.Health);
+		PlayerCamera = GetNode<Camera2D>("PlayerCamera");
 
 		ApplyExistingItemEffectsToPlayer();
 	}
