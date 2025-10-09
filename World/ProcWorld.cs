@@ -9,6 +9,8 @@ public partial class ProcWorld : TileMapLayer
 {
 	[Export]
 	public NoiseTexture2D NoiseTexture2D { get; set; }
+	[Export]
+	public bool UseAreaBasedChunkRendering { get; set; } = false;
 
 	private Noise _noise;
 
@@ -16,7 +18,7 @@ public partial class ProcWorld : TileMapLayer
 	private int _tileSize = 16; // Size of individual tiles
 	private int _chunkSize;
 
-	private int _chunkLoadThreshold = 8096;
+	private int _chunkLoadThreshold = 2048;
 
 	private int _sourceId = 0;
 	private Vector2I _plainGrassAtlas = new(2, 0);
@@ -68,9 +70,16 @@ public partial class ProcWorld : TileMapLayer
 		}
 	}
 
-	public override void _PhysicsProcess(double delta)
+	public override void _Process(double delta)
 	{
-		CheckChunkLoading();
+		if (UseAreaBasedChunkRendering)
+		{
+			CheckChunkLoading_AreaAroundPlayer();
+		}
+		else
+		{
+			CheckChunkLoading_PlayerNeighbor();
+		}
 		ProcessChunkQueue();
 	}
 
@@ -107,7 +116,25 @@ public partial class ProcWorld : TileMapLayer
 		}
 	}
 
-	private void CheckChunkLoading()
+	private void CheckChunkLoading_AreaAroundPlayer()
+	{
+		var playerGlobalX = _player.GlobalPosition.X;
+		var playerGlobalY = _player.GlobalPosition.Y;
+
+		var playerChunk = new Vector2I((int)Math.Floor(playerGlobalX / _chunkSize), (int)Math.Floor(playerGlobalX / _chunkSize));
+		var renderDistanceChunkTopLeftChunk = new Vector2I((int)Math.Floor((playerGlobalX - _chunkLoadThreshold) / _chunkSize), (int)Math.Floor((playerGlobalY + _chunkLoadThreshold) / _chunkSize));
+		var renderDistanceChunkBottomRight = new Vector2I((int)Math.Floor((playerGlobalX + _chunkLoadThreshold) / _chunkSize), (int)Math.Floor((playerGlobalY - _chunkLoadThreshold) / _chunkSize));
+
+		for (var i = renderDistanceChunkTopLeftChunk.X; i < renderDistanceChunkBottomRight.X; i++)
+		{
+			for (var j = renderDistanceChunkBottomRight.Y; j < renderDistanceChunkTopLeftChunk.Y; j++)
+			{
+				GenerateChunk(new Vector2I(i, j));
+			}
+		}
+	}
+
+	private void CheckChunkLoading_PlayerNeighbor()
 	{
 		var globalX = _player.GlobalPosition.X;
 		var globalY = _player.GlobalPosition.Y;
