@@ -36,8 +36,8 @@ public partial class World : Node
 		if (Input.IsActionJustPressed("zoom_out"))
 		{
 			var diff = PlayerManager.PlayerNode.PlayerCamera.Zoom - delta;
-			// if (diff < new Vector2(0.4f, 0.4f))
-			// 	return;
+			if (diff < new Vector2(0f, 0f))
+				return;
 
 			PlayerManager.PlayerNode.PlayerCamera.Zoom = diff;
 		}

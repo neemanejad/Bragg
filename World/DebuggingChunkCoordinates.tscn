@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://b5g1cxnefdwp0"]
+
+[ext_resource type="Script" path="res://World/DebuggingChunkCoordinates.cs" id="1_phcy3"]
+
+[node name="Control" type="Control" node_paths=PackedStringArray("CoordinatesLabel")]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_phcy3")
+CoordinatesLabel = NodePath("Label")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 100

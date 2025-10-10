@@ -1,16 +1,44 @@
-[gd_scene load_steps=5 format=3 uid="uid://bbs8urh6wwvxm"]
+[gd_scene load_steps=13 format=3 uid="uid://bbs8urh6wwvxm"]
 
 [ext_resource type="TileSet" uid="uid://df4uinf8jiogj" path="res://TileSets/WorldTileSet3.tres" id="1_cd10m"]
 [ext_resource type="Script" path="res://World/ProcWorld.cs" id="1_u8h71"]
+[ext_resource type="Texture2D" uid="uid://c5c63ms6olll0" path="res://World/TerrainNoise.tres" id="3_oxv8p"]
+[ext_resource type="PackedScene" uid="uid://b5g1cxnefdwp0" path="res://World/DebuggingChunkCoordinates.tscn" id="4_bllmv"]
+[ext_resource type="PackedScene" uid="uid://d2w8ylny7b4x4" path="res://Enemies/EnemyColony.tscn" id="4_d5bp7"]
+[ext_resource type="PackedScene" uid="uid://cavcc3ptyyuhp" path="res://Enemies/FastEnemy.tscn" id="5_8rebp"]
+[ext_resource type="Script" path="res://World/Chunk.cs" id="5_jb4ts"]
+[ext_resource type="PackedScene" uid="uid://das0vbqna72es" path="res://Enemies/ShootingEnemy.tscn" id="6_m3jik"]
+[ext_resource type="PackedScene" uid="uid://bp0cekjqvscav" path="res://Enemies/StrongEnemy.tscn" id="7_75nml"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_61c3w"]
-noise_type = 3
-frequency = 0.0025
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_1h1as"]
+noise_type = 5
+fractal_lacunarity = 3.0
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_sa4bd"]
-noise = SubResource("FastNoiseLite_61c3w")
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_cvvcr"]
+noise = SubResource("FastNoiseLite_1h1as")
 
-[node name="ProcWorld" type="TileMapLayer"]
+[sub_resource type="Resource" id="Resource_pu1m7"]
+script = ExtResource("5_jb4ts")
+SourceId = 0
+ChunkLoadThreshold = 1024
+TilesPerChunk = 64
+TileSize = 16
+PlainGrassAtlas = Vector2i(2, 0)
+SandAtlas = Vector2i(0, 0)
+ShallowWaterAtlas1 = Vector2i(1, 0)
+ShallowWaterAtlas2 = Vector2i(2, 0)
+DeepWaterAtlas1 = Vector2i(3, 0)
+DeepWaterAtlas2 = Vector2i(4, 0)
+
+[node name="ProcWorld" type="TileMapLayer" node_paths=PackedStringArray("EnemyColony")]
 tile_set = ExtResource("1_cd10m")
 script = ExtResource("1_u8h71")
-NoiseTexture2D = SubResource("NoiseTexture2D_sa4bd")
+TerrainTexture = ExtResource("3_oxv8p")
+EnemySpawnTexture = SubResource("NoiseTexture2D_cvvcr")
+DebuggingChunkCoordinates = ExtResource("4_bllmv")
+EnemyColony = NodePath("EnemyColony")
+Chunk = SubResource("Resource_pu1m7")
+
+[node name="EnemyColony" parent="." instance=ExtResource("4_d5bp7")]
+Enemies = [ExtResource("6_m3jik"), ExtResource("7_75nml"), ExtResource("5_8rebp")]
+EnemyWeights = [0.5, 1.2, 0.3]

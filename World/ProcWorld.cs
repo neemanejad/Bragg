@@ -3,30 +3,38 @@ using System.Collections.Generic;
 
 using Godot;
 
+using Redwood.Enemies;
+
 namespace Redwood.World;
 
 public partial class ProcWorld : TileMapLayer
 {
 	[Export]
 	public NoiseTexture2D NoiseTexture2D { get; set; }
+
+	[Export]
+	public NoiseTexture2D TerrainTexture { get; set; }
+
 	[Export]
 	public bool UseAreaBasedChunkRendering { get; set; } = false;
 
-	private Noise _noise;
+	[Export]
+	public NoiseTexture2D EnemySpawnTexture { get; set; }
 
-	private int _tilesPerChunk = 64; // X and Y
-	private int _tileSize = 16; // Size of individual tiles
-	private int _chunkSize;
+	[Export]
+	public PackedScene DebuggingChunkCoordinates { get; set; }
 
-	private int _chunkLoadThreshold = 2048;
+	[Export]
+	public EnemyColony EnemyColony { get; set; }
 
-	private int _sourceId = 0;
-	private Vector2I _plainGrassAtlas = new(2, 0);
-	private Vector2I _sandAtlas = new(0, 0);
-	private Vector2I _shallowWaterAtlas1 = new(1, 0);
-	private Vector2I _shallowWaterAtlas2 = new(2, 0);
-	private Vector2I _deepWaterAtlas1 = new(3, 0);
-	private Vector2I _deepWaterAtlas2 = new(4, 0);
+	[Export]
+	public Chunk Chunk { get; set; }
+
+	[Export]
+	public bool ChunkDebugging { get; set; } = true;
+
+	private Noise _terrainNoise;
+	private Noise _enemySpawnNoise;
 
 	private readonly HashSet<Vector2I> _generatedChunks = new();
 	private readonly Queue<Vector2I> _chunkQueue = new();
@@ -35,9 +43,8 @@ public partial class ProcWorld : TileMapLayer
 
 	public override void _Ready()
 	{
-		_chunkSize = _tilesPerChunk * _tileSize;
-
-		_noise = NoiseTexture2D.Noise;
+		_terrainNoise = TerrainTexture.Noise;
+		_enemySpawnNoise = EnemySpawnTexture.Noise;
 
 		GenerateChunk(Vector2I.Zero);
 	}
@@ -46,27 +53,27 @@ public partial class ProcWorld : TileMapLayer
 	{
 		if (noiseVal > 0.0f)
 		{
-			SetCell(coords, 0, _plainGrassAtlas);
+			SetCell(coords, 0, Chunk.PlainGrassAtlas);
 		}
 		else if (noiseVal > -0.03)
 		{
-			SetCell(coords, 1, _sandAtlas);
+			SetCell(coords, 1, Chunk.SandAtlas);
 		}
 		else if (noiseVal > -0.05)
 		{
-			SetCell(coords, 1, _shallowWaterAtlas1);
+			SetCell(coords, 1, Chunk.ShallowWaterAtlas1);
 		}
 		else if (noiseVal > -0.075)
 		{
-			SetCell(coords, 1, _shallowWaterAtlas2);
+			SetCell(coords, 1, Chunk.ShallowWaterAtlas2);
 		}
 		else if (noiseVal > -0.1)
 		{
-			SetCell(coords, 1, _deepWaterAtlas1);
+			SetCell(coords, 1, Chunk.DeepWaterAtlas1);
 		}
 		else
 		{
-			SetCell(coords, 1, _deepWaterAtlas2);
+			SetCell(coords, 1, Chunk.DeepWaterAtlas2);
 		}
 	}
 
@@ -101,18 +108,35 @@ public partial class ProcWorld : TileMapLayer
 			return;
 		}
 
-		var chunkCoords = _chunkQueue.Dequeue();
-		var chunkWorldCoords = chunkCoords * _tilesPerChunk;
+		float terrainNoiseValueSum = 0;
+		float enemyNoiseValueSum = 0;
 
-		for (var x = 0; x < _tilesPerChunk; x++)
+		var chunkCoords = _chunkQueue.Dequeue();
+		var chunkWorldCoords = chunkCoords * Chunk.TilesPerChunk;
+
+		ChunkDebugInfo(chunkCoords);
+
+		for (var x = 0; x < Chunk.TilesPerChunk; x++)
 		{
-			for (var y = 0; y < _tilesPerChunk; y++)
+			for (var y = 0; y < Chunk.TilesPerChunk; y++)
 			{
 				var worldX = x + chunkWorldCoords.X;
 				var worldY = y + chunkWorldCoords.Y;
 
-				DetermineCellPlacement(new(worldX, worldY), _noise.GetNoise2D(worldX, worldY));
+				var terrainNoiseValue = _terrainNoise.GetNoise2D(worldX, worldY);
+
+				terrainNoiseValueSum += terrainNoiseValue;
+				enemyNoiseValueSum += _enemySpawnNoise.GetNoise2D(worldX, worldY);
+
+				DetermineCellPlacement(new(worldX, worldY), terrainNoiseValue);
 			}
+		}
+
+		var shouldSpawnColony = Math.Abs((int)enemyNoiseValueSum / Chunk.TilesPerChunk) > 19 && ((int)terrainNoiseValueSum / Chunk.TilesPerChunk) > 0;
+
+		if (shouldSpawnColony)
+		{
+			EnemyColony.Generate(chunkCoords * Chunk.ChunkSize);
 		}
 	}
 
@@ -121,9 +145,9 @@ public partial class ProcWorld : TileMapLayer
 		var playerGlobalX = _player.GlobalPosition.X;
 		var playerGlobalY = _player.GlobalPosition.Y;
 
-		var playerChunk = new Vector2I((int)Math.Floor(playerGlobalX / _chunkSize), (int)Math.Floor(playerGlobalX / _chunkSize));
-		var renderDistanceChunkTopLeftChunk = new Vector2I((int)Math.Floor((playerGlobalX - _chunkLoadThreshold) / _chunkSize), (int)Math.Floor((playerGlobalY + _chunkLoadThreshold) / _chunkSize));
-		var renderDistanceChunkBottomRight = new Vector2I((int)Math.Floor((playerGlobalX + _chunkLoadThreshold) / _chunkSize), (int)Math.Floor((playerGlobalY - _chunkLoadThreshold) / _chunkSize));
+		var playerChunk = new Vector2I((int)Math.Floor(playerGlobalX / Chunk.ChunkSize), (int)Math.Floor(playerGlobalX / Chunk.ChunkSize));
+		var renderDistanceChunkTopLeftChunk = new Vector2I((int)Math.Floor((playerGlobalX - Chunk.ChunkLoadThreshold) / Chunk.ChunkSize), (int)Math.Floor((playerGlobalY + Chunk.ChunkLoadThreshold) / Chunk.ChunkSize));
+		var renderDistanceChunkBottomRight = new Vector2I((int)Math.Floor((playerGlobalX + Chunk.ChunkLoadThreshold) / Chunk.ChunkSize), (int)Math.Floor((playerGlobalY - Chunk.ChunkLoadThreshold) / Chunk.ChunkSize));
 
 		for (var i = renderDistanceChunkTopLeftChunk.X; i < renderDistanceChunkBottomRight.X; i++)
 		{
@@ -139,47 +163,57 @@ public partial class ProcWorld : TileMapLayer
 		var globalX = _player.GlobalPosition.X;
 		var globalY = _player.GlobalPosition.Y;
 
-		var playerChunk = new Vector2I((int)Math.Floor(globalX / _chunkSize), (int)Math.Floor(globalY / _chunkSize));
+		var playerChunk = new Vector2I((int)Math.Floor(globalX / Chunk.ChunkSize), (int)Math.Floor(globalY / Chunk.ChunkSize));
 
-		var localX = Mathf.PosMod(globalX, _chunkSize);
-		var localY = Mathf.PosMod(globalY, _chunkSize);
+		var localX = Mathf.PosMod(globalX, Chunk.ChunkSize);
+		var localY = Mathf.PosMod(globalY, Chunk.ChunkSize);
 
-		if (localX < _chunkLoadThreshold)
+		if (localX < Chunk.ChunkLoadThreshold)
 		{
 			GenerateChunk(playerChunk + Vector2I.Left);
 		}
-		if (localX > _chunkSize - _chunkLoadThreshold)
+		if (localX > Chunk.ChunkSize - Chunk.ChunkLoadThreshold)
 		{
 			GenerateChunk(playerChunk + Vector2I.Right);
 		}
-		if (localY < _chunkLoadThreshold)
+		if (localY < Chunk.ChunkLoadThreshold)
 		{
 			GenerateChunk(playerChunk + Vector2I.Up);
 		}
-		if (localY > _chunkSize - _chunkLoadThreshold)
+		if (localY > Chunk.ChunkSize - Chunk.ChunkLoadThreshold)
 		{
 			GenerateChunk(playerChunk + Vector2I.Down);
 		}
 
 		// Top left
-		if (localY < _chunkLoadThreshold && localX < _chunkLoadThreshold)
+		if (localY < Chunk.ChunkLoadThreshold && localX < Chunk.ChunkLoadThreshold)
 		{
 			GenerateChunk(playerChunk + Vector2I.Up + Vector2I.Left);
 		}
 		// Bottom left
-		if (localY > _chunkSize - _chunkLoadThreshold && localX < _chunkLoadThreshold)
+		if (localY > Chunk.ChunkSize - Chunk.ChunkLoadThreshold && localX < Chunk.ChunkLoadThreshold)
 		{
 			GenerateChunk(playerChunk + Vector2I.Down + Vector2I.Left);
 		}
 		// Bottom right
-		if (localY > _chunkSize - _chunkLoadThreshold && localX > _chunkSize - _chunkLoadThreshold)
+		if (localY > Chunk.ChunkSize - Chunk.ChunkLoadThreshold && localX > Chunk.ChunkSize - Chunk.ChunkLoadThreshold)
 		{
 			GenerateChunk(playerChunk + Vector2I.Down + Vector2I.Right);
 		}
 		// Top right
-		if (localY < _chunkLoadThreshold && localX > _chunkSize - _chunkLoadThreshold)
+		if (localY < Chunk.ChunkLoadThreshold && localX > Chunk.ChunkSize - Chunk.ChunkLoadThreshold)
 		{
 			GenerateChunk(playerChunk + Vector2I.Up + Vector2I.Right);
 		}
+	}
+
+	private void ChunkDebugInfo(Vector2I chunkCoords)
+	{
+		if (!ChunkDebugging && DebuggingChunkCoordinates != null) return;
+
+		var debugCoordsLabel = DebuggingChunkCoordinates.Instantiate<DebuggingChunkCoordinates>();
+		debugCoordsLabel.Coordinates = chunkCoords;
+		debugCoordsLabel.GlobalPosition = chunkCoords * Chunk.ChunkSize;
+		AddChild(debugCoordsLabel);
 	}
 }

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Godot;
 
 using Redwood.Scripts.World;
+using Redwood.Singletons.RandomUtils;
 
 namespace Redwood.Scripts.Core;
 
@@ -61,7 +62,7 @@ public partial class WorldGenerator
 			_ => (15f, 30f),
 		};
 
-		var temp = RandRange(range.min, range.max);
+		var temp = RandomUtils.RandRange(range.min, range.max);
 
 		temp += weather switch
 		{
@@ -96,7 +97,7 @@ public partial class WorldGenerator
 			_ => new() { { Weather.Clear, 1f } }
 		};
 
-		return WeightedPick(weights);
+		return RandomUtils.WeightedPick(weights);
 	}
 
 	private Biome PickBiome()
@@ -110,7 +111,7 @@ public partial class WorldGenerator
 			{Biome.Volcanic, 0.5f},
 		};
 
-		return WeightedPick(weights);
+		return RandomUtils.WeightedPick(weights);
 	}
 
 	private T PickEnum<T>() where T : Enum
@@ -118,31 +119,5 @@ public partial class WorldGenerator
 		var values = (T[])Enum.GetValues(typeof(T));
 		var idx = _rng.RandiRange(0, values.Length - 1);
 		return values[idx];
-	}
-
-	private T WeightedPick<T>(Dictionary<T, float> weights)
-	{
-		float sum = 0;
-		foreach (var w in weights.Values)
-		{
-			sum += w;
-		}
-
-		var r = _rng.Randf() * sum;
-
-		foreach (var pair in weights)
-		{
-			r -= pair.Value;
-			if (r <= 0f) return pair.Key;
-		}
-
-		// Fallback
-		foreach (var key in weights.Keys) return key;
-		throw new InvalidOperationException("Empty dictionary.");
-	}
-
-	private float RandRange(float min, float max)
-	{
-		return min + _rng.Randf() * (max - min);
 	}
 }

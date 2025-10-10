@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://cjnd58k3a1ks8"]
+[gd_scene load_steps=2 format=3 uid="uid://dw2i4ie4h7bjo"]
 
 [ext_resource type="Script" path="res://World/WorldEventListener.cs" id="1_65fwj"]
 

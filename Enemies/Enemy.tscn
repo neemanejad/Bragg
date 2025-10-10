@@ -12,7 +12,6 @@ size = Vector2(256, 256)
 motion_mode = 1
 script = ExtResource("1_xio3m")
 HealthComponent = NodePath("HealthComponent")
-Damage = 5.0
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -25,7 +24,10 @@ texture = ExtResource("2_1p4xl")
 [node name="HealthComponent" parent="." instance=ExtResource("3_l7cu6")]
 
 [node name="HealthBar" parent="." node_paths=PackedStringArray("HealthComponent") instance=ExtResource("2_lgjvy")]
-position = Vector2(0, -104)
+offset_left = 0.0
+offset_top = -104.0
+offset_right = 0.0
+offset_bottom = -104.0
 HealthComponent = NodePath("../HealthComponent")
 
 [connection signal="LostAllHealth" from="HealthComponent" to="." method="LostAllHealth"]
