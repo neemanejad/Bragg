@@ -18,7 +18,9 @@ texture = ExtResource("2_te8tk")
 1:0/0 = 0
 2:0/0 = 0
 3:0/0 = 0
+3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 4:0/0 = 0
+4:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mnl7g"]
 texture = ExtResource("3_tuavb")
@@ -30,6 +32,7 @@ texture = ExtResource("3_tuavb")
 2:1/0 = 0
 
 [resource]
+physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_tggvt")
 sources/1 = SubResource("TileSetAtlasSource_eplsd")
 sources/2 = SubResource("TileSetAtlasSource_mnl7g")

@@ -3,7 +3,7 @@ using Godot;
 namespace Redwood.World;
 
 [GlobalClass]
-public partial class Chunk : Resource
+public partial class ChunkData : Resource
 {
 	[Export]
 	public int SourceId = 0;
@@ -18,7 +18,10 @@ public partial class Chunk : Resource
 	public int TileSize = 16; // Size of individual tiles
 
 	[Export]
-	public Vector2I PlainGrassAtlas = new(2, 0);
+	public Vector2I LightPlainGrassAtlas = new(1, 0);
+
+	[Export]
+	public Vector2I DarkPlainGrassAtlas = new(2, 0);
 
 	[Export]
 	public Vector2I SandAtlas = new(0, 0);

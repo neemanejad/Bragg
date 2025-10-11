@@ -4,22 +4,23 @@ using System.Collections.Generic;
 using Godot;
 
 using Redwood.Enemies;
+using Redwood.Singletons.RandomUtils;
 
 namespace Redwood.World;
 
 public partial class ProcWorld : TileMapLayer
 {
 	[Export]
-	public NoiseTexture2D NoiseTexture2D { get; set; }
+	public FastNoiseLite TerrainElevationMap;
 
 	[Export]
-	public NoiseTexture2D TerrainTexture { get; set; }
+	public FastNoiseLite TerrainMoistureMap;
+
+	[Export]
+	public FastNoiseLite EnemyHeightMap;
 
 	[Export]
 	public bool UseAreaBasedChunkRendering { get; set; } = false;
-
-	[Export]
-	public NoiseTexture2D EnemySpawnTexture { get; set; }
 
 	[Export]
 	public PackedScene DebuggingChunkCoordinates { get; set; }
@@ -28,13 +29,10 @@ public partial class ProcWorld : TileMapLayer
 	public EnemyColony EnemyColony { get; set; }
 
 	[Export]
-	public Chunk Chunk { get; set; }
+	public ChunkData ChunkData { get; set; }
 
 	[Export]
 	public bool ChunkDebugging { get; set; } = true;
-
-	private Noise _terrainNoise;
-	private Noise _enemySpawnNoise;
 
 	private readonly HashSet<Vector2I> _generatedChunks = new();
 	private readonly Queue<Vector2I> _chunkQueue = new();
@@ -43,37 +41,48 @@ public partial class ProcWorld : TileMapLayer
 
 	public override void _Ready()
 	{
-		_terrainNoise = TerrainTexture.Noise;
-		_enemySpawnNoise = EnemySpawnTexture.Noise;
+		TerrainElevationMap.Seed = (int)RandomUtils.RNG.Randi();
+		TerrainMoistureMap.Seed = (int)RandomUtils.RNG.Randi();
+		EnemyHeightMap.Seed = (int)RandomUtils.RNG.Randi();
 
 		GenerateChunk(Vector2I.Zero);
 	}
 
-	private void DetermineCellPlacement(Vector2I coords, float noiseVal)
+	private void DetermineCellPlacement(Vector2I coords, float elevation, float moisture)
 	{
-		if (noiseVal > 0.0f)
+		void SetLandCell(Vector2I tileAtlas) => SetCell(coords, 0, tileAtlas);
+		void SetWaterCell(Vector2I tileAtlas) => SetCell(coords, 1, tileAtlas);
+
+		if (elevation > -0.3)
 		{
-			SetCell(coords, 0, Chunk.PlainGrassAtlas);
+			if (moisture > -0.3)
+			{
+				SetLandCell(ChunkData.DarkPlainGrassAtlas);
+			}
+			else
+			{
+				SetLandCell(ChunkData.LightPlainGrassAtlas);
+			}
 		}
-		else if (noiseVal > -0.03)
+		else if (elevation > -0.35)
 		{
-			SetCell(coords, 1, Chunk.SandAtlas);
+			SetWaterCell(ChunkData.SandAtlas);
 		}
-		else if (noiseVal > -0.05)
+		else if (elevation > -0.4)
 		{
-			SetCell(coords, 1, Chunk.ShallowWaterAtlas1);
+			SetWaterCell(ChunkData.ShallowWaterAtlas1);
 		}
-		else if (noiseVal > -0.075)
+		else if (elevation > -0.5)
 		{
-			SetCell(coords, 1, Chunk.ShallowWaterAtlas2);
+			SetWaterCell(ChunkData.ShallowWaterAtlas2);
 		}
-		else if (noiseVal > -0.1)
+		else if (elevation > -0.6)
 		{
-			SetCell(coords, 1, Chunk.DeepWaterAtlas1);
+			SetWaterCell(ChunkData.DeepWaterAtlas1);
 		}
 		else
 		{
-			SetCell(coords, 1, Chunk.DeepWaterAtlas2);
+			SetWaterCell(ChunkData.DeepWaterAtlas2);
 		}
 	}
 
@@ -87,6 +96,7 @@ public partial class ProcWorld : TileMapLayer
 		{
 			CheckChunkLoading_PlayerNeighbor();
 		}
+
 		ProcessChunkQueue();
 	}
 
@@ -108,35 +118,38 @@ public partial class ProcWorld : TileMapLayer
 			return;
 		}
 
-		float terrainNoiseValueSum = 0;
-		float enemyNoiseValueSum = 0;
+		float terrainElevationSum = 0;
+		float enemyElevationSum = 0;
 
 		var chunkCoords = _chunkQueue.Dequeue();
-		var chunkWorldCoords = chunkCoords * Chunk.TilesPerChunk;
+		var chunkWorldCoords = chunkCoords * ChunkData.TilesPerChunk;
 
 		ChunkDebugInfo(chunkCoords);
 
-		for (var x = 0; x < Chunk.TilesPerChunk; x++)
+		for (var x = 0; x < ChunkData.TilesPerChunk; x++)
 		{
-			for (var y = 0; y < Chunk.TilesPerChunk; y++)
+			for (var y = 0; y < ChunkData.TilesPerChunk; y++)
 			{
+
 				var worldX = x + chunkWorldCoords.X;
 				var worldY = y + chunkWorldCoords.Y;
+				var distance = new Vector2I(worldX, worldY).DistanceTo(Vector2I.Zero) / 1024;
 
-				var terrainNoiseValue = _terrainNoise.GetNoise2D(worldX, worldY);
+				var terrainElevationValue = TerrainElevationMap.GetNoise2D(worldX, worldY) - distance;
+				var terrainMoistureValue = TerrainMoistureMap.GetNoise2D(worldX, worldY) - distance;
 
-				terrainNoiseValueSum += terrainNoiseValue;
-				enemyNoiseValueSum += _enemySpawnNoise.GetNoise2D(worldX, worldY);
+				terrainElevationSum += terrainElevationValue;
+				enemyElevationSum += EnemyHeightMap.GetNoise2D(worldX, worldY);
 
-				DetermineCellPlacement(new(worldX, worldY), terrainNoiseValue);
+				DetermineCellPlacement(new(worldX, worldY), terrainElevationValue, terrainMoistureValue);
 			}
 		}
 
-		var shouldSpawnColony = Math.Abs((int)enemyNoiseValueSum / Chunk.TilesPerChunk) > 19 && ((int)terrainNoiseValueSum / Chunk.TilesPerChunk) > 0;
+		var shouldSpawnColony = Math.Abs((int)enemyElevationSum / ChunkData.TilesPerChunk) > 19 && ((int)terrainElevationSum / ChunkData.TilesPerChunk) > 0;
 
 		if (shouldSpawnColony)
 		{
-			EnemyColony.Generate(chunkCoords * Chunk.ChunkSize);
+			EnemyColony.Generate(chunkCoords * ChunkData.ChunkSize);
 		}
 	}
 
@@ -145,9 +158,8 @@ public partial class ProcWorld : TileMapLayer
 		var playerGlobalX = _player.GlobalPosition.X;
 		var playerGlobalY = _player.GlobalPosition.Y;
 
-		var playerChunk = new Vector2I((int)Math.Floor(playerGlobalX / Chunk.ChunkSize), (int)Math.Floor(playerGlobalX / Chunk.ChunkSize));
-		var renderDistanceChunkTopLeftChunk = new Vector2I((int)Math.Floor((playerGlobalX - Chunk.ChunkLoadThreshold) / Chunk.ChunkSize), (int)Math.Floor((playerGlobalY + Chunk.ChunkLoadThreshold) / Chunk.ChunkSize));
-		var renderDistanceChunkBottomRight = new Vector2I((int)Math.Floor((playerGlobalX + Chunk.ChunkLoadThreshold) / Chunk.ChunkSize), (int)Math.Floor((playerGlobalY - Chunk.ChunkLoadThreshold) / Chunk.ChunkSize));
+		var renderDistanceChunkTopLeftChunk = new Vector2I((int)Math.Floor((playerGlobalX - ChunkData.ChunkLoadThreshold) / ChunkData.ChunkSize), (int)Math.Floor((playerGlobalY + ChunkData.ChunkLoadThreshold) / ChunkData.ChunkSize));
+		var renderDistanceChunkBottomRight = new Vector2I((int)Math.Floor((playerGlobalX + ChunkData.ChunkLoadThreshold) / ChunkData.ChunkSize), (int)Math.Floor((playerGlobalY - ChunkData.ChunkLoadThreshold) / ChunkData.ChunkSize));
 
 		for (var i = renderDistanceChunkTopLeftChunk.X; i < renderDistanceChunkBottomRight.X; i++)
 		{
@@ -163,45 +175,45 @@ public partial class ProcWorld : TileMapLayer
 		var globalX = _player.GlobalPosition.X;
 		var globalY = _player.GlobalPosition.Y;
 
-		var playerChunk = new Vector2I((int)Math.Floor(globalX / Chunk.ChunkSize), (int)Math.Floor(globalY / Chunk.ChunkSize));
+		var playerChunk = new Vector2I((int)Math.Floor(globalX / ChunkData.ChunkSize), (int)Math.Floor(globalY / ChunkData.ChunkSize));
 
-		var localX = Mathf.PosMod(globalX, Chunk.ChunkSize);
-		var localY = Mathf.PosMod(globalY, Chunk.ChunkSize);
+		var localX = Mathf.PosMod(globalX, ChunkData.ChunkSize);
+		var localY = Mathf.PosMod(globalY, ChunkData.ChunkSize);
 
-		if (localX < Chunk.ChunkLoadThreshold)
+		if (localX < ChunkData.ChunkLoadThreshold)
 		{
 			GenerateChunk(playerChunk + Vector2I.Left);
 		}
-		if (localX > Chunk.ChunkSize - Chunk.ChunkLoadThreshold)
+		if (localX > ChunkData.ChunkSize - ChunkData.ChunkLoadThreshold)
 		{
 			GenerateChunk(playerChunk + Vector2I.Right);
 		}
-		if (localY < Chunk.ChunkLoadThreshold)
+		if (localY < ChunkData.ChunkLoadThreshold)
 		{
 			GenerateChunk(playerChunk + Vector2I.Up);
 		}
-		if (localY > Chunk.ChunkSize - Chunk.ChunkLoadThreshold)
+		if (localY > ChunkData.ChunkSize - ChunkData.ChunkLoadThreshold)
 		{
 			GenerateChunk(playerChunk + Vector2I.Down);
 		}
 
 		// Top left
-		if (localY < Chunk.ChunkLoadThreshold && localX < Chunk.ChunkLoadThreshold)
+		if (localY < ChunkData.ChunkLoadThreshold && localX < ChunkData.ChunkLoadThreshold)
 		{
 			GenerateChunk(playerChunk + Vector2I.Up + Vector2I.Left);
 		}
 		// Bottom left
-		if (localY > Chunk.ChunkSize - Chunk.ChunkLoadThreshold && localX < Chunk.ChunkLoadThreshold)
+		if (localY > ChunkData.ChunkSize - ChunkData.ChunkLoadThreshold && localX < ChunkData.ChunkLoadThreshold)
 		{
 			GenerateChunk(playerChunk + Vector2I.Down + Vector2I.Left);
 		}
 		// Bottom right
-		if (localY > Chunk.ChunkSize - Chunk.ChunkLoadThreshold && localX > Chunk.ChunkSize - Chunk.ChunkLoadThreshold)
+		if (localY > ChunkData.ChunkSize - ChunkData.ChunkLoadThreshold && localX > ChunkData.ChunkSize - ChunkData.ChunkLoadThreshold)
 		{
 			GenerateChunk(playerChunk + Vector2I.Down + Vector2I.Right);
 		}
 		// Top right
-		if (localY < Chunk.ChunkLoadThreshold && localX > Chunk.ChunkSize - Chunk.ChunkLoadThreshold)
+		if (localY < ChunkData.ChunkLoadThreshold && localX > ChunkData.ChunkSize - ChunkData.ChunkLoadThreshold)
 		{
 			GenerateChunk(playerChunk + Vector2I.Up + Vector2I.Right);
 		}
@@ -213,7 +225,7 @@ public partial class ProcWorld : TileMapLayer
 
 		var debugCoordsLabel = DebuggingChunkCoordinates.Instantiate<DebuggingChunkCoordinates>();
 		debugCoordsLabel.Coordinates = chunkCoords;
-		debugCoordsLabel.GlobalPosition = chunkCoords * Chunk.ChunkSize;
+		debugCoordsLabel.GlobalPosition = chunkCoords * ChunkData.ChunkSize;
 		AddChild(debugCoordsLabel);
 	}
 }

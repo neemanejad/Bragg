@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://d2w8ylny7b4x4"]
+[gd_scene load_steps=2 format=3 uid="uid://bwe40454p6igd"]
 
 [ext_resource type="Script" path="res://Enemies/EnemyColony.cs" id="1_vgw4v"]
 

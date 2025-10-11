@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://b5g1cxnefdwp0"]
+[gd_scene load_steps=2 format=3 uid="uid://ct5yb5t1va0w"]
 
 [ext_resource type="Script" path="res://World/DebuggingChunkCoordinates.cs" id="1_phcy3"]
 
