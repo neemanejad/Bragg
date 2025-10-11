@@ -2,9 +2,12 @@ using System;
 
 using Godot;
 
+using Redwood.UI;
+
 public partial class GameManager : Node
 {
 	public static GameManager Instance { get; private set; }
+	UISignalEmitter _uiSignalEmitter { get; set; }
 
 	[Signal]
 	public delegate void StartGameEventHandler();
@@ -26,6 +29,9 @@ public partial class GameManager : Node
 		survivalTimer.WaitTime = 1;
 		survivalTimer.Connect(Timer.SignalName.Timeout, new Callable(this, MethodName.AddSecond));
 		AddChild(survivalTimer);
+
+		_uiSignalEmitter = ResourceLoader.Load<PackedScene>("res://UI/UISignalEmitter.tscn").Instantiate<UISignalEmitter>();
+		AddChild(_uiSignalEmitter);
 	}
 
 	public void PauseSurvivalTimer()
@@ -56,14 +62,7 @@ public partial class GameManager : Node
 
 	public void End()
 	{
-		var playerNode = PlayerManager.PlayerNode;
-
-		var gameOverScene = GD.Load<PackedScene>("res://UI/GameOver/GameOver.tscn").Instantiate();
-		gameOverScene.ProcessMode = ProcessModeEnum.Always;
-
-		playerNode.GetParent().AddChild(gameOverScene);
-		//playerNode.QueueFree();
-
+		_uiSignalEmitter.SignalAddUI(UIType.GameOverMenu);
 		PlayerManager.Instance.Reset();
 
 		EmitSignal(SignalName.EndGame);

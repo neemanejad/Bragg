@@ -3,10 +3,13 @@ using System;
 using Godot;
 
 using Redwood;
+using Redwood.UI;
 using Redwood.UI.Deployment;
 
 public partial class BountyComputer : Node2D
 {
+	[Export]
+	UISignalEmitter _uISignalEmitter { get; set; }
 	Label interactionLabel;
 	PackedScene deploymentSelection;
 	bool canInteract = false;
@@ -25,7 +28,7 @@ public partial class BountyComputer : Node2D
 	{
 		if (canInteract && Input.IsActionJustPressed("interact"))
 		{
-			AddChild(deploymentSelection.Instantiate());
+			_uISignalEmitter.SignalAddUI(UIType.BountySelectionMenu);
 		}
 	}
 

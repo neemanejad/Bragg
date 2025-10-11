@@ -4,23 +4,25 @@ using Godot;
 
 public partial class SettingsMenu : CanvasLayer
 {
+	[Signal]
+	public delegate void CloseSettingsMenuEventHandler();
+
 	CheckBox _fullscreenCheckbox;
 	Button _backButton;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		Hide();
+		ProcessMode = ProcessModeEnum.Disabled;
+
 		_fullscreenCheckbox = GetNode<CheckBox>("MarginContainer/VBoxContainer/SettingsContainer/MarginContainer/CheckBox");
 		_backButton = GetNode<Button>("MarginContainer/VBoxContainer/ButtonContainer/MarginContainer/Button");
-
-		Hide();
 
 		_fullscreenCheckbox.Pressed += OnFullscreenCheckboxPressed;
 		_fullscreenCheckbox.ButtonPressed = DisplayServer.WindowGetMode() == DisplayServer.WindowMode.Fullscreen;
 
-		_backButton.Pressed += () => Visible = !Visible;
-
-		ProcessMode = ProcessModeEnum.Always;
+		_backButton.Pressed += () => EmitSignal(SignalName.CloseSettingsMenu);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -31,14 +33,9 @@ public partial class SettingsMenu : CanvasLayer
 
 	private void ProcessInput()
 	{
-		if (!CanReceiveInput())
-		{
-			return;
-		}
-
 		if (Input.IsActionJustPressed("escape"))
 		{
-			Visible = !Visible;
+			EmitSignal(SignalName.CloseSettingsMenu);
 		}
 	}
 
@@ -58,10 +55,5 @@ public partial class SettingsMenu : CanvasLayer
 	{
 		_fullscreenCheckbox.Pressed -= OnFullscreenCheckboxPressed;
 		base._ExitTree();
-	}
-
-	public bool CanReceiveInput()
-	{
-		return Visible;
 	}
 }

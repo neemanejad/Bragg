@@ -1,10 +1,11 @@
 using Godot;
 
+using Redwood.Singletons.SceneSwitcher;
 using Redwood.Singletons.WorldManager;
 
 namespace Redwood.UI.Deployment;
 
-public partial class DeploymentSelection : CanvasLayer
+public partial class DeploymentSelection : UI
 {
 	private Button _button;
 
@@ -14,14 +15,22 @@ public partial class DeploymentSelection : CanvasLayer
 	{
 		ProcessMode = ProcessModeEnum.Always;
 
-		_button = GetNode<Button>("Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HeaderContainer/HBoxContainer/Button");
+		_button = GetNode<Button>("CanvasLayer/Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HeaderContainer/HBoxContainer/Button");
 		_button.Pressed += () => QueueFree();
 
-		_deploymentCardGrid = GetNode<GridContainer>("Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/DeploymentCardGrid");
+		_deploymentCardGrid = GetNode<GridContainer>("CanvasLayer/Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/DeploymentCardGrid");
 
 		GenerateDeploymentCards();
 
 		GetTree().Paused = true;
+	}
+
+	public override void _Process(double delta)
+	{
+		if (Input.IsActionJustPressed("escape"))
+		{
+			QueueFree();
+		}
 	}
 
 	private void GenerateDeploymentCards()
@@ -32,13 +41,17 @@ public partial class DeploymentSelection : CanvasLayer
 		{
 			var deploymentCard = ResourceLoader.Load<PackedScene>("res://UI/Deployment/DeploymentCard.tscn").Instantiate<DeploymentCard>();
 			deploymentCard.World = world;
+			deploymentCard.Connect(DeploymentCard.SignalName.DeploymentCardSelected, new Callable(this, MethodName.DeploymentCardSelected));
 
 			_deploymentCardGrid.AddChild(deploymentCard);
 		}
 	}
 
-	public override void _ExitTree()
+	public void DeploymentCardSelected(DeploymentCard deploymentCard)
 	{
-		GetTree().Paused = false;
+		GameManager.Instance.Start();
+		WorldManager.Instance.Select(deploymentCard.World);
+		SceneSwitcher.Instance.GotoScene("res://World/World.tscn");
+		QueueFree();
 	}
 }

@@ -1,37 +1,31 @@
-[gd_scene load_steps=8 format=3 uid="uid://dxdjyo2a2op4c"]
+[gd_scene load_steps=11 format=3 uid="uid://dxdjyo2a2op4c"]
 
 [ext_resource type="Theme" uid="uid://deqeqesf3ve3l" path="res://Theme/Theme.tres" id="1_f80gw"]
 [ext_resource type="PackedScene" uid="uid://dyq3odk2ogbfk" path="res://Hub/Hub.tscn" id="1_fnuqi"]
-[ext_resource type="PackedScene" uid="uid://4kalpfq4lmh7" path="res://Menus/PauseMenu/PauseMenu.tscn" id="2_beb82"]
-[ext_resource type="PackedScene" uid="uid://bbux5rs511px1" path="res://Inventory/InventoryUI.tscn" id="3_n5n71"]
+[ext_resource type="PackedScene" uid="uid://bbux5rs511px1" path="res://Inventory/InventoryUI.tscn" id="3_et6m5"]
 [ext_resource type="PackedScene" uid="uid://20wj24co13mm" path="res://Player/Player.tscn" id="3_tcv06"]
-[ext_resource type="PackedScene" uid="uid://cvtdesilp60wl" path="res://UI/Notifications/NotificationUI.tscn" id="6_wapn0"]
-[ext_resource type="PackedScene" uid="uid://ct00w70xnn0vw" path="res://UI/Bounties/PlayerBounties.tscn" id="7_fo1wt"]
+[ext_resource type="Script" path="res://UI/UIManager.cs" id="4_17yn4"]
+[ext_resource type="PackedScene" uid="uid://4kalpfq4lmh7" path="res://Menus/PauseMenu/PauseMenu.tscn" id="4_jiv4y"]
+[ext_resource type="PackedScene" uid="uid://bmwtfdasxkrde" path="res://UI/Bounties/BountySelectionScreen.tscn" id="5_4q7nq"]
+[ext_resource type="PackedScene" uid="uid://ct00w70xnn0vw" path="res://UI/Bounties/PlayerBounties.tscn" id="6_2chlc"]
+[ext_resource type="PackedScene" uid="uid://bbcjk2bl5rgle" path="res://UI/Deployment/DeploymentSelection.tscn" id="7_vh4lf"]
+[ext_resource type="PackedScene" uid="uid://bffthneg1lqvx" path="res://UI/GameOver/GameOver.tscn" id="8_odkfv"]
 
 [node name="Main" type="Node"]
 
-[node name="WorldRoot" type="Node2D" parent="."]
-
-[node name="Hub" parent="WorldRoot" instance=ExtResource("1_fnuqi")]
-
-[node name="Player" parent="." instance=ExtResource("3_tcv06")]
-
-[node name="UI" type="Control" parent="."]
+[node name="UIManager" type="Control" parent="."]
+process_mode = 3
 z_index = 4096
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 theme = ExtResource("1_f80gw")
+script = ExtResource("4_17yn4")
+Menus = Array[PackedScene]([ExtResource("3_et6m5"), ExtResource("4_jiv4y"), ExtResource("5_4q7nq"), ExtResource("6_2chlc"), ExtResource("7_vh4lf"), ExtResource("8_odkfv")])
 
-[node name="PauseMenu" parent="UI" instance=ExtResource("2_beb82")]
-layout_mode = 1
+[node name="WorldRoot" type="Node2D" parent="."]
 
-[node name="InventoryUI" parent="UI" instance=ExtResource("3_n5n71")]
-layout_mode = 1
+[node name="Hub" parent="WorldRoot" instance=ExtResource("1_fnuqi")]
 
-[node name="NotificationUI" parent="UI" instance=ExtResource("6_wapn0")]
-layout_mode = 1
-
-[node name="CurrentBounties" parent="UI" instance=ExtResource("7_fo1wt")]
-layout_mode = 1
+[node name="Player" parent="." instance=ExtResource("3_tcv06")]

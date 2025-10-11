@@ -1,8 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://bbux5rs511px1"]
+[gd_scene load_steps=3 format=3 uid="uid://bbux5rs511px1"]
 
 [ext_resource type="Script" path="res://Inventory/InventoryUI.cs" id="1_ut1s6"]
+[ext_resource type="PackedScene" uid="uid://cv81rawaku4je" path="res://UI/UISignalEmitter.tscn" id="2_yxrmo"]
 
-[node name="InventoryUI" type="Control"]
+[node name="InventoryUI" type="Control" node_paths=PackedStringArray("_uiSignalEmitter")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,6 +13,8 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_ut1s6")
+UIType = 1
+_uiSignalEmitter = NodePath("UISignalEmitter")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 128
@@ -29,3 +32,5 @@ grow_vertical = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
 allow_search = false
+
+[node name="UISignalEmitter" parent="." instance=ExtResource("2_yxrmo")]

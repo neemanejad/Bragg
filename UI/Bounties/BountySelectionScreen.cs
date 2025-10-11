@@ -2,7 +2,9 @@ using System;
 
 using Godot;
 
-public partial class BountySelectionScreen : CanvasLayer
+using Redwood.UI;
+
+public partial class BountySelectionScreen : UI
 {
 	VBoxContainer _bountyList;
 
@@ -11,9 +13,9 @@ public partial class BountySelectionScreen : CanvasLayer
 	{
 		ProcessMode = ProcessModeEnum.Always;
 
-		_bountyList = GetNode<VBoxContainer>("PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/BountyList");
+		_bountyList = GetNode<VBoxContainer>("CanvasLayer/PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/BountyList");
 
-		var exitButton = GetNode<Button>("PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/ExitButton");
+		var exitButton = GetNode<Button>("CanvasLayer/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/ExitButton");
 		exitButton.Pressed += () => QueueFree();
 
 		RenderBountyOptions();
@@ -24,7 +26,10 @@ public partial class BountySelectionScreen : CanvasLayer
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-
+		if (Input.IsActionJustPressed("escape"))
+		{
+			QueueFree();
+		}
 	}
 
 	public void RenderBountyOptions()

@@ -1,12 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://baqjugpoi57hx"]
+[gd_scene load_steps=4 format=3 uid="uid://baqjugpoi57hx"]
 
 [ext_resource type="Script" path="res://Deployment/Deployment.cs" id="1_tkh27"]
+[ext_resource type="PackedScene" uid="uid://cv81rawaku4je" path="res://UI/UISignalEmitter.tscn" id="2_abau3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3rayy"]
 size = Vector2(64, 64)
 
-[node name="Deployment" type="Area2D"]
+[node name="Deployment" type="Area2D" node_paths=PackedStringArray("_uiSignalEmitter")]
 script = ExtResource("1_tkh27")
+_uiSignalEmitter = NodePath("UISignalEmitter")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_right = 64.0
@@ -15,3 +17,5 @@ offset_bottom = 64.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(32, 32)
 shape = SubResource("RectangleShape2D_3rayy")
+
+[node name="UISignalEmitter" parent="." instance=ExtResource("2_abau3")]

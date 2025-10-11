@@ -5,8 +5,9 @@ using System.Linq;
 using Godot;
 
 using Redwood.Bounties;
+using Redwood.UI;
 
-public partial class PlayerBounties : Control
+public partial class PlayerBounties : UI
 {
 	VBoxContainer BountyList { get; set; }
 	CanvasLayer CanvasLayer { get; set; }
@@ -26,16 +27,14 @@ public partial class PlayerBounties : Control
 			playerBounty.Bounty = bounty;
 			BountyList.AddChild(playerBounty);
 		}
-
-		CanvasLayer.Visible = false;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		if (Input.IsActionJustPressed("bounties"))
+		if (Input.IsActionJustPressed("bounties") || Input.IsActionJustPressed("escape"))
 		{
-			CanvasLayer.Visible = !CanvasLayer.Visible;
+			QueueFree();
 		}
 	}
 

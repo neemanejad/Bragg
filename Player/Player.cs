@@ -1,6 +1,7 @@
 using Godot;
 
 using Redwood.Items;
+using Redwood.UI;
 
 public partial class Player : CharacterBody2D
 {
@@ -30,6 +31,19 @@ public partial class Player : CharacterBody2D
 	public override void _PhysicsProcess(double delta)
 	{
 		HandleMovementInput();
+	}
+
+	public override void _Process(double delta)
+	{
+		//if (Input.IsActionJustPressed("inventory"))
+		//{
+		//	_uiSignalEmitter.SignalAddUI(UIType.InventoryMenu);
+		//}
+
+		//if (Input.IsActionJustPressed("escape"))
+		//{
+		//	_uiSignalEmitter.SignalAddUI(UIType.PauseMenu);
+		//}
 	}
 
 	/// <summary>

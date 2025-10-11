@@ -8,6 +8,8 @@ namespace Redwood.UI.Deployment;
 
 public partial class DeploymentCard : PanelContainer
 {
+	[Signal]
+	public delegate void DeploymentCardSelectedEventHandler(DeploymentCard deploymentCard);
 	public WorldData World { get; set; }
 
 	public override void _Ready()
@@ -39,8 +41,6 @@ public partial class DeploymentCard : PanelContainer
 
 	private void Deploy()
 	{
-		GameManager.Instance.Start();
-		WorldManager.Instance.Select(World);
-		SceneSwitcher.Instance.GotoScene("res://World/World.tscn");
+		EmitSignal(SignalName.DeploymentCardSelected, this);
 	}
 }

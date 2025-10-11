@@ -5,8 +5,9 @@ using System.Reflection;
 using Godot;
 
 using Redwood.Items;
+using Redwood.UI;
 
-public partial class InventoryUI : Control
+public partial class InventoryUI : UI
 {
 
 	ItemList ItemList { get; set; }
@@ -27,9 +28,6 @@ public partial class InventoryUI : Control
 		}
 
 		PlayerManager.Instance.ItemAdded += AddItem;
-
-
-		CanvasLayer.Visible = false;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -40,9 +38,9 @@ public partial class InventoryUI : Control
 
 	private void ProcessKeyboardInput()
 	{
-		if (Input.IsActionJustPressed("inventory"))
+		if (Input.IsActionJustPressed("inventory") || Input.IsActionJustPressed("escape"))
 		{
-			CanvasLayer.Visible = !CanvasLayer.Visible;
+			QueueFree();
 		}
 	}
 

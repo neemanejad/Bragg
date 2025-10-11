@@ -15,12 +15,6 @@ scale = Vector2(2, 2)
 CurrentHealth = 500.0
 MaxHealth = 500.0
 
-[node name="HealthBar" parent="." index="3"]
-offset_left = 0.0
-offset_top = -104.0
-offset_right = 0.0
-offset_bottom = -104.0
-
 [node name="ColorRect" type="ColorRect" parent="." index="4"]
 offset_left = -128.0
 offset_top = -128.0

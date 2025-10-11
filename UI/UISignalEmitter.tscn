@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cv81rawaku4je"]
+
+[ext_resource type="Script" path="res://UI/UISignalEmitter.cs" id="1_frfu6"]
+
+[node name="UISignalEmitter" type="Node"]
+script = ExtResource("1_frfu6")

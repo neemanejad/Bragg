@@ -1,9 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://ct00w70xnn0vw"]
+[gd_scene load_steps=4 format=3 uid="uid://ct00w70xnn0vw"]
 
 [ext_resource type="Theme" uid="uid://deqeqesf3ve3l" path="res://Theme/Theme.tres" id="2_euyeo"]
 [ext_resource type="Script" path="res://UI/Bounties/PlayerBounties.cs" id="2_vfp1d"]
+[ext_resource type="PackedScene" uid="uid://cv81rawaku4je" path="res://UI/UISignalEmitter.tscn" id="3_1vdfl"]
 
-[node name="CurrentBounties" type="Control"]
+[node name="CurrentBounties" type="Control" node_paths=PackedStringArray("_uiSignalEmitter")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,6 +12,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_vfp1d")
+UIType = 4
+_uiSignalEmitter = NodePath("UISignalEmitter")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -42,3 +45,5 @@ layout_mode = 2
 [node name="PlayerBountyList" type="VBoxContainer" parent="CanvasLayer/PanelContainer/MarginContainer/ScrollContainer"]
 layout_mode = 2
 theme_override_constants/separation = 130
+
+[node name="UISignalEmitter" parent="." instance=ExtResource("3_1vdfl")]

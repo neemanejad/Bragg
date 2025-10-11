@@ -1,14 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://c86r35uksfxx7"]
+[gd_scene load_steps=6 format=3 uid="uid://c86r35uksfxx7"]
 
 [ext_resource type="Texture2D" uid="uid://bnx10qyuxk3bv" path="res://Art/Bounties/Sprite-0001.png" id="1_qx4oe"]
 [ext_resource type="Script" path="res://Bounties/BountyComputer.cs" id="1_yoc2o"]
 [ext_resource type="Theme" uid="uid://deqeqesf3ve3l" path="res://Theme/Theme.tres" id="2_hbslf"]
+[ext_resource type="PackedScene" uid="uid://cv81rawaku4je" path="res://UI/UISignalEmitter.tscn" id="4_r3tre"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0wka5"]
 size = Vector2(208, 216)
 
-[node name="BountyComputer" type="Node2D"]
+[node name="BountyComputer" type="Node2D" node_paths=PackedStringArray("_uISignalEmitter")]
 script = ExtResource("1_yoc2o")
+_uISignalEmitter = NodePath("UISignalEmitter")
 
 [node name="InteractionLabel" type="Label" parent="."]
 offset_left = -128.0
@@ -29,6 +31,8 @@ texture = ExtResource("1_qx4oe")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(0, -4)
 shape = SubResource("RectangleShape2D_0wka5")
+
+[node name="UISignalEmitter" parent="." instance=ExtResource("4_r3tre")]
 
 [connection signal="body_entered" from="Area2D" to="." method="OnPlayerEnterInteractionArea"]
 [connection signal="body_exited" from="Area2D" to="." method="OnPlayerLeaveInteractionArea"]

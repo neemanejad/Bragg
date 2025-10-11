@@ -1,10 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://4kalpfq4lmh7"]
+[gd_scene load_steps=6 format=3 uid="uid://4kalpfq4lmh7"]
 
 [ext_resource type="Theme" uid="uid://deqeqesf3ve3l" path="res://Theme/Theme.tres" id="1_l0nbd"]
 [ext_resource type="PackedScene" uid="uid://bwugmn83a2u4f" path="res://Menus/PauseMenu/SettingsMenu.tscn" id="2_e3mn6"]
+[ext_resource type="Script" path="res://Menus/PauseMenu/PauseMenu.cs" id="2_gx613"]
 [ext_resource type="PackedScene" uid="uid://i7t0sm66mfmu" path="res://Menus/PauseMenu/StartingMenu.tscn" id="3_54uys"]
+[ext_resource type="PackedScene" uid="uid://cv81rawaku4je" path="res://UI/UISignalEmitter.tscn" id="5_m8nrf"]
 
-[node name="PauseMenu" type="Control"]
+[node name="PauseMenu" type="Control" node_paths=PackedStringArray("_uiSignalEmitter")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -14,7 +16,11 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("1_l0nbd")
+script = ExtResource("2_gx613")
+_uiSignalEmitter = NodePath("UISignalEmitter")
 
 [node name="SettingsMenu" parent="." instance=ExtResource("2_e3mn6")]
 
 [node name="StartingMenu" parent="." instance=ExtResource("3_54uys")]
+
+[node name="UISignalEmitter" parent="." instance=ExtResource("5_m8nrf")]
