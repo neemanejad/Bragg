@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://cwspm6lf31k37"]
+
+[ext_resource type="Script" path="res://World/Map.cs" id="1_t2abu"]
+[ext_resource type="Texture2D" uid="uid://ddb7q8y77vkbk" path="res://icon.svg" id="4_kxmxo"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_3kfqh"]
+noise_type = 0
+frequency = 0.002
+
+[node name="Map" type="TextureRect" node_paths=PackedStringArray("_playerIcon")]
+script = ExtResource("1_t2abu")
+TerrainElevationMap = SubResource("FastNoiseLite_3kfqh")
+_playerIcon = NodePath("Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("4_kxmxo")

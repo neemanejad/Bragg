@@ -1,7 +1,9 @@
+using System;
+
 using Godot;
 
 using Redwood.Scripts.World;
-
+using Redwood.Singletons.RandomUtils;
 using Redwood.Singletons.WorldManager;
 
 namespace Redwood.World;
@@ -9,9 +11,18 @@ namespace Redwood.World;
 public partial class World : Node
 {
 	[Export]
-	public PackedScene EnemyScene { get; set; }
+	public ProcWorld ProcWorld;
+
+	[Export]
+	public WorldCamera WorldCamera;
+
+	[Export]
+	public WorldMap WorldMap;
 
 	private WorldData _worldData;
+
+	[Signal]
+	public delegate void WorldReadyEventHandler(int terrainSeed);
 
 	public override void _Ready()
 	{
@@ -21,34 +32,12 @@ public partial class World : Node
 		PlayerManager.Instance.StartShooting();
 
 		_worldData = WorldManager.Instance.SelectedWorld;
-	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
-		HandleZoom();
-	}
+		var terrainSeed = (int)Math.Abs(RandomUtils.RNG.Randi());
 
-	private static void HandleZoom()
-	{
-		var delta = new Vector2(0.1f, 0.1f);
+		Connect(SignalName.WorldReady, new Callable(ProcWorld.ChunkGenerator, ChunkGenerator.MethodName.SetSeeds));
+		Connect(SignalName.WorldReady, new Callable(WorldMap.Map, Map.MethodName.GenerateMap));
 
-		if (Input.IsActionJustPressed("zoom_out"))
-		{
-			var diff = PlayerManager.PlayerNode.PlayerCamera.Zoom - delta;
-			if (diff < new Vector2(0f, 0f))
-				return;
-
-			PlayerManager.PlayerNode.PlayerCamera.Zoom = diff;
-		}
-
-		if (Input.IsActionJustPressed("zoom_in"))
-		{
-			var sum = PlayerManager.PlayerNode.PlayerCamera.Zoom - delta;
-			// if (sum > new Vector2(1.4f, 1.4f))
-			// 	return;
-
-			PlayerManager.PlayerNode.PlayerCamera.Zoom = PlayerManager.PlayerNode.PlayerCamera.Zoom + delta;
-		}
+		EmitSignal(SignalName.WorldReady, terrainSeed);
 	}
 }

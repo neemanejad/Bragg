@@ -1,21 +1,17 @@
-using System;
-using System.Collections.Generic;
-
 using Godot;
 using Godot.Collections;
-
-using Redwood.Menus;
 
 namespace Redwood.UI;
 
 public partial class UIManager : Control
 {
-	UI _displayedUi = null;
+	private UI _displayedUi = null;
+
 	[Export]
 	public Array<PackedScene> Menus { get; set; }
-	readonly System.Collections.Generic.Dictionary<UIType, PackedScene> _uis = new();
 
-	// Called when the node enters the scene tree for the first time.
+	readonly Dictionary<UIType, PackedScene> _uis = new();
+
 	public override void _Ready()
 	{
 		foreach (var menuPackedScene in Menus)
@@ -25,7 +21,6 @@ public partial class UIManager : Control
 		}
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
 		if (Input.IsActionJustPressed("inventory"))
@@ -60,6 +55,7 @@ public partial class UIManager : Control
 	public void RemoveCurrentUI(int id)
 	{
 		UIType type = (UIType)id;
+
 		if (type != _displayedUi.UIType)
 		{
 			return;

@@ -35,9 +35,6 @@ public partial class WorldGenerator
 		// Randomize generation for breathable atmposphere and visibility
 		var world = new WorldData(name, biome, weather, timeOfDay, gravityScale, temperatureC, true, 100f);
 
-		// Debugging
-		// GD.Print(world);
-
 		return world;
 	}
 

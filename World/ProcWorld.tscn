@@ -1,51 +1,13 @@
-[gd_scene load_steps=13 format=3 uid="uid://bbs8urh6wwvxm"]
+[gd_scene load_steps=4 format=3 uid="uid://bbs8urh6wwvxm"]
 
 [ext_resource type="TileSet" uid="uid://df4uinf8jiogj" path="res://TileSets/WorldTileSet3.tres" id="1_cd10m"]
 [ext_resource type="Script" path="res://World/ProcWorld.cs" id="1_u8h71"]
-[ext_resource type="Script" path="res://World/ChunkData.cs" id="4_5oi4u"]
-[ext_resource type="PackedScene" uid="uid://ct5yb5t1va0w" path="res://World/DebuggingChunkCoordinates.tscn" id="4_bllmv"]
-[ext_resource type="PackedScene" uid="uid://bwe40454p6igd" path="res://Enemies/EnemyColony.tscn" id="4_d5bp7"]
-[ext_resource type="PackedScene" uid="uid://cavcc3ptyyuhp" path="res://Enemies/FastEnemy.tscn" id="5_8rebp"]
-[ext_resource type="PackedScene" uid="uid://das0vbqna72es" path="res://Enemies/ShootingEnemy.tscn" id="6_m3jik"]
-[ext_resource type="PackedScene" uid="uid://bp0cekjqvscav" path="res://Enemies/StrongEnemy.tscn" id="7_75nml"]
+[ext_resource type="PackedScene" uid="uid://hu6e7mrlv3t0" path="res://World/ChunkGenerator/ChunkGenerator.tscn" id="3_my5ex"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_0rnpj"]
-noise_type = 0
-frequency = 0.002
-fractal_octaves = 6
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_mx1s1"]
-noise_type = 0
-frequency = 0.002
-fractal_octaves = 6
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_qi6kf"]
-noise_type = 5
-
-[sub_resource type="Resource" id="Resource_1yj5k"]
-script = ExtResource("4_5oi4u")
-SourceId = 0
-ChunkLoadThreshold = 1024
-TilesPerChunk = 64
-TileSize = 16
-LightPlainGrassAtlas = Vector2i(1, 0)
-DarkPlainGrassAtlas = Vector2i(2, 0)
-SandAtlas = Vector2i(0, 0)
-ShallowWaterAtlas1 = Vector2i(1, 0)
-ShallowWaterAtlas2 = Vector2i(2, 0)
-DeepWaterAtlas1 = Vector2i(3, 0)
-DeepWaterAtlas2 = Vector2i(4, 0)
-
-[node name="ProcWorld" type="TileMapLayer" node_paths=PackedStringArray("EnemyColony")]
+[node name="ProcWorld" type="TileMapLayer" node_paths=PackedStringArray("ChunkGenerator")]
 tile_set = ExtResource("1_cd10m")
 script = ExtResource("1_u8h71")
-TerrainElevationMap = SubResource("FastNoiseLite_0rnpj")
-TerrainMoistureMap = SubResource("FastNoiseLite_mx1s1")
-EnemyHeightMap = SubResource("FastNoiseLite_qi6kf")
-DebuggingChunkCoordinates = ExtResource("4_bllmv")
-EnemyColony = NodePath("EnemyColony")
-ChunkData = SubResource("Resource_1yj5k")
+ChunkGenerator = NodePath("ChunkGenerator")
 
-[node name="EnemyColony" parent="." instance=ExtResource("4_d5bp7")]
-Enemies = [ExtResource("6_m3jik"), ExtResource("7_75nml"), ExtResource("5_8rebp")]
-EnemyWeights = [0.5, 1.2, 0.3]
+[node name="ChunkGenerator" parent="." instance=ExtResource("3_my5ex")]
+ChunkDebugging = true

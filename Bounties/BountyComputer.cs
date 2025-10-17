@@ -1,34 +1,32 @@
-using System;
-
 using Godot;
 
-using Redwood;
 using Redwood.UI;
-using Redwood.UI.Deployment;
+
+namespace Redwood.Bounties;
 
 public partial class BountyComputer : Node2D
 {
 	[Export]
-	UISignalEmitter _uISignalEmitter { get; set; }
-	Label interactionLabel;
-	PackedScene deploymentSelection;
-	bool canInteract = false;
+	UISignalEmitter UISignalEmitter { get; set; }
 
+	[Export]
+	public Label InteractionLabel;
 
-	// Called when the node enters the scene tree for the first time.
+	[Export]
+	public PackedScene BountySelectionScreen;
+
+	bool _canInteract = false;
+
 	public override void _Ready()
 	{
-		interactionLabel = GetNode<Label>("InteractionLabel");
-		deploymentSelection = ResourceLoader.Load<PackedScene>("res://UI/Bounties/BountySelectionScreen.tscn");
-		interactionLabel.Visible = false;
+		InteractionLabel.Visible = false;
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		if (canInteract && Input.IsActionJustPressed("interact"))
+		if (_canInteract && Input.IsActionJustPressed("interact"))
 		{
-			_uISignalEmitter.SignalAddUI(UIType.BountySelectionMenu);
+			UISignalEmitter.SignalAddUI(UIType.BountySelectionMenu);
 		}
 	}
 
@@ -36,8 +34,8 @@ public partial class BountyComputer : Node2D
 	{
 		if (body.IsInGroup("Player"))
 		{
-			interactionLabel.Visible = true;
-			canInteract = true;
+			InteractionLabel.Visible = true;
+			_canInteract = true;
 		}
 	}
 
@@ -45,8 +43,8 @@ public partial class BountyComputer : Node2D
 	{
 		if (body.IsInGroup("Player"))
 		{
-			interactionLabel.Visible = false;
-			canInteract = false;
+			InteractionLabel.Visible = false;
+			_canInteract = false;
 		}
 	}
 

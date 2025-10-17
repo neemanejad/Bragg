@@ -1,16 +1,19 @@
-[gd_scene load_steps=6 format=3 uid="uid://c86r35uksfxx7"]
+[gd_scene load_steps=7 format=3 uid="uid://c86r35uksfxx7"]
 
 [ext_resource type="Texture2D" uid="uid://bnx10qyuxk3bv" path="res://Art/Bounties/Sprite-0001.png" id="1_qx4oe"]
 [ext_resource type="Script" path="res://Bounties/BountyComputer.cs" id="1_yoc2o"]
 [ext_resource type="Theme" uid="uid://deqeqesf3ve3l" path="res://Theme/Theme.tres" id="2_hbslf"]
+[ext_resource type="PackedScene" uid="uid://bmwtfdasxkrde" path="res://UI/Bounties/BountySelectionScreen.tscn" id="2_pbg8u"]
 [ext_resource type="PackedScene" uid="uid://cv81rawaku4je" path="res://UI/UISignalEmitter.tscn" id="4_r3tre"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0wka5"]
 size = Vector2(208, 216)
 
-[node name="BountyComputer" type="Node2D" node_paths=PackedStringArray("_uISignalEmitter")]
+[node name="BountyComputer" type="Node2D" node_paths=PackedStringArray("UISignalEmitter", "InteractionLabel")]
 script = ExtResource("1_yoc2o")
-_uISignalEmitter = NodePath("UISignalEmitter")
+UISignalEmitter = NodePath("UISignalEmitter")
+InteractionLabel = NodePath("InteractionLabel")
+BountySelectionScreen = ExtResource("2_pbg8u")
 
 [node name="InteractionLabel" type="Label" parent="."]
 offset_left = -128.0
