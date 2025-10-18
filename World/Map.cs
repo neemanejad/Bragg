@@ -23,7 +23,7 @@ public partial class Map : TextureRect
 
 	public override void _Process(double delta)
 	{
-		_playerIcon.Position = (PlayerManager.PlayerNode.GlobalPosition / (ChunkData.TilesPerChunk / 4)) + new Vector2(_mapWidth, _mapHeight);
+		_playerIcon.Position = (PlayerManager.Instance.PlayerNode.GlobalPosition / (ChunkData.TilesPerChunk / 4)) + new Vector2(_mapWidth, _mapHeight);
 	}
 
 	public void GenerateMap(int terrainSeed)

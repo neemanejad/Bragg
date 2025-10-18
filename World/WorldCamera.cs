@@ -15,20 +15,20 @@ public partial class WorldCamera : Node2D
 
 		if (Input.IsActionJustPressed("zoom_out"))
 		{
-			var diff = PlayerManager.PlayerNode.PlayerCamera.Zoom - delta;
+			var diff = PlayerManager.Instance.PlayerNode.PlayerCamera.Zoom - delta;
 			if (diff < new Vector2(0f, 0f))
 				return;
 
-			PlayerManager.PlayerNode.PlayerCamera.Zoom = diff;
+			PlayerManager.Instance.PlayerNode.PlayerCamera.Zoom = diff;
 		}
 
 		if (Input.IsActionJustPressed("zoom_in"))
 		{
-			var sum = PlayerManager.PlayerNode.PlayerCamera.Zoom - delta;
+			var sum = PlayerManager.Instance.PlayerNode.PlayerCamera.Zoom - delta;
 			// if (sum > new Vector2(1.4f, 1.4f))
 			// 	return;
 
-			PlayerManager.PlayerNode.PlayerCamera.Zoom = PlayerManager.PlayerNode.PlayerCamera.Zoom + delta;
+			PlayerManager.Instance.PlayerNode.PlayerCamera.Zoom = PlayerManager.Instance.PlayerNode.PlayerCamera.Zoom + delta;
 		}
 	}
 }

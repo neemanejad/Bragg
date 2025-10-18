@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cv18dv24ggpk3"]
 
 [ext_resource type="Script" path="res://Enemies/Bosses/BossSpawner.cs" id="1_kdk4p"]
-[ext_resource type="PackedScene" uid="uid://8s5wufrvcdjs" path="res://Enemies/Bosses/HeavyBoss.tscn" id="2_rfl4s"]
+[ext_resource type="PackedScene" uid="uid://by3erxvtlilmd" path="res://Enemies/Bosses/HeavyBoss.tscn" id="2_rfl4s"]
 
 [node name="BossSpawner" type="Node2D"]
 script = ExtResource("1_kdk4p")

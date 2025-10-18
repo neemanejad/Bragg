@@ -17,7 +17,7 @@ public partial class Deployment : Area2D
 
 	public override void _Process(double delta)
 	{
-		var playerInArea = GetOverlappingBodies().Contains(PlayerManager.PlayerNode);
+		var playerInArea = GetOverlappingBodies().Contains(PlayerManager.Instance.PlayerNode);
 
 		var isInteracting = Input.IsActionJustPressed("interact");
 

@@ -7,7 +7,7 @@ public partial class ProcWorld : TileMapLayer
 	[Export]
 	public ChunkGenerator ChunkGenerator { get; set; }
 
-	private Player _player = PlayerManager.PlayerNode;
+	private Player _player = PlayerManager.Instance.PlayerNode;
 
 	public override void _Ready()
 	{

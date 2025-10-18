@@ -29,8 +29,8 @@ public partial class LocationUtils : Node
 		var randX = GetRandomScreenSizeRange(screenSize.X);
 		var randY = GetRandomScreenSizeRange(screenSize.Y);
 
-		var enemyPositionX = (float)(PlayerManager.PlayerNode.Position.X + randX);
-		var enemyPositionY = (float)(PlayerManager.PlayerNode.Position.Y + randY);
+		var enemyPositionX = (float)(PlayerManager.Instance.PlayerNode.Position.X + randX);
+		var enemyPositionY = (float)(PlayerManager.Instance.PlayerNode.Position.Y + randY);
 
 		return new Vector2(enemyPositionX, enemyPositionY);
 	}

@@ -10,22 +10,17 @@ public partial class PlayerManager : Node
 {
 	[Signal]
 	public delegate void ItemAddedEventHandler(int itemId);
-
-	public Dictionary<ItemId, int> ItemCountMap = new Dictionary<ItemId, int>();
-
+	public Dictionary<ItemId, int> ItemCountMap { get; private set; } = new Dictionary<ItemId, int>();
 	public static PlayerManager Instance { get; private set; }
-
-	public static Player PlayerNode { get; private set; }
-	public static BaseWeapon WeaponNode { get; private set; }
-
-	private float _health = 100f;
-
+	public Player PlayerNode { get; private set; }
+	public BaseWeapon WeaponNode { get; private set; }
 	public float Health
 	{
 		get { return _health; }
 	}
 
 	private int _killCount = 0;
+	private float _health = 100f;
 
 	public int KillCount { get { return _killCount; } }
 	public int ReputationCount { get; private set; }
@@ -179,11 +174,21 @@ public partial class PlayerManager : Node
 
 	internal void StartShooting()
 	{
+		if (WeaponNode == null)
+		{
+			return;
+		}
+
 		WeaponNode.StartShooting();
 	}
 
 	internal void StopShooting()
 	{
+		if (WeaponNode == null)
+		{
+			return;
+		}
+
 		WeaponNode.StopShooting();
 	}
 }

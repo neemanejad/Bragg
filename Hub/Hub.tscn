@@ -11,3 +11,4 @@ script = ExtResource("1_3cofr")
 position = Vector2(48, -440)
 
 [node name="Deployment" parent="." instance=ExtResource("3_lhmwt")]
+position = Vector2(328, -152)

@@ -34,7 +34,7 @@ public partial class Enemy : CharacterBody2D
 	public override void _PhysicsProcess(double delta)
 	{
 		// TODO: remove need for this
-		if (PlayerManager.PlayerNode == null)
+		if (PlayerManager.Instance.PlayerNode == null)
 		{
 			return;
 		}
@@ -54,7 +54,7 @@ public partial class Enemy : CharacterBody2D
 
 		var collider = lastSlideCollision.GetCollider();
 
-		if (collider != PlayerManager.PlayerNode)
+		if (collider != PlayerManager.Instance.PlayerNode)
 		{
 			return;
 		}
@@ -73,7 +73,7 @@ public partial class Enemy : CharacterBody2D
 
 	private void FollowPlayer()
 	{
-		var playerDirection = (PlayerManager.PlayerNode.GlobalPosition - GlobalPosition).Normalized();
+		var playerDirection = (PlayerManager.Instance.PlayerNode.GlobalPosition - GlobalPosition).Normalized();
 		Velocity = playerDirection * (float)EnemyData.Speed;
 		MoveAndSlide();
 	}

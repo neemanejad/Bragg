@@ -16,7 +16,7 @@ public partial class EnemySpawner : Node2D
 
 	private void SpawnEnemy()
 	{
-		if (PlayerManager.PlayerNode == null)
+		if (PlayerManager.Instance.PlayerNode == null)
 		{
 			return;
 		}

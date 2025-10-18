@@ -40,7 +40,7 @@ public partial class ChunkGenerator : Node
 	[Signal]
 	public delegate void TileGeneratedEventHandler(Vector2I coords, int sourceId, Vector2I tileAtlas);
 
-	private Player _player = PlayerManager.PlayerNode;
+	private Player _player = PlayerManager.Instance.PlayerNode;
 
 
 	private readonly HashSet<Vector2I> _generatedChunks = new();

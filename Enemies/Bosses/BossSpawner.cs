@@ -22,7 +22,7 @@ public partial class BossSpawner : Node2D
 
 	public void SpawnBoss()
 	{
-		if (PlayerManager.PlayerNode == null)
+		if (PlayerManager.Instance.PlayerNode == null)
 		{
 			return;
 		}

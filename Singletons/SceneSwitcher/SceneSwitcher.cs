@@ -29,6 +29,7 @@ public partial class SceneSwitcher : Node
 		// we can be sure that no code from the current scene is running:
 
 		CallDeferred(MethodName.DeferredGotoScene, path);
+		PlayerManager.Instance.PlayerNode.Position = Vector2.Zero;
 	}
 
 	private void DeferredGotoScene(string path)
