@@ -7,6 +7,8 @@ public partial class ImportantEnemy : Enemy
 
 	public override void _Ready()
 	{
+		Connect(SignalName.ReceivedDamage, new Callable(GetNode<DamageIndicator>("DamageIndicator"), DamageIndicator.MethodName.ShowDamage));
+
 		base._Ready();
 
 		EnemyDefeated += ImportantEnemyDefeatedSignal;

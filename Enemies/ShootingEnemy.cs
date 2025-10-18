@@ -11,6 +11,13 @@ public partial class ShootingEnemy : Enemy
 	[Export]
 	public float ProjectileDamage { get; set; }
 
+	public override void _Ready()
+	{
+		Connect(SignalName.ReceivedDamage, new Callable(GetNode<DamageIndicator>("DamageIndicator"), DamageIndicator.MethodName.ShowDamage));
+
+		base._Ready();
+	}
+
 	public void ShootProjectileTowardsPlayer()
 	{
 		// TODO: remove need for this check

@@ -18,6 +18,8 @@ public partial class Enemy : CharacterBody2D
 
 	[Signal]
 	public delegate void EnemyDefeatedEventHandler(string? enemyId);
+	[Signal]
+	public delegate void ReceivedDamageEventHandler();
 
 	private bool canAttack = true;
 
@@ -62,6 +64,12 @@ public partial class Enemy : CharacterBody2D
 		PlayerManager.Instance.SubtractHealth(EnemyData.Damage);
 	}
 
+	public void TakeDamage(float damage)
+	{
+		HealthComponent.RemoveHealth(damage);
+		EmitSignal(SignalName.ReceivedDamage);
+	}
+
 	public void LostAllHealth()
 	{
 		PlayerManager.Instance.OnKillHandler();
@@ -89,4 +97,6 @@ public partial class Enemy : CharacterBody2D
 			GetParent().CallDeferred(MethodName.AddChild, item);
 		}
 	}
+
+
 }

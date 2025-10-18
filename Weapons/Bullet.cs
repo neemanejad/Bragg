@@ -19,7 +19,7 @@ public partial class Bullet : Area2D
 
 		if (body is Enemy enemy)
 		{
-			enemy.HealthComponent.RemoveHealth(Damage);
+			enemy.TakeDamage(Damage);
 			QueueFree();
 		}
 	}

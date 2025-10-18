@@ -113,7 +113,7 @@ public partial class ChunkGenerator : Node
 			}
 		}
 
-		var shouldSpawnColony = Math.Abs((int)enemyElevationSum / ChunkData.TilesPerChunk) > 19 && ((int)terrainElevationSum / ChunkData.TilesPerChunk) > 0;
+		var shouldSpawnColony = Math.Abs((int)enemyElevationSum / ChunkData.TilesPerChunk) > 7 && ((int)terrainElevationSum / ChunkData.TilesPerChunk) > 0;
 
 		if (shouldSpawnColony)
 		{

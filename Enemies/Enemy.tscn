@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://crxeuyluv2n2"]
+[gd_scene load_steps=7 format=3 uid="uid://dvvsa0n0jcsd0"]
 
 [ext_resource type="Script" path="res://Enemies/Enemy.cs" id="1_xio3m"]
 [ext_resource type="Texture2D" uid="uid://ddb7q8y77vkbk" path="res://icon.svg" id="2_1p4xl"]
 [ext_resource type="PackedScene" uid="uid://b730r6uoiexq6" path="res://HealthBar/HealthBar.tscn" id="2_lgjvy"]
 [ext_resource type="PackedScene" uid="uid://dx7rw14cjb4ie" path="res://Components/HealthComponent.tscn" id="3_l7cu6"]
+[ext_resource type="PackedScene" uid="uid://cbl1gkopgdq0p" path="res://Enemies/DamageIndicator.tscn" id="5_moo0e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_na3nw"]
 size = Vector2(256, 256)
@@ -29,5 +30,8 @@ offset_top = -104.0
 offset_right = 0.0
 offset_bottom = -104.0
 HealthComponent = NodePath("../HealthComponent")
+
+[node name="DamageIndicator" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("5_moo0e")]
+sprite = NodePath("../Sprite2D")
 
 [connection signal="LostAllHealth" from="HealthComponent" to="." method="LostAllHealth"]
