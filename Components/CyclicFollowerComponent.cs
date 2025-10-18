@@ -33,9 +33,8 @@ public partial class CyclicFollowerComponent : Node2D
 
 	private void ProcessMouseMovement()
 	{
-		var directionVector = GetLocalMousePosition().Normalized() * Radius;
-		Entity.Position = directionVector;
-
-		Entity.LookAt(GetGlobalMousePosition());
+		var directionVector = (GetLocalMousePosition() + Anchor).Normalized();
+		Entity.Position = directionVector * Radius;
+		Entity.Rotation = directionVector.Angle();
 	}
 }
