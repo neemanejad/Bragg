@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dxdjyo2a2op4c"]
+[gd_scene load_steps=12 format=3 uid="uid://dxdjyo2a2op4c"]
 
 [ext_resource type="PackedScene" uid="uid://dyq3odk2ogbfk" path="res://Hub/Hub.tscn" id="1_fnuqi"]
 [ext_resource type="PackedScene" uid="uid://bbux5rs511px1" path="res://Inventory/InventoryUI.tscn" id="3_et6m5"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://ct00w70xnn0vw" path="res://UI/Bounties/PlayerBounties.tscn" id="6_2chlc"]
 [ext_resource type="PackedScene" uid="uid://bbcjk2bl5rgle" path="res://UI/Deployment/DeploymentSelection.tscn" id="7_vh4lf"]
 [ext_resource type="PackedScene" uid="uid://bffthneg1lqvx" path="res://UI/GameOver/GameOver.tscn" id="8_odkfv"]
+[ext_resource type="Script" path="res://FPSCounter.cs" id="11_xsa6f"]
 
 [node name="Main" type="Node"]
 
@@ -24,4 +25,10 @@ Menus = Array[PackedScene]([ExtResource("3_et6m5"), ExtResource("4_jiv4y"), ExtR
 [node name="Hub" parent="WorldRoot" instance=ExtResource("1_fnuqi")]
 
 [node name="Player" parent="." instance=ExtResource("3_tcv06")]
-Speed = 800.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="FPSCounter" type="Label" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 23.0
+script = ExtResource("11_xsa6f")

@@ -2,18 +2,18 @@
 
 [ext_resource type="Script" path="res://World/World.cs" id="1_eh1jh"]
 [ext_resource type="PackedScene" uid="uid://b8r8ux8d3h7rj" path="res://World/WorldCamera.tscn" id="3_d4s2j"]
+[ext_resource type="PackedScene" uid="uid://bh7wmw3y67x5n" path="res://World/Procedural/ProceduralWorld.tscn" id="3_kbq87"]
 [ext_resource type="PackedScene" uid="uid://bvcqtbwlklo3f" path="res://World/WorldMap.tscn" id="4_xkphq"]
-[ext_resource type="PackedScene" uid="uid://bbs8urh6wwvxm" path="res://World/ProcWorld.tscn" id="8_kb1jm"]
 
-[node name="World" type="Node2D" node_paths=PackedStringArray("ProcWorld", "WorldCamera", "WorldMap")]
+[node name="World" type="Node2D" node_paths=PackedStringArray("ProceduralWorld", "WorldCamera", "WorldMap")]
 script = ExtResource("1_eh1jh")
-ProcWorld = NodePath("ProcWorld")
+ProceduralWorld = NodePath("ProceduralWorld")
 WorldCamera = NodePath("WorldCamera")
 WorldMap = NodePath("WorldMap")
 metadata/_edit_lock_ = true
 
 [node name="WorldCamera" parent="." instance=ExtResource("3_d4s2j")]
 
-[node name="ProcWorld" parent="." instance=ExtResource("8_kb1jm")]
+[node name="ProceduralWorld" parent="." instance=ExtResource("3_kbq87")]
 
 [node name="WorldMap" parent="." instance=ExtResource("4_xkphq")]

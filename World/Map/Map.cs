@@ -1,5 +1,7 @@
 using Godot;
 
+using Redwood.Singletons.RandomUtils;
+
 namespace Redwood.World;
 
 public partial class Map : TextureRect
@@ -20,21 +22,25 @@ public partial class Map : TextureRect
 	private int _mapWidth = 450;
 	private int _mapHeight = 450;
 
+	public override void _Ready()
+	{
+		GenerateMap();
+	}
 
 	public override void _Process(double delta)
 	{
-		_playerIcon.Position = (PlayerManager.Instance.PlayerNode.GlobalPosition / (ChunkData.TilesPerChunk / 4)) + new Vector2(_mapWidth, _mapHeight);
+		_playerIcon.Position = (PlayerManager.Instance.PlayerNode.GlobalPosition / ChunkData.TilesPerChunk) + new Vector2(_mapWidth, _mapHeight);
 	}
 
-	public void GenerateMap(int terrainSeed)
+	public void GenerateMap()
 	{
-		TerrainElevationMap.Seed = terrainSeed;
+		TerrainElevationMap.Seed = (int)RandomUtils.RNG.Seed;
 
 		for (var x = -_mapWidth; x < _mapWidth; x++)
 		{
 			for (var y = -_mapHeight; y < _mapHeight; y++)
 			{
-				var distance = new Vector2I(x, y).DistanceTo(Vector2I.Zero) / (6 * ChunkData.TilesPerChunk);
+				var distance = new Vector2I(x, y).DistanceTo(Vector2I.Zero) / (32 * ChunkData.TilesPerChunk);
 				var terrainElevationValue = TerrainElevationMap.GetNoise2D(x, y) - distance;
 
 				string color;

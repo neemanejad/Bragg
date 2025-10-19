@@ -1,0 +1,23 @@
+[gd_scene load_steps=9 format=3 uid="uid://bh7wmw3y67x5n"]
+
+[ext_resource type="TileSet" uid="uid://df4uinf8jiogj" path="res://TileSets/WorldTileSet3.tres" id="1_1rjfe"]
+[ext_resource type="Script" path="res://World/Procedural/ProceduralWorld.cs" id="1_m4tno"]
+[ext_resource type="FastNoiseLite" uid="uid://cpwk6j7imamob" path="res://World/Resources/TerrainElevation.tres" id="2_pt38x"]
+[ext_resource type="FastNoiseLite" uid="uid://jgcp6oo6p7et" path="res://World/Resources/TerrainMoisture.tres" id="3_5fp1c"]
+[ext_resource type="FastNoiseLite" uid="uid://b6wru5qyy1si7" path="res://World/Resources/EnemyNoiseMap.tres" id="4_gd3ex"]
+[ext_resource type="Script" path="res://World/ChunkData.cs" id="5_35y3h"]
+[ext_resource type="PackedScene" uid="uid://u2xc6xgr2k73" path="res://World/Chunk/Chunk.tscn" id="6_sjujs"]
+
+[sub_resource type="Resource" id="Resource_s5tkp"]
+script = ExtResource("5_35y3h")
+TilesPerChunk = 16
+TileSize = 16
+
+[node name="ProceduralWorld" type="TileMapLayer"]
+tile_set = ExtResource("1_1rjfe")
+script = ExtResource("1_m4tno")
+TerrainElevationMap = ExtResource("2_pt38x")
+TerrainMoistureMap = ExtResource("3_5fp1c")
+EnemyHeightMap = ExtResource("4_gd3ex")
+ChunkData = SubResource("Resource_s5tkp")
+Chunk = ExtResource("6_sjujs")

@@ -1,0 +1,19 @@
+[gd_scene load_steps=6 format=3 uid="uid://u2xc6xgr2k73"]
+
+[ext_resource type="Script" path="res://World/Chunk/Chunk.cs" id="1_jwn7k"]
+[ext_resource type="TileSet" uid="uid://df4uinf8jiogj" path="res://TileSets/WorldTileSet3.tres" id="1_op0yj"]
+[ext_resource type="Script" path="res://World/ChunkData.cs" id="3_poklp"]
+[ext_resource type="PackedScene" uid="uid://ct5yb5t1va0w" path="res://World/Chunk/DebuggingChunkCoordinates.tscn" id="4_lw40h"]
+
+[sub_resource type="Resource" id="Resource_bhqjj"]
+script = ExtResource("3_poklp")
+TilesPerChunk = 16
+TileSize = 16
+
+[node name="Chunk" type="TileMapLayer" node_paths=PackedStringArray("DebuggingChunkCoordinates")]
+tile_set = ExtResource("1_op0yj")
+script = ExtResource("1_jwn7k")
+DebuggingChunkCoordinates = NodePath("Control")
+ChunkData = SubResource("Resource_bhqjj")
+
+[node name="Control" parent="." instance=ExtResource("4_lw40h")]

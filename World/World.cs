@@ -11,7 +11,7 @@ namespace Redwood.World;
 public partial class World : Node
 {
 	[Export]
-	public ProcWorld ProcWorld;
+	public ProceduralWorld ProceduralWorld;
 
 	[Export]
 	public WorldCamera WorldCamera;
@@ -21,9 +21,6 @@ public partial class World : Node
 
 	private WorldData _worldData;
 
-	[Signal]
-	public delegate void WorldReadyEventHandler(int terrainSeed);
-
 	public override void _Ready()
 	{
 		GameManager.Instance.ResetSurvivalTimer();
@@ -32,12 +29,5 @@ public partial class World : Node
 		PlayerManager.Instance.StartShooting();
 
 		_worldData = WorldManager.Instance.SelectedWorld;
-
-		var terrainSeed = (int)Math.Abs(RandomUtils.RNG.Randi());
-
-		Connect(SignalName.WorldReady, new Callable(ProcWorld.ChunkGenerator, ChunkGenerator.MethodName.SetSeeds));
-		Connect(SignalName.WorldReady, new Callable(WorldMap.Map, Map.MethodName.GenerateMap));
-
-		EmitSignal(SignalName.WorldReady, terrainSeed);
 	}
 }
