@@ -73,7 +73,7 @@ public partial class BountyManager : Node
 
 	public Bounty GenerateBounty()
 	{
-		var enemyResourceDir = DirAccess.Open("res://Resources/Enemies");
+		var enemyResourceDir = DirAccess.Open("res://Enemies/Resources");
 		var enemyResourceFileNames = new Array<string>(enemyResourceDir.GetFiles()).ToList().Select((file) => file = $"{enemyResourceDir.GetCurrentDir()}/{file}");
 		var randomEnemyResourceFileName = new Array<string>(enemyResourceFileNames).PickRandom();
 		var randomEnemyResource = ResourceLoader.Load<EnemyData>(randomEnemyResourceFileName);

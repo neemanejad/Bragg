@@ -9,13 +9,10 @@ public partial class Enemy : CharacterBody2D
 {
 	[Export]
 	public EnemyData EnemyData { get; set; }
-
 	[Export]
 	public HealthComponent HealthComponent { get; set; }
-
 	[Export]
-	public Timer HitTimer { get; set; }
-
+	public Sprite2D Sprite2D { get; set; }
 	[Signal]
 	public delegate void EnemyDefeatedEventHandler(string? enemyId);
 	[Signal]
@@ -30,7 +27,11 @@ public partial class Enemy : CharacterBody2D
 			throw new NullReferenceException("HealthComponent is null in HitboxComponent");
 		}
 
+		var damageIndicator = GetNode<DamageIndicator>("DamageIndicator");
+		damageIndicator.Sprite2D = Sprite2D;
+
 		Connect(SignalName.EnemyDefeated, new Callable(WorldEventListener.Instance, WorldEventListener.MethodName.OnEnemyKilled));
+		Connect(SignalName.ReceivedDamage, new Callable(damageIndicator, DamageIndicator.MethodName.ShowDamage));
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -97,6 +98,4 @@ public partial class Enemy : CharacterBody2D
 			GetParent().CallDeferred(MethodName.AddChild, item);
 		}
 	}
-
-
 }

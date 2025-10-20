@@ -1,48 +1,27 @@
-[gd_scene load_steps=8 format=3 uid="uid://das0vbqna72es"]
+[gd_scene load_steps=6 format=3 uid="uid://das0vbqna72es"]
 
 [ext_resource type="Script" path="res://Enemies/ShootingEnemy.cs" id="1_2en1h"]
+[ext_resource type="PackedScene" uid="uid://dvvsa0n0jcsd0" path="res://Enemies/Enemy.tscn" id="1_w10t8"]
 [ext_resource type="PackedScene" uid="uid://bvdwgpet7jhfd" path="res://Enemies/Weapons/Bullets/EnemyBullet.tscn" id="2_2bqju"]
-[ext_resource type="PackedScene" uid="uid://dx7rw14cjb4ie" path="res://Components/HealthComponent.tscn" id="3_t4cmk"]
-[ext_resource type="Resource" uid="uid://p023y7ydepgg" path="res://Resources/Enemies/ShootingEnemy.tres" id="3_yvjig"]
+[ext_resource type="Resource" uid="uid://p023y7ydepgg" path="res://Enemies/Resources/ShootingEnemy.tres" id="3_yvjig"]
 [ext_resource type="Texture2D" uid="uid://d1q7ofi6vaqhq" path="res://Art/Enemies/shooting_enemy.png" id="4_h6vpm"]
-[ext_resource type="PackedScene" uid="uid://b730r6uoiexq6" path="res://HealthBar/HealthBar.tscn" id="4_lmn4a"]
-[ext_resource type="PackedScene" uid="uid://cbl1gkopgdq0p" path="res://Enemies/DamageIndicator.tscn" id="7_2o03q"]
 
-[node name="ShootingEnemy" type="CharacterBody2D" node_paths=PackedStringArray("HealthComponent", "HitTimer")]
+[node name="ShootingEnemy" type="Node2D"]
 script = ExtResource("1_2en1h")
 Projectile = ExtResource("2_2bqju")
-ProjectileSpeed = 500.0
-ProjectileDamage = 10.0
-EnemyData = ExtResource("3_yvjig")
-HealthComponent = NodePath("HealthComponent")
-HitTimer = NodePath("ShootTimer")
+ProjectileSpeed = 30.0
+ProjectileDamage = 20.0
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Enemy" parent="." node_paths=PackedStringArray("Sprite2D") instance=ExtResource("1_w10t8")]
+EnemyData = ExtResource("3_yvjig")
+Sprite2D = NodePath("Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="Enemy"]
 position = Vector2(-9.7791e-06, 3.66177)
 scale = Vector2(0.557, 0.523)
 texture = ExtResource("4_h6vpm")
 
-[node name="HealthComponent" parent="." instance=ExtResource("3_t4cmk")]
-
-[node name="HealthBar" parent="." node_paths=PackedStringArray("HealthComponent") instance=ExtResource("4_lmn4a")]
-offset_left = 0.0
-offset_top = -120.0
-offset_right = 0.0
-offset_bottom = -120.0
-HealthComponent = NodePath("../HealthComponent")
-
-[node name="ShootTimer" type="Timer" parent="."]
-autostart = true
-
-[node name="DamageIndicator" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("7_2o03q")]
-position = Vector2(5.96046e-08, 4)
-scale = Vector2(2.375, 2.192)
-sprite = NodePath("../Sprite2D")
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Enemy"]
 position = Vector2(0, 2)
 scale = Vector2(0.64, 0.64)
 polygon = PackedVector2Array(-50, -41, -58, -28, -62, -9, -62, 9, -55, 25, -45, 36, -22, 43, 19, 43, 46, 36, 58, 22, 63, 3, 62, -15, 55, -34, 48, -41, 59, -44, 59, -49, 45, -55, 60, -68, 59, -73, 46, -72, 56, -80, 60, -92, 49, -90, 44, -98, 41, -96, 42, -88, 32, -92, 33, -80, 24, -82, 26, -73, 14, -76, 17, -86, 9, -85, 10, -92, 5, -91, 5, -98, -4, -97, -5, -92, -10, -92, -9, -85, -19, -85, -15, -77, -26, -72, -26, -82, -32, -80, -32, -91, -42, -87, -42, -98, -49, -91, -61, -92, -54, -79, -48, -74, -60, -72, -60, -69, -46, -56, -59, -49, -59, -44)
-
-[connection signal="LostAllHealth" from="HealthComponent" to="." method="LostAllHealth"]
-[connection signal="timeout" from="ShootTimer" to="." method="ShootProjectileTowardsPlayer"]

@@ -4,16 +4,13 @@ using Godot;
 
 public partial class DamageIndicator : Node2D
 {
-	[Export]
-	Sprite2D sprite { get; set; }
+	public Sprite2D Sprite2D { get; set; }
 	Tween currentDamageAnimation { get; set; }
-	Color originalColor { get; set; }
 
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		originalColor = sprite.Modulate;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -29,7 +26,7 @@ public partial class DamageIndicator : Node2D
 		}
 
 		currentDamageAnimation = CreateTween();
-		sprite.Modulate = Colors.Red;
-		currentDamageAnimation.TweenProperty(sprite, Sprite2D.PropertyName.Modulate.ToString(), originalColor, 0.2);
+		Sprite2D.Modulate = Colors.Red;
+		currentDamageAnimation.TweenProperty(Sprite2D, Sprite2D.PropertyName.Modulate.ToString(), new Color(1, 1, 1, 1), 0.2);
 	}
 }

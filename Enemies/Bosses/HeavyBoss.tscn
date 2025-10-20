@@ -1,17 +1,23 @@
-[gd_scene load_steps=4 format=3 uid="uid://by3erxvtlilmd"]
+[gd_scene load_steps=5 format=3 uid="uid://by3erxvtlilmd"]
 
 [ext_resource type="PackedScene" uid="uid://dvvsa0n0jcsd0" path="res://Enemies/Enemy.tscn" id="1_573lr"]
+[ext_resource type="Texture2D" uid="uid://ddb7q8y77vkbk" path="res://icon.svg" id="2_shfdl"]
 [ext_resource type="Script" path="res://Enemies/ImportantEnemy.cs" id="2_yofl3"]
-[ext_resource type="Resource" uid="uid://bvxjg4vndf07" path="res://Resources/Enemies/HeavyBoss.tres" id="3_ts5ya"]
 
-[node name="HeavyBoss" instance=ExtResource("1_573lr")]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wjylc"]
+size = Vector2(160, 128)
+
+[node name="HeavyBoss" type="Node2D"]
 script = ExtResource("2_yofl3")
-EnemyData = ExtResource("3_ts5ya")
 
-[node name="Sprite2D" parent="." index="1"]
-modulate = Color(1, 0.347274, 0.273676, 1)
-scale = Vector2(2, 2)
+[node name="Enemy" parent="." instance=ExtResource("1_573lr")]
+position = Vector2(16, 8)
 
-[node name="HealthComponent" parent="." index="2"]
-CurrentHealth = 500.0
-MaxHealth = 500.0
+[node name="Sprite2D" type="Sprite2D" parent="Enemy"]
+position = Vector2(-16, -8)
+scale = Vector2(1.25, 1)
+texture = ExtResource("2_shfdl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy"]
+position = Vector2(-16, -8)
+shape = SubResource("RectangleShape2D_wjylc")

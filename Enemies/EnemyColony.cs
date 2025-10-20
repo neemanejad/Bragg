@@ -23,12 +23,12 @@ public partial class EnemyColony : Node2D
 	public void Generate(Vector2I coords)
 	{
 		var enemyCount = RandomUtils.RNG.RandiRange(_enemyMinCount, _enemyMaxCount);
-		List<Enemy> enemies = new();
+		List<Node2D> enemies = new();
 
 		for (var i = 0; i < enemyCount; i++)
 		{
 			var randIndex = (int)RandomUtils.RNG.RandWeighted(EnemyWeights.ToArray());
-			var enemy = Enemies[randIndex].Instantiate<Enemy>();
+			var enemy = Enemies[randIndex].Instantiate<Node2D>();
 			enemies.Add(enemy);
 		}
 

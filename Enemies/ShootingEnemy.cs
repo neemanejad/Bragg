@@ -2,7 +2,9 @@ using System;
 
 using Godot;
 
-public partial class ShootingEnemy : Enemy
+using Redwood.Singletons.WorldManager;
+
+public partial class ShootingEnemy : Node2D
 {
 	[Export]
 	public PackedScene Projectile { get; set; }
@@ -10,13 +12,6 @@ public partial class ShootingEnemy : Enemy
 	public float ProjectileSpeed { get; set; }
 	[Export]
 	public float ProjectileDamage { get; set; }
-
-	public override void _Ready()
-	{
-		Connect(SignalName.ReceivedDamage, new Callable(GetNode<DamageIndicator>("DamageIndicator"), DamageIndicator.MethodName.ShowDamage));
-
-		base._Ready();
-	}
 
 	public void ShootProjectileTowardsPlayer()
 	{

@@ -31,7 +31,7 @@ public partial class Chunk : TileMapLayer
 	public void Complete()
 	{
 		// TODO: Consolidate any noise values in one place
-		if (AverageTerrainElevation > -0.3 && AverageEnemyNoise > 7)
+		if (AverageTerrainElevation > -0.3 && AverageEnemyNoise > 4)
 		{
 			EnemyColony.Generate(ChunkCoordinates * ChunkData.ChunkSize);
 		}

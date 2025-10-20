@@ -1,26 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://dvvsa0n0jcsd0"]
+[gd_scene load_steps=5 format=3 uid="uid://dvvsa0n0jcsd0"]
 
 [ext_resource type="Script" path="res://Enemies/Enemy.cs" id="1_xio3m"]
-[ext_resource type="Texture2D" uid="uid://ddb7q8y77vkbk" path="res://icon.svg" id="2_1p4xl"]
 [ext_resource type="PackedScene" uid="uid://b730r6uoiexq6" path="res://HealthBar/HealthBar.tscn" id="2_lgjvy"]
 [ext_resource type="PackedScene" uid="uid://dx7rw14cjb4ie" path="res://Components/HealthComponent.tscn" id="3_l7cu6"]
 [ext_resource type="PackedScene" uid="uid://cbl1gkopgdq0p" path="res://Enemies/DamageIndicator.tscn" id="5_moo0e"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_na3nw"]
-size = Vector2(256, 256)
 
 [node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("HealthComponent")]
 motion_mode = 1
 script = ExtResource("1_xio3m")
 HealthComponent = NodePath("HealthComponent")
 metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_na3nw")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-rotation = 3.14159
-texture = ExtResource("2_1p4xl")
 
 [node name="HealthComponent" parent="." instance=ExtResource("3_l7cu6")]
 
@@ -31,7 +20,6 @@ offset_right = 0.0
 offset_bottom = -104.0
 HealthComponent = NodePath("../HealthComponent")
 
-[node name="DamageIndicator" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("5_moo0e")]
-sprite = NodePath("../Sprite2D")
+[node name="DamageIndicator" parent="." instance=ExtResource("5_moo0e")]
 
 [connection signal="LostAllHealth" from="HealthComponent" to="." method="LostAllHealth"]
