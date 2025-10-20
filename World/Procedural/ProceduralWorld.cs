@@ -108,8 +108,6 @@ public partial class ProceduralWorld : Node2D
 		var chunkToQueue = Chunk.Instantiate<Chunk>();
 		chunkToQueue.Prepare(coords);
 
-
-
 		_inProgressChunks.Add(coords, 0);
 
 
@@ -160,10 +158,16 @@ public partial class ProceduralWorld : Node2D
 			rowNeedingWork += 1;
 			_inProgressChunks[chunkCoords] = rowNeedingWork;
 
+			chunk.AverageTerrainElevation += terrainElevationSum / ChunkData.TilesPerChunk;
+			chunk.AverageEnemyNoise += enemyElevationSum / ChunkData.TilesPerChunk;
+
 			if (rowNeedingWork == ChunkData.TilesPerChunk)
 			{
 				_inProgressChunks.Remove(chunkCoords);
 				_completeChunksCoordinates.Add(chunkCoords);
+
+
+				chunk.Complete();
 			}
 			else
 			{

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dxdjyo2a2op4c"]
+[gd_scene load_steps=11 format=3 uid="uid://dxdjyo2a2op4c"]
 
 [ext_resource type="PackedScene" uid="uid://dyq3odk2ogbfk" path="res://Hub/Hub.tscn" id="1_fnuqi"]
 [ext_resource type="PackedScene" uid="uid://bbux5rs511px1" path="res://Inventory/InventoryUI.tscn" id="3_et6m5"]
