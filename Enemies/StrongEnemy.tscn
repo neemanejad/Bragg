@@ -1,39 +1,32 @@
-[gd_scene load_steps=8 format=3 uid="uid://bp0cekjqvscav"]
+[gd_scene load_steps=7 format=3 uid="uid://bp0cekjqvscav"]
 
 [ext_resource type="Script" path="res://Enemies/StrongEnemy.cs" id="1_ftrru"]
 [ext_resource type="Resource" uid="uid://bxeyo3c2kr2pk" path="res://Resources/Enemies/StrongEnemy.tres" id="2_bmldy"]
-[ext_resource type="Texture2D" uid="uid://ddb7q8y77vkbk" path="res://icon.svg" id="2_my2eh"]
 [ext_resource type="PackedScene" uid="uid://dx7rw14cjb4ie" path="res://Components/HealthComponent.tscn" id="3_7wkvk"]
+[ext_resource type="Texture2D" uid="uid://caamonwqcspmt" path="res://Art/Enemies/strong_enemy.png" id="3_wg4jt"]
 [ext_resource type="PackedScene" uid="uid://b730r6uoiexq6" path="res://HealthBar/HealthBar.tscn" id="4_k2i8b"]
 [ext_resource type="PackedScene" uid="uid://cbl1gkopgdq0p" path="res://Enemies/DamageIndicator.tscn" id="6_q7m5d"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_evqp1"]
-size = Vector2(144, 144)
-
 [node name="StrongEnemy" type="CharacterBody2D" node_paths=PackedStringArray("HealthComponent")]
-position = Vector2(8, -8)
 script = ExtResource("1_ftrru")
 EnemyData = ExtResource("2_bmldy")
 HealthComponent = NodePath("HealthComponent")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-8, 8)
-shape = SubResource("RectangleShape2D_evqp1")
-
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(0.82327, 0.452623, 5.77569e-07, 1)
-position = Vector2(-8.00002, 8)
-rotation = 3.14159
-scale = Vector2(1.12496, 1.12715)
-texture = ExtResource("2_my2eh")
+scale = Vector2(0.435, 0.435)
+texture = ExtResource("3_wg4jt")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+scale = Vector2(5.44, 6.018)
+polygon = PackedVector2Array(-0.567376, -5.1282, 1.70213, -5.1282, 3.30882, -4.1542, 5.10638, -2.05128, 5.10638, -0.51282, 6.80851, 0, 8.58156, 1.34615, 11.1348, 2.30769, 11.3475, 6.15385, 12.4823, 7.69231, 15.7447, 9.35897, 17.5887, 11.2821, 19.8582, 12.8205, 19.8582, 14.8718, 19.2908, 15.3846, 18.156, 15.3846, 17.0213, 15.8974, 14.7518, 15.8974, 12.4823, 15.8974, 8.51064, 15.8974, 5.67376, 15.3846, 4.53901, 15.3846, 2.2695, 15.8974, 1.13475, 15.8974, -0.141844, 16.1538, -4.32624, 16.1538, -6.73759, 15.7692, -7.80142, 15.7692, -8.65248, 16.0256, -9.64539, 16.4744, -13.9716, 16.7308, -17.8014, 16.7308, -19.4326, 16.3462, -19.2199, 15, -18.3688, 14.0385, -17.305, 13.141, -16.6667, 12.8846, -16.383, 11.7308, -15.6028, 10.8333, -14.3972, 10.1923, -13.5461, 9.80769, -13.4752, 5.83333, -12.9787, 4.35897, -12.4113, 3.20513, -11.9149, 1.66667, -10.2128, 0.961538, -8.08511, 0.128205, -7.16312, -0.320513, -6.24114, -1.41026, -4.8227, -3.14103, -3.12057, -4.29487, -1.91489, -4.87179)
 
 [node name="HealthComponent" parent="." instance=ExtResource("3_7wkvk")]
 
 [node name="HealthBar" parent="." node_paths=PackedStringArray("HealthComponent") instance=ExtResource("4_k2i8b")]
 offset_left = 0.0
-offset_top = -104.0
+offset_top = -56.0
 offset_right = 0.0
-offset_bottom = -104.0
+offset_bottom = -56.0
 HealthComponent = NodePath("../HealthComponent")
 
 [node name="DamageIndicator" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("6_q7m5d")]

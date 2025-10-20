@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bnx10qyuxk3bv"
-path="res://.godot/imported/Sprite-0001.png-1316912d2929a2e1e49ef813a09789a8.ctex"
+uid="uid://n0va6xnnpe0f"
+path="res://.godot/imported/bounty_computer.png-1d91d4569ae6cf8d796afa9c41790fad.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Bounties/Sprite-0001.png"
-dest_files=["res://.godot/imported/Sprite-0001.png-1316912d2929a2e1e49ef813a09789a8.ctex"]
+source_file="res://Art/Bounties/bounty_computer.png"
+dest_files=["res://.godot/imported/bounty_computer.png-1d91d4569ae6cf8d796afa9c41790fad.ctex"]
 
 [params]
 

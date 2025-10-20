@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://c86r35uksfxx7"]
 
-[ext_resource type="Texture2D" uid="uid://bnx10qyuxk3bv" path="res://Art/Bounties/Sprite-0001.png" id="1_qx4oe"]
 [ext_resource type="Script" path="res://Bounties/BountyComputer.cs" id="1_yoc2o"]
 [ext_resource type="Theme" uid="uid://deqeqesf3ve3l" path="res://Theme/Theme.tres" id="2_hbslf"]
 [ext_resource type="PackedScene" uid="uid://bmwtfdasxkrde" path="res://UI/Bounties/BountySelectionScreen.tscn" id="2_pbg8u"]
+[ext_resource type="Texture2D" uid="uid://n0va6xnnpe0f" path="res://Art/Bounties/bounty_computer.png" id="4_8lv11"]
 [ext_resource type="PackedScene" uid="uid://cv81rawaku4je" path="res://UI/UISignalEmitter.tscn" id="4_r3tre"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0wka5"]
@@ -27,7 +27,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_qx4oe")
+texture = ExtResource("4_8lv11")
 
 [node name="Area2D" type="Area2D" parent="."]
 
