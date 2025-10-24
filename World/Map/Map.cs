@@ -29,6 +29,11 @@ public partial class Map : TextureRect
 
 	public override void _Process(double delta)
 	{
+		if (Input.IsActionJustPressed("map"))
+		{
+			Visible = !Visible;
+		}
+
 		_playerIcon.Position = (PlayerManager.Instance.PlayerNode.GlobalPosition / ChunkData.TilesPerChunk) + new Vector2(_mapWidth, _mapHeight);
 	}
 

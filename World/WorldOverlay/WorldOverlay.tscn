@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://dlfyah4t2wbjw"]
+
+[ext_resource type="PackedScene" uid="uid://cwspm6lf31k37" path="res://World/Map/Map.tscn" id="1_ggyfo"]
+[ext_resource type="Script" path="res://World/WorldOverlay/WorldOverlay.cs" id="1_ndns0"]
+
+[node name="WorldOverlay" type="CanvasLayer" node_paths=PackedStringArray("CountdownLabel")]
+script = ExtResource("1_ndns0")
+CountdownLabel = NodePath("MarginContainer/HBoxContainer/Countdown")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="Countdown" type="Label" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+text = "00:00"
+
+[node name="Map" parent="MarginContainer/HBoxContainer" instance=ExtResource("1_ggyfo")]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3

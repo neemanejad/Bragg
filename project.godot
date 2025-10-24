@@ -45,6 +45,10 @@ Items=""
 Player=""
 Projectiles=""
 
+[gui]
+
+theme/custom="res://Theme/Theme.tres"
+
 [input]
 
 left={

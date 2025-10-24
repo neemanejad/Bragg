@@ -1,9 +1,6 @@
-using System;
-
 using Godot;
 
 using Redwood.Scripts.World;
-using Redwood.Singletons.RandomUtils;
 using Redwood.Singletons.WorldManager;
 
 namespace Redwood.World;
@@ -17,7 +14,7 @@ public partial class World : Node
 	public WorldCamera WorldCamera;
 
 	[Export]
-	public WorldMap WorldMap;
+	public Timer Countdown;
 
 	private WorldData _worldData;
 
