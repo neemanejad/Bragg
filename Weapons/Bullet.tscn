@@ -24,5 +24,4 @@ position = Vector2(0, -4.76837e-07)
 scale = Vector2(1, 1.01334)
 shape = SubResource("RectangleShape2D_vmsbd")
 
-[connection signal="body_entered" from="." to="." method="Hit"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="FreeBullet"]

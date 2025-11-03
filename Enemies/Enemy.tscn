@@ -1,17 +1,36 @@
-[gd_scene load_steps=5 format=3 uid="uid://dvvsa0n0jcsd0"]
+[gd_scene load_steps=11 format=3 uid="uid://dvvsa0n0jcsd0"]
 
 [ext_resource type="Script" path="res://Enemies/Enemy.cs" id="1_xio3m"]
 [ext_resource type="PackedScene" uid="uid://b730r6uoiexq6" path="res://HealthBar/HealthBar.tscn" id="2_lgjvy"]
+[ext_resource type="Script" path="res://Enemies/EnemyData.cs" id="2_ugy1c"]
 [ext_resource type="PackedScene" uid="uid://dx7rw14cjb4ie" path="res://Components/HealthComponent.tscn" id="3_l7cu6"]
+[ext_resource type="Texture2D" uid="uid://ddb7q8y77vkbk" path="res://icon.svg" id="5_dvby1"]
 [ext_resource type="PackedScene" uid="uid://cbl1gkopgdq0p" path="res://Enemies/DamageIndicator.tscn" id="5_moo0e"]
+[ext_resource type="PackedScene" uid="uid://cjqqq7puvx83j" path="res://Components/HitBox.tscn" id="6_ibswf"]
+
+[sub_resource type="Resource" id="Resource_sox1t"]
+script = ExtResource("2_ugy1c")
+Id = ""
+Name = ""
+Speed = 200.0
+Damage = 0.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xhdfl"]
+size = Vector2(128, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o5qk8"]
+size = Vector2(128, 128)
 
 [node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("HealthComponent")]
 motion_mode = 1
 script = ExtResource("1_xio3m")
+EnemyData = SubResource("Resource_sox1t")
 HealthComponent = NodePath("HealthComponent")
 metadata/_edit_group_ = true
 
 [node name="HealthComponent" parent="." instance=ExtResource("3_l7cu6")]
+CurrentHealth = 30.0
+MaxHealth = 30.0
 
 [node name="HealthBar" parent="." node_paths=PackedStringArray("HealthComponent") instance=ExtResource("2_lgjvy")]
 offset_left = 0.0
@@ -21,5 +40,17 @@ offset_bottom = -104.0
 HealthComponent = NodePath("../HealthComponent")
 
 [node name="DamageIndicator" parent="." instance=ExtResource("5_moo0e")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_xhdfl")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("5_dvby1")
+
+[node name="HitBox" parent="." node_paths=PackedStringArray("HealthComponent") instance=ExtResource("6_ibswf")]
+HealthComponent = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+shape = SubResource("RectangleShape2D_o5qk8")
 
 [connection signal="LostAllHealth" from="HealthComponent" to="." method="LostAllHealth"]

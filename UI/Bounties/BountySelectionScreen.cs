@@ -4,7 +4,7 @@ using Godot;
 
 using Redwood.UI;
 
-public partial class BountySelectionScreen : UI
+public partial class BountySelectionScreen : UIControl
 {
 	VBoxContainer _bountyList;
 

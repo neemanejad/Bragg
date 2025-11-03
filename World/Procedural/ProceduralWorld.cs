@@ -4,6 +4,8 @@ using System.Threading.Tasks;
 
 using Godot;
 
+using Redwood.PlayerEntity;
+using Redwood.Singletons;
 using Redwood.Singletons.RandomUtils;
 using Redwood.World.Utils;
 

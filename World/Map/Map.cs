@@ -1,5 +1,6 @@
 using Godot;
 
+using Redwood.Singletons;
 using Redwood.Singletons.RandomUtils;
 
 namespace Redwood.World;

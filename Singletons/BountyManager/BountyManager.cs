@@ -9,6 +9,7 @@ using Redwood.Bounties;
 using Redwood.Enemies;
 using Redwood.Notifications;
 using Redwood.Resources;
+using Redwood.Singletons;
 using Redwood.Singletons.NotificationsManager;
 
 public partial class BountyManager : Node

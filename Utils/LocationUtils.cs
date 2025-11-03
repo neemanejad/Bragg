@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 using Godot;
 
+using Redwood.Singletons;
+
 public partial class LocationUtils : Node
 {
 	private int BUFFER = 750;

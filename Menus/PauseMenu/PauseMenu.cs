@@ -1,11 +1,10 @@
-using System;
-
 using Godot;
 
-using Redwood.Menus;
 using Redwood.UI;
 
-public partial class PauseMenu : UI
+namespace Redwood.Menus;
+
+public partial class PauseMenu : UIControl
 {
 	StartingMenu _startingMenu { get; set; }
 	SettingsMenu _settingsMenu { get; set; }

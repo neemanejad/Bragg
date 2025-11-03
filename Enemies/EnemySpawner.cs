@@ -1,5 +1,9 @@
 using Godot;
 
+using Redwood.Singletons;
+
+namespace Redwood.Enemies;
+
 public partial class EnemySpawner : Node2D
 {
 	[Export]

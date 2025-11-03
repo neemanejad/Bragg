@@ -1,9 +1,10 @@
 using System;
-using System.Collections.Generic;
 
 using Godot;
 
-using Redwood.Enemies;
+using Redwood.Singletons;
+
+namespace Redwood.Enemies;
 
 public partial class Enemy : CharacterBody2D
 {
@@ -65,11 +66,11 @@ public partial class Enemy : CharacterBody2D
 		PlayerManager.Instance.SubtractHealth(EnemyData.Damage);
 	}
 
-	public void TakeDamage(float damage)
-	{
-		HealthComponent.RemoveHealth(damage);
-		EmitSignal(SignalName.ReceivedDamage);
-	}
+	// public void TakeDamage(float damage)
+	// {
+	// 	HealthComponent.RemoveHealth(damage);
+	// 	EmitSignal(SignalName.ReceivedDamage);
+	// }
 
 	public void LostAllHealth()
 	{

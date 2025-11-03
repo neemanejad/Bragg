@@ -1,6 +1,7 @@
 using Godot;
 
 using Redwood.Scripts.World;
+using Redwood.Singletons;
 using Redwood.Singletons.WorldManager;
 
 namespace Redwood.World;

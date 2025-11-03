@@ -2,6 +2,8 @@ using System;
 
 using Godot;
 
+using Redwood.Singletons;
+
 namespace Redwood.World.Utils;
 
 /// <summary>

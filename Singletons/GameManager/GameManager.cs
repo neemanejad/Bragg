@@ -2,6 +2,7 @@ using System;
 
 using Godot;
 
+using Redwood.Singletons;
 using Redwood.UI;
 
 public partial class GameManager : Node

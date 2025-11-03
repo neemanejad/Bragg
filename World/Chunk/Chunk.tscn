@@ -1,13 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://u2xc6xgr2k73"]
+[gd_scene load_steps=8 format=3 uid="uid://u2xc6xgr2k73"]
 
 [ext_resource type="Script" path="res://World/Chunk/Chunk.cs" id="1_jwn7k"]
 [ext_resource type="TileSet" uid="uid://df4uinf8jiogj" path="res://TileSets/WorldTileSet3.tres" id="1_op0yj"]
 [ext_resource type="Script" path="res://World/ChunkData.cs" id="3_poklp"]
 [ext_resource type="PackedScene" uid="uid://ct5yb5t1va0w" path="res://World/Chunk/DebuggingChunkCoordinates.tscn" id="4_lw40h"]
 [ext_resource type="PackedScene" uid="uid://bwe40454p6igd" path="res://Enemies/EnemyColony.tscn" id="5_vgutt"]
-[ext_resource type="PackedScene" uid="uid://cavcc3ptyyuhp" path="res://Enemies/FastEnemy.tscn" id="6_8juit"]
-[ext_resource type="PackedScene" uid="uid://das0vbqna72es" path="res://Enemies/ShootingEnemy.tscn" id="7_bfm87"]
-[ext_resource type="PackedScene" uid="uid://bp0cekjqvscav" path="res://Enemies/StrongEnemy.tscn" id="8_srmhw"]
+[ext_resource type="PackedScene" uid="uid://dvvsa0n0jcsd0" path="res://Enemies/Enemy.tscn" id="6_uw37c"]
 
 [sub_resource type="Resource" id="Resource_bhqjj"]
 script = ExtResource("3_poklp")
@@ -25,5 +23,5 @@ EnemyColony = NodePath("EnemyColony")
 
 [node name="EnemyColony" parent="." instance=ExtResource("5_vgutt")]
 z_index = 1
-Enemies = [ExtResource("6_8juit"), ExtResource("7_bfm87"), ExtResource("8_srmhw")]
-EnemyWeights = [0.5, 1.0, 0.8]
+Enemies = [ExtResource("6_uw37c")]
+EnemyWeights = [0.1]

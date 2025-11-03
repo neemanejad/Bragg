@@ -7,7 +7,7 @@ using Godot;
 using Redwood.Bounties;
 using Redwood.UI;
 
-public partial class PlayerBounties : UI
+public partial class PlayerBounties : UIControl
 {
 	VBoxContainer BountyList { get; set; }
 	CanvasLayer CanvasLayer { get; set; }

@@ -1,7 +1,8 @@
 using Godot;
 
-using Redwood.UI;
 using Redwood.Utils;
+
+namespace Redwood.UI;
 
 public partial class UISignalEmitter : Node
 {

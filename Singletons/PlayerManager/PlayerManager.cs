@@ -4,7 +4,11 @@ using System.Collections.Generic;
 using Godot;
 
 using Redwood.Items;
+using Redwood.PlayerEntity;
 using Redwood.Resources;
+using Redwood.Weapons;
+
+namespace Redwood.Singletons;
 
 public partial class PlayerManager : Node
 {

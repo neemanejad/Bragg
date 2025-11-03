@@ -2,6 +2,8 @@ using System;
 
 using Godot;
 
+using Redwood.Singletons;
+
 public partial class EnemyBullet : Node2D
 {
 	public Vector2 Direction { get; set; }

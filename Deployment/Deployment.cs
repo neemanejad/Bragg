@@ -2,12 +2,13 @@ namespace Redwood.Deployment;
 
 using Godot;
 
+using Redwood.Singletons;
 using Redwood.UI;
 
 public partial class Deployment : Area2D
 {
 	[Export]
-	UISignalEmitter _uiSignalEmitter { get; set; }
+	UISignalEmitter UiSignalEmitter { get; set; }
 	private PackedScene _deploymentSelectionScene;
 
 	public override void _Ready()
@@ -23,7 +24,7 @@ public partial class Deployment : Area2D
 
 		if (playerInArea && isInteracting)
 		{
-			_uiSignalEmitter.SignalAddUI(UIType.DeploymentMenu);
+			UiSignalEmitter.SignalAddUI(UIType.DeploymentMenu);
 		}
 	}
 }

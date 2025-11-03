@@ -1,5 +1,7 @@
 using Godot;
 
+namespace Redwood.Enemies;
+
 public partial class ImportantEnemy : Node2D
 {
 	[Signal]

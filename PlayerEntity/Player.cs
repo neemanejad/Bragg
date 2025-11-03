@@ -1,7 +1,9 @@
 using Godot;
 
 using Redwood.Items;
-using Redwood.UI;
+using Redwood.Singletons;
+
+namespace Redwood.PlayerEntity;
 
 public partial class Player : CharacterBody2D
 {

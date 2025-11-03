@@ -2,12 +2,13 @@ using System;
 
 using Godot;
 
+using Redwood.Singletons;
 using Redwood.Singletons.SceneSwitcher;
 using Redwood.UI;
 using Redwood.Utils;
 
 
-public partial class GameOver : UI
+public partial class GameOver : UIControl
 {
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()

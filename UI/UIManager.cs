@@ -5,7 +5,7 @@ namespace Redwood.UI;
 
 public partial class UIManager : Control
 {
-	private UI _displayedUi = null;
+	private UIControl _displayedUi = null;
 
 	[Export]
 	public Array<PackedScene> Menus { get; set; }
@@ -16,7 +16,7 @@ public partial class UIManager : Control
 	{
 		foreach (var menuPackedScene in Menus)
 		{
-			var menu = menuPackedScene.Instantiate<UI>();
+			var menu = menuPackedScene.Instantiate<UIControl>();
 			_uis[menu.UIType] = menuPackedScene;
 		}
 	}
@@ -47,7 +47,7 @@ public partial class UIManager : Control
 		}
 
 		UIType type = (UIType)id;
-		var ui = _uis[type].Instantiate<UI>();
+		var ui = _uis[type].Instantiate<UIControl>();
 		_displayedUi = ui;
 		AddChild(ui);
 	}

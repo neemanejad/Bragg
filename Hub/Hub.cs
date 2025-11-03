@@ -1,6 +1,6 @@
 using Godot;
 
-using Redwood.Enemies;
+using Redwood.Singletons;
 using Redwood.Singletons.WorldManager;
 
 namespace Redwood.Hub;

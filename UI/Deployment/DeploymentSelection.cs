@@ -5,7 +5,7 @@ using Redwood.Singletons.WorldManager;
 
 namespace Redwood.UI.Deployment;
 
-public partial class DeploymentSelection : UI
+public partial class DeploymentSelection : UIControl
 {
 	private Button _button;
 

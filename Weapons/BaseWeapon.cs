@@ -1,5 +1,8 @@
 using Godot;
-using Godot.Collections;
+
+using Redwood.Singletons;
+
+namespace Redwood.Weapons;
 
 public partial class BaseWeapon : Node2D
 {

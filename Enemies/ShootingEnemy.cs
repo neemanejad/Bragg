@@ -1,8 +1,8 @@
-using System;
-
 using Godot;
 
-using Redwood.Singletons.WorldManager;
+using Redwood.Singletons;
+
+namespace Redwood.Enemies;
 
 public partial class ShootingEnemy : Node2D
 {

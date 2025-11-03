@@ -3,6 +3,7 @@ using System;
 using Godot;
 
 using Redwood.Items;
+using Redwood.Singletons;
 
 public partial class SpeedBoostItem : Node2D, IItemNode
 {

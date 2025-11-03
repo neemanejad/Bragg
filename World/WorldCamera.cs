@@ -1,5 +1,7 @@
 using Godot;
 
+using Redwood.Singletons;
+
 namespace Redwood.World;
 
 public partial class WorldCamera : Node2D

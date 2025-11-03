@@ -1,13 +1,14 @@
-using System;
 using System.Collections.Generic;
-using System.Reflection;
 
 using Godot;
 
 using Redwood.Items;
+using Redwood.Singletons;
 using Redwood.UI;
 
-public partial class InventoryUI : UI
+namespace Redwood.Inventory;
+
+public partial class InventoryUI : UIControl
 {
 
 	ItemList ItemList { get; set; }

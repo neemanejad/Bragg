@@ -17,8 +17,8 @@ public partial class EnemyColony : Node2D
 	[Export]
 	public Array<float> EnemyWeights;
 
-	private int _enemyMinCount = 3;
-	private int _enemyMaxCount = 7;
+	private int _enemyMinCount = 1;
+	private int _enemyMaxCount = 2;
 
 	public void Generate(Vector2I coords)
 	{

@@ -2,13 +2,13 @@
 
 [ext_resource type="PackedScene" uid="uid://dyq3odk2ogbfk" path="res://Hub/Hub.tscn" id="1_fnuqi"]
 [ext_resource type="PackedScene" uid="uid://bbux5rs511px1" path="res://Inventory/InventoryUI.tscn" id="3_et6m5"]
-[ext_resource type="PackedScene" uid="uid://20wj24co13mm" path="res://Player/Player.tscn" id="3_tcv06"]
 [ext_resource type="Script" path="res://UI/UIManager.cs" id="4_17yn4"]
 [ext_resource type="PackedScene" uid="uid://4kalpfq4lmh7" path="res://Menus/PauseMenu/PauseMenu.tscn" id="4_jiv4y"]
 [ext_resource type="PackedScene" uid="uid://bmwtfdasxkrde" path="res://UI/Bounties/BountySelectionScreen.tscn" id="5_4q7nq"]
 [ext_resource type="PackedScene" uid="uid://ct00w70xnn0vw" path="res://UI/Bounties/PlayerBounties.tscn" id="6_2chlc"]
 [ext_resource type="PackedScene" uid="uid://bbcjk2bl5rgle" path="res://UI/Deployment/DeploymentSelection.tscn" id="7_vh4lf"]
 [ext_resource type="PackedScene" uid="uid://bffthneg1lqvx" path="res://UI/GameOver/GameOver.tscn" id="8_odkfv"]
+[ext_resource type="PackedScene" uid="uid://20wj24co13mm" path="res://PlayerEntity/Player.tscn" id="9_bnk83"]
 [ext_resource type="Script" path="res://FPSCounter.cs" id="11_xsa6f"]
 
 [node name="Main" type="Node"]
@@ -24,7 +24,7 @@ Menus = Array[PackedScene]([ExtResource("3_et6m5"), ExtResource("4_jiv4y"), ExtR
 
 [node name="Hub" parent="WorldRoot" instance=ExtResource("1_fnuqi")]
 
-[node name="Player" parent="." instance=ExtResource("3_tcv06")]
+[node name="Player" parent="." instance=ExtResource("9_bnk83")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

@@ -4,14 +4,14 @@
 [ext_resource type="Script" path="res://UI/Deployment/DeploymentSelection.cs" id="1_petd7"]
 [ext_resource type="PackedScene" uid="uid://cv81rawaku4je" path="res://UI/UISignalEmitter.tscn" id="3_nam7d"]
 
-[node name="DeploymentSelection" type="Control" node_paths=PackedStringArray("_uiSignalEmitter")]
+[node name="DeploymentSelection" type="Control" node_paths=PackedStringArray("UiSignalEmitter")]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_petd7")
 UIType = 2
-_uiSignalEmitter = NodePath("UISignalEmitter")
+UiSignalEmitter = NodePath("UISignalEmitter")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
