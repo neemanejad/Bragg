@@ -1,14 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://dx4dhe4ky264e"]
+[gd_scene load_steps=4 format=3 uid="uid://dx4dhe4ky264e"]
 
 [ext_resource type="Script" path="res://Weapons/Bullet.cs" id="1_su24x"]
+[ext_resource type="PackedScene" uid="uid://cplqgmxgfg65u" path="res://Components/HurtBox.tscn" id="2_7dtar"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_vmsbd"]
-size = Vector2(20, 31.5787)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fmrqk"]
+size = Vector2(15.9999, 32)
 
-[node name="Area2D" type="Area2D"]
+[node name="Bullet" type="Node2D" node_paths=PackedStringArray("BulletHurtBox", "VisibleNotifier")]
 rotation = 1.57079
 script = ExtResource("1_su24x")
 Damage = 10.0
+BulletHurtBox = NodePath("HurtBox")
+VisibleNotifier = NodePath("VisibleNotifier")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = -8.0
@@ -16,12 +19,15 @@ offset_top = -16.0
 offset_right = 8.0
 offset_bottom = 16.0
 
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-scale = Vector2(1, 1.6)
+[node name="VisibleNotifier" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(-4.76837e-07, 0)
+scale = Vector2(0.8, 1.6)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -4.76837e-07)
-scale = Vector2(1, 1.01334)
-shape = SubResource("RectangleShape2D_vmsbd")
+[node name="HurtBox" parent="." instance=ExtResource("2_7dtar")]
+position = Vector2(-2, -1.2517e-05)
 
-[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="FreeBullet"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(2.00005, -1.20398e-05)
+shape = SubResource("RectangleShape2D_fmrqk")
+
+[connection signal="screen_exited" from="VisibleNotifier" to="." method="FreeBullet"]

@@ -1,6 +1,6 @@
-namespace Redwood.Components;
-
 using Godot;
+
+namespace Redwood.Components;
 
 public partial class HitBox : Area2D
 {

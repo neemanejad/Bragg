@@ -66,12 +66,6 @@ public partial class Enemy : CharacterBody2D
 		PlayerManager.Instance.SubtractHealth(EnemyData.Damage);
 	}
 
-	// public void TakeDamage(float damage)
-	// {
-	// 	HealthComponent.RemoveHealth(damage);
-	// 	EmitSignal(SignalName.ReceivedDamage);
-	// }
-
 	public void LostAllHealth()
 	{
 		PlayerManager.Instance.OnKillHandler();
