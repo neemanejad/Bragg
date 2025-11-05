@@ -2,6 +2,7 @@ using System;
 
 using Godot;
 
+using Redwood.Components;
 using Redwood.Singletons;
 
 namespace Redwood.Enemies;
@@ -10,16 +11,20 @@ public partial class Enemy : CharacterBody2D
 {
 	[Export]
 	public EnemyData EnemyData { get; set; }
+
 	[Export]
 	public HealthComponent HealthComponent { get; set; }
+
+	[Export]
+	public DamageIndicator DamageIndicator { get; set; }
+
 	[Export]
 	public Sprite2D Sprite2D { get; set; }
+
 	[Signal]
 	public delegate void EnemyDefeatedEventHandler(string? enemyId);
 	[Signal]
 	public delegate void ReceivedDamageEventHandler();
-
-	private bool canAttack = true;
 
 	public override void _Ready()
 	{
@@ -28,11 +33,12 @@ public partial class Enemy : CharacterBody2D
 			throw new NullReferenceException("HealthComponent is null in HitboxComponent");
 		}
 
-		var damageIndicator = GetNode<DamageIndicator>("DamageIndicator");
-		damageIndicator.Sprite2D = Sprite2D;
+		DamageIndicator.Sprite2D = Sprite2D;
 
 		Connect(SignalName.EnemyDefeated, new Callable(WorldEventListener.Instance, WorldEventListener.MethodName.OnEnemyKilled));
-		Connect(SignalName.ReceivedDamage, new Callable(damageIndicator, DamageIndicator.MethodName.ShowDamage));
+		Connect(SignalName.ReceivedDamage, new Callable(DamageIndicator, DamageIndicator.MethodName.ShowDamage));
+
+		HealthComponent.Connect(HealthComponent.SignalName.LostAllHealth, new Callable(this, MethodName.HandleEnemyDefeated));
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -66,11 +72,10 @@ public partial class Enemy : CharacterBody2D
 		PlayerManager.Instance.SubtractHealth(EnemyData.Damage);
 	}
 
-	public void LostAllHealth()
+	public void HandleEnemyDefeated()
 	{
 		PlayerManager.Instance.OnKillHandler();
 		MaybeDropItem();
-		QueueFree();
 
 		EmitSignal(SignalName.EnemyDefeated, EnemyData.Id);
 	}

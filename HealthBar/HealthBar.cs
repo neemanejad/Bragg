@@ -2,6 +2,8 @@ using System;
 
 using Godot;
 
+using Redwood.Components;
+
 public partial class HealthBar : Control
 {
 	[Signal]

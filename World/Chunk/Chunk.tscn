@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://u2xc6xgr2k73"]
+[gd_scene load_steps=9 format=3 uid="uid://u2xc6xgr2k73"]
 
 [ext_resource type="Script" path="res://World/Chunk/Chunk.cs" id="1_jwn7k"]
 [ext_resource type="TileSet" uid="uid://df4uinf8jiogj" path="res://TileSets/WorldTileSet3.tres" id="1_op0yj"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://ct5yb5t1va0w" path="res://World/Chunk/DebuggingChunkCoordinates.tscn" id="4_lw40h"]
 [ext_resource type="PackedScene" uid="uid://bwe40454p6igd" path="res://Enemies/EnemyColony.tscn" id="5_vgutt"]
 [ext_resource type="PackedScene" uid="uid://dvvsa0n0jcsd0" path="res://Enemies/Enemy.tscn" id="6_uw37c"]
+[ext_resource type="PackedScene" uid="uid://cavcc3ptyyuhp" path="res://Enemies/FastEnemy.tscn" id="7_bkhpr"]
 
 [sub_resource type="Resource" id="Resource_bhqjj"]
 script = ExtResource("3_poklp")
@@ -29,5 +30,5 @@ color = Color(0.188235, 0.639216, 0.788235, 1)
 
 [node name="EnemyColony" parent="." instance=ExtResource("5_vgutt")]
 z_index = 1
-Enemies = [ExtResource("6_uw37c")]
-EnemyWeights = [0.1]
+Enemies = [ExtResource("6_uw37c"), ExtResource("7_bkhpr")]
+EnemyWeights = [1.0, 0.5]

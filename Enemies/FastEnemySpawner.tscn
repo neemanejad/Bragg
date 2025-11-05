@@ -1,9 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://ft4u0d4owk8k"]
-
-[ext_resource type="PackedScene" uid="uid://cp7na7lpka4bf" path="res://Enemies/EnemySpawner.tscn" id="1_y82jp"]
-[ext_resource type="PackedScene" uid="uid://cavcc3ptyyuhp" path="res://Enemies/FastEnemy.tscn" id="2_kuti5"]
-
-[node name="FastEnemySpawner" type="Node2D"]
-
-[node name="EnemySpawner" parent="." instance=ExtResource("1_y82jp")]
-EnemyScene = ExtResource("2_kuti5")

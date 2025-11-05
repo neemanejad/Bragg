@@ -1,5 +1,6 @@
 using Godot;
 
+using Redwood.Components;
 using Redwood.Items;
 using Redwood.Singletons;
 

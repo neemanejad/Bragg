@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 using Godot;
 
+using Redwood.Components;
 using Redwood.Items;
 using Redwood.PlayerEntity;
 using Redwood.Resources;

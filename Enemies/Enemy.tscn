@@ -21,12 +21,16 @@ size = Vector2(128, 128)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o5qk8"]
 size = Vector2(128, 128)
 
-[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("HealthComponent")]
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("HealthComponent", "DamageIndicator", "Sprite2D")]
 motion_mode = 1
 script = ExtResource("1_xio3m")
 EnemyData = SubResource("Resource_sox1t")
 HealthComponent = NodePath("HealthComponent")
-metadata/_edit_group_ = true
+DamageIndicator = NodePath("DamageIndicator")
+Sprite2D = NodePath("Sprite2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_xhdfl")
 
 [node name="HealthComponent" parent="." instance=ExtResource("3_l7cu6")]
 CurrentHealth = 10.0
@@ -34,15 +38,12 @@ MaxHealth = 10.0
 
 [node name="HealthBar" parent="." node_paths=PackedStringArray("HealthComponent") instance=ExtResource("2_lgjvy")]
 offset_left = 0.0
-offset_top = -104.0
+offset_top = -112.0
 offset_right = 0.0
-offset_bottom = -104.0
+offset_bottom = -112.0
 HealthComponent = NodePath("../HealthComponent")
 
 [node name="DamageIndicator" parent="." instance=ExtResource("5_moo0e")]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_xhdfl")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("5_dvby1")
@@ -52,5 +53,3 @@ HealthComponent = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 shape = SubResource("RectangleShape2D_o5qk8")
-
-[connection signal="LostAllHealth" from="HealthComponent" to="." method="LostAllHealth"]

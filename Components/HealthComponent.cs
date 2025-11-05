@@ -1,6 +1,6 @@
-using System;
-
 using Godot;
+
+namespace Redwood.Components;
 
 public partial class HealthComponent : Node
 {
@@ -31,6 +31,7 @@ public partial class HealthComponent : Node
 
 		if (CurrentHealth <= 0)
 		{
+			GetParent().QueueFree();
 			EmitSignal(SignalName.LostAllHealth);
 		}
 	}
