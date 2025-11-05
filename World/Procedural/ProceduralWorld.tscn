@@ -10,7 +10,7 @@
 
 [sub_resource type="Resource" id="Resource_s5tkp"]
 script = ExtResource("5_35y3h")
-TilesPerChunk = 16
+TilesPerChunk = 64
 TileSize = 16
 
 [node name="ProceduralWorld" type="TileMapLayer"]

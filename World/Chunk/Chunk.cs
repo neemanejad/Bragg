@@ -39,6 +39,7 @@ public partial class Chunk : TileMapLayer
 
 	public void Prepare(Vector2I chunkCoords)
 	{
+		GlobalPosition = chunkCoords * ChunkData.ChunkSize;
 		ChunkCoordinates = chunkCoords;
 	}
 
@@ -47,6 +48,5 @@ public partial class Chunk : TileMapLayer
 		if (!ChunkDebugging) return;
 
 		DebuggingChunkCoordinates.SetDebugCoords(ChunkCoordinates);
-		DebuggingChunkCoordinates.GlobalPosition = ChunkCoordinates * ChunkData.ChunkSize;
 	}
 }

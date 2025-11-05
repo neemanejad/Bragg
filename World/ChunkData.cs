@@ -6,7 +6,7 @@ namespace Redwood.World;
 public partial class ChunkData : Resource
 {
 	[Export]
-	public int TilesPerChunk = 16; // X and Y
+	public int TilesPerChunk = 64; // X and Y
 
 	[Export]
 	public int TileSize = 16; // Size of individual tiles in px

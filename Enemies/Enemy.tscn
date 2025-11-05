@@ -29,8 +29,8 @@ HealthComponent = NodePath("HealthComponent")
 metadata/_edit_group_ = true
 
 [node name="HealthComponent" parent="." instance=ExtResource("3_l7cu6")]
-CurrentHealth = 30.0
-MaxHealth = 30.0
+CurrentHealth = 10.0
+MaxHealth = 10.0
 
 [node name="HealthBar" parent="." node_paths=PackedStringArray("HealthComponent") instance=ExtResource("2_lgjvy")]
 offset_left = 0.0

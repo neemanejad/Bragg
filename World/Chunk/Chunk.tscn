@@ -9,7 +9,7 @@
 
 [sub_resource type="Resource" id="Resource_bhqjj"]
 script = ExtResource("3_poklp")
-TilesPerChunk = 16
+TilesPerChunk = 64
 TileSize = 16
 
 [node name="Chunk" type="TileMapLayer" node_paths=PackedStringArray("DebuggingChunkCoordinates", "EnemyColony")]
@@ -18,6 +18,12 @@ script = ExtResource("1_jwn7k")
 DebuggingChunkCoordinates = NodePath("Control")
 ChunkData = SubResource("Resource_bhqjj")
 EnemyColony = NodePath("EnemyColony")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+show_behind_parent = true
+offset_right = 1024.0
+offset_bottom = 1024.0
+color = Color(0.188235, 0.639216, 0.788235, 1)
 
 [node name="Control" parent="." instance=ExtResource("4_lw40h")]
 
