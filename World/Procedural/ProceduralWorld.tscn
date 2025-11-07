@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://bh7wmw3y67x5n"]
 
-[ext_resource type="TileSet" uid="uid://df4uinf8jiogj" path="res://TileSets/WorldTileSet3.tres" id="1_1rjfe"]
 [ext_resource type="Script" path="res://World/Procedural/ProceduralWorld.cs" id="1_m4tno"]
+[ext_resource type="TileSet" uid="uid://iui8yo11l4qs" path="res://TileSets/v1/TileSetV1.tres" id="1_oul51"]
 [ext_resource type="FastNoiseLite" uid="uid://cpwk6j7imamob" path="res://World/Resources/TerrainElevation.tres" id="2_pt38x"]
 [ext_resource type="FastNoiseLite" uid="uid://jgcp6oo6p7et" path="res://World/Resources/TerrainMoisture.tres" id="3_5fp1c"]
 [ext_resource type="FastNoiseLite" uid="uid://b6wru5qyy1si7" path="res://World/Resources/EnemyNoiseMap.tres" id="4_gd3ex"]
@@ -10,11 +10,12 @@
 
 [sub_resource type="Resource" id="Resource_s5tkp"]
 script = ExtResource("5_35y3h")
-TilesPerChunk = 64
-TileSize = 16
+TilesPerChunk = 32
+TileSize = 64
 
 [node name="ProceduralWorld" type="TileMapLayer"]
-tile_set = ExtResource("1_1rjfe")
+position = Vector2(5, 1)
+tile_set = ExtResource("1_oul51")
 script = ExtResource("1_m4tno")
 TerrainElevationMap = ExtResource("2_pt38x")
 TerrainMoistureMap = ExtResource("3_5fp1c")

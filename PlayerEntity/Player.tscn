@@ -14,6 +14,7 @@ size = Vector2(32, 32)
 motion_mode = 1
 platform_on_leave = 2
 script = ExtResource("1_qas8a")
+Speed = 2000.0
 metadata/_edit_group_ = true
 
 [node name="Vitals" parent="." instance=ExtResource("2_jtnkn")]

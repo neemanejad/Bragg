@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Threading;
 
@@ -11,7 +12,7 @@ using Redwood.World.Utils;
 
 namespace Redwood.World;
 
-public partial class ProceduralWorld : Node2D
+public partial class ProceduralWorld : TileMapLayer
 {
 	[Export]
 	public FastNoiseLite TerrainElevationMap;
@@ -42,22 +43,17 @@ public partial class ProceduralWorld : Node2D
 	/// <summary>
 	/// Number of chunks in any cardinal direction before the noise falls off (land -> ocean)
 	/// </summary>
-	private int _chunkFalloff = 16;
+	private int _chunkFalloff = 8;
 
 	/// <summary>
 	/// The radius of the circle and search cone for queueing chunks
 	/// </summary>
-	private int _renderDistance = 8;
+	private int _renderDistance = 2;
 
 	/// <summary>
 	/// Contains chunks that are fully complete
 	/// </summary>
-	private readonly HashSet<Vector2I> _completeChunksCoordinates = new();
-
-	/// <summary>
-	/// Tracks chunks currently in progress alongside where they were left off
-	/// </summary>
-	private readonly Dictionary<Vector2I, int> _inProgressChunks = new();
+	private readonly ConcurrentDictionary<Vector2I, Godot.Collections.Array<Vector2I>> _completeChunksCoordinates = new();
 
 	/// <summary>
 	/// Chunk queue that prioritizes those closer to the player node
@@ -82,7 +78,7 @@ public partial class ProceduralWorld : Node2D
 	{
 		SetSeeds();
 
-		var initialSize = 8;
+		var initialSize = 2;
 
 		for (var x = -initialSize; x <= initialSize; x++)
 		{
@@ -99,6 +95,8 @@ public partial class ProceduralWorld : Node2D
 
 		while (_chunksReady.TryDequeue(out var chunk))
 		{
+			_completeChunksCoordinates.TryGetValue(chunk.ChunkCoordinates, out var cells);
+			SetCellsTerrainConnect(cells, 0, 0);
 			AddChild(chunk);
 		}
 
@@ -131,9 +129,10 @@ public partial class ProceduralWorld : Node2D
 			_lastKnownPlayerChunkCoordinates = chunkCoordinates;
 		}
 
-		if (_chunksReady.Count > 0)
+		if (_chunksReady.TryDequeue(out var chunk))
 		{
-			var chunk = _chunksReady.Dequeue();
+			_completeChunksCoordinates.TryGetValue(chunk.ChunkCoordinates, out var cells);
+			SetCellsTerrainConnect(cells, 0, 0);
 			AddChild(chunk);
 		}
 	}
@@ -141,16 +140,13 @@ public partial class ProceduralWorld : Node2D
 	public void QueueChunkToProcess(Vector2I coords)
 	{
 		// Skip over chunks already generated or are in progress
-		if (_completeChunksCoordinates.Contains(coords) || _inProgressChunks.ContainsKey(coords))
+		if (_completeChunksCoordinates.ContainsKey(coords))
 		{
 			return;
 		}
 
 		var chunkToQueue = Chunk.Instantiate<Chunk>();
 		chunkToQueue.Prepare(coords);
-
-		_inProgressChunks.Add(coords, 0);
-
 
 		var distanceToPlayerChunk = coords.DistanceTo(_lastKnownPlayerChunkCoordinates);
 		_chunkQueue.Enqueue(chunkToQueue, distanceToPlayerChunk);
@@ -171,47 +167,43 @@ public partial class ProceduralWorld : Node2D
 
 		var chunkWorldCoords = chunkCoords * ChunkData.TilesPerChunk;
 
-		_inProgressChunks.TryGetValue(chunkCoords, out var rowNeedingWork);
+		var landTerrain = new Godot.Collections.Array<Vector2I>();
+		var waterTerrain = new Godot.Collections.Array<Vector2I>();
 
-		for (var y = 0; y < ChunkData.TilesPerChunk; y++)
+		for (var x = 0; x < ChunkData.TilesPerChunk; x++)
 		{
-			var worldX = rowNeedingWork + chunkWorldCoords.X;
-			var worldY = y + chunkWorldCoords.Y;
-			var approxFalloff = new Vector2I(worldX, worldY).DistanceTo(Vector2I.Zero) / (_chunkFalloff * ChunkData.TilesPerChunk);
-
-			var terrainElevationValue = TerrainElevationMap.GetNoise2D(worldX, worldY) - approxFalloff;
-			var terrainMoistureValue = TerrainMoistureMap.GetNoise2D(worldX, worldY) - approxFalloff;
-
-			terrainElevationSum += terrainElevationValue;
-			enemyElevationSum += EnemyHeightMap.GetNoise2D(worldX, worldY);
-
-			var (sourceId, tileAtlas) = TileGenerator.DetermineTileAtlas(terrainElevationValue, terrainMoistureValue);
-			if (sourceId == -1)
+			for (var y = 0; y < ChunkData.TilesPerChunk; y++)
 			{
-				continue;
-			}
+				var worldX = x + chunkWorldCoords.X;
+				var worldY = y + chunkWorldCoords.Y;
+				var approxFalloff = new Vector2I(worldX, worldY).DistanceTo(Vector2I.Zero) / (_chunkFalloff * ChunkData.TilesPerChunk);
 
-			chunk.SetCell(new Vector2I(rowNeedingWork, y), sourceId, tileAtlas);
+				var terrainElevationValue = TerrainElevationMap.GetNoise2D(worldX, worldY) - approxFalloff;
+				var terrainMoistureValue = TerrainMoistureMap.GetNoise2D(worldX, worldY) - approxFalloff;
+
+				terrainElevationSum += terrainElevationValue;
+				enemyElevationSum += EnemyHeightMap.GetNoise2D(worldX, worldY);
+
+				// TODO: Clean this up
+				var (sourceId, tileAtlas) = TileGenerator.DetermineTileAtlas(terrainElevationValue, terrainMoistureValue);
+				if (sourceId != -1)
+				{
+					landTerrain.Add(new(worldX, worldY));
+				}
+
+				waterTerrain.Add(new(x, y));
+			}
 		}
 
-		rowNeedingWork += 1;
-		_inProgressChunks[chunkCoords] = rowNeedingWork;
+		chunk.WaterTileMapLayer.SetCellsTerrainConnect(waterTerrain, 1, 0);
 
 		chunk.AverageTerrainElevation += terrainElevationSum / ChunkData.TilesPerChunk;
 		chunk.AverageEnemyNoise += enemyElevationSum / ChunkData.TilesPerChunk;
 
-		if (rowNeedingWork == ChunkData.TilesPerChunk)
+		if (_completeChunksCoordinates.TryAdd(chunkCoords, landTerrain))
 		{
-			_inProgressChunks.Remove(chunkCoords);
-			_completeChunksCoordinates.Add(chunkCoords);
 			_chunksReady.Enqueue(chunk);
-
 			chunk.Complete();
-		}
-		else
-		{
-			var distanceToPlayerChunk = chunkCoords.DistanceTo(_lastKnownPlayerChunkCoordinates);
-			_chunkQueue.Enqueue(chunk, distanceToPlayerChunk);
 		}
 	}
 

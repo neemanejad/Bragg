@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://u2xc6xgr2k73"]
 
+[ext_resource type="TileSet" uid="uid://iui8yo11l4qs" path="res://TileSets/v1/TileSetV1.tres" id="1_c4v55"]
 [ext_resource type="Script" path="res://World/Chunk/Chunk.cs" id="1_jwn7k"]
-[ext_resource type="TileSet" uid="uid://df4uinf8jiogj" path="res://TileSets/WorldTileSet3.tres" id="1_op0yj"]
 [ext_resource type="Script" path="res://World/ChunkData.cs" id="3_poklp"]
 [ext_resource type="PackedScene" uid="uid://ct5yb5t1va0w" path="res://World/Chunk/DebuggingChunkCoordinates.tscn" id="4_lw40h"]
 [ext_resource type="PackedScene" uid="uid://bwe40454p6igd" path="res://Enemies/EnemyColony.tscn" id="5_vgutt"]
@@ -10,21 +10,20 @@
 
 [sub_resource type="Resource" id="Resource_bhqjj"]
 script = ExtResource("3_poklp")
-TilesPerChunk = 64
-TileSize = 16
+TilesPerChunk = 32
+TileSize = 64
 
-[node name="Chunk" type="TileMapLayer" node_paths=PackedStringArray("DebuggingChunkCoordinates", "EnemyColony")]
-tile_set = ExtResource("1_op0yj")
+[node name="Chunk" type="Node2D" node_paths=PackedStringArray("DebuggingChunkCoordinates", "EnemyColony", "WaterTileMapLayer")]
+texture_filter = 1
 script = ExtResource("1_jwn7k")
 DebuggingChunkCoordinates = NodePath("Control")
 ChunkData = SubResource("Resource_bhqjj")
 EnemyColony = NodePath("EnemyColony")
+WaterTileMapLayer = NodePath("Water")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="Water" type="TileMapLayer" parent="."]
 show_behind_parent = true
-offset_right = 1024.0
-offset_bottom = 1024.0
-color = Color(0.188235, 0.639216, 0.788235, 1)
+tile_set = ExtResource("1_c4v55")
 
 [node name="Control" parent="." instance=ExtResource("4_lw40h")]
 
